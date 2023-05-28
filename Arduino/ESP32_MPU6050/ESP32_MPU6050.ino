@@ -1,10 +1,15 @@
 #include <Wire.h>
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 
 #define ACC_RATE_2G 1671.8 // 加速度(2G)用の変換係数(生値→[m/s2]) ※32767/2/9.8
 #define GYO_RATE_250 131.1 // 角速度(250[deg/s])用の変換係数(生値→[deg/s])
 
-SoftwareSerial serial(10, 11); // RX, TXピンを適宜変更
+#define SDA_PIN 23
+#define SCL_PIN 18
+
+#define BUTTON_PIN 2
+
+//SoftwareSerial serial(10, 11); // RX, TXピンを適宜変更
 
 volatile uint8_t data[14]; //センサからのデータ格納用配列
 
@@ -18,18 +23,31 @@ volatile float rz = 0;   //出力データ(Z軸角速度)
 
 void setup() {
   //Serial.begin(115200);
-  Wire.begin(); // I2C通信を開始する
+  Wire.begin(SDA_PIN, SCL_PIN); // I2C通信を開始する
   Serial.begin(115200); // シリアル通信を開始する
 
   i2cWriteReg(0x68, 0x6b, 0x00); //センサーをONにする
   i2cWriteReg(0x68, 0x1b, 0x00); //角速度レンジ設定(±250[deg/s])
   i2cWriteReg(0x68, 0x1c, 0x00); //加速度レンジ設定(±2G)
+
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
 }
 
 void loop() {
   MPU_DATAGET();
 
+  if (digitalRead(BUTTON_PIN) == LOW) {
+    ax = 0;
+    ay = 0;
+    az = 0;
+    rx = 0;
+    ry = 0;
+    rz = 0;
+  }
   // データをシリアルポートに送信する
+  // 出力は以下の順番
+  //ax,ay,az,rx,ry,rz
+  // test
   Serial.print(ax);
   Serial.print(",");
   Serial.print(ay);
@@ -41,6 +59,12 @@ void loop() {
   Serial.print(ry);
   Serial.print(",");
   Serial.println(rz);
+  // Serial.print("X axis acceleration: "); Serial.println(ax);
+  // Serial.print("Y axis acceleration: "); Serial.println(ay);
+  // Serial.print("Z axis acceleration: "); Serial.println(az);
+  // Serial.print("X axis angular velocity: "); Serial.println(rx);
+  // Serial.print("Y axis angular velocity: "); Serial.println(ry);
+  // Serial.print("Z axis angular velocity: "); Serial.println(rz);
 
   delay(100);
 }
