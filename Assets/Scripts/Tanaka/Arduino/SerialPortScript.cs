@@ -7,13 +7,13 @@ public class SerialPortScript : MonoBehaviour
 {
     SerialPort serialPort;
 
-    public string portName = "COM3";
-    public int baudRate = 115200;
+    private string portName = "COM6";
+    private int baudRate = 115200;
 
     void Start()
     {
         serialPort = new SerialPort(portName, baudRate);
-        serialPort.ReadTimeout = 500;
+        //serialPort.ReadTimeout = 500;
         serialPort.Open();
     }
 
@@ -32,7 +32,7 @@ public class SerialPortScript : MonoBehaviour
                 float rx = float.Parse(values[3]);
                 float ry = float.Parse(values[4]);
                 float rz = float.Parse(values[5]);
-                //bool ButtonFlag = values[6];
+                //bool ButtonFlag = bool.Parse(values[6]);
                 // 値の確認
                 Debug.Log("ax: " + ax + ", ay: " + ay + ", az: " + az + ", rx: " + rx + ", ry: " + ry + ", rz: " + rz);
             }
