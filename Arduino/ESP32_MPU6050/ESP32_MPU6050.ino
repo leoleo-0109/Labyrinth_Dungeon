@@ -4,10 +4,10 @@
 #define ACC_RATE_2G 1671.8 // 加速度(2G)用の変換係数(生値→[m/s2]) ※32767/2/9.8
 #define GYO_RATE_250 131.1 // 角速度(250[deg/s])用の変換係数(生値→[deg/s])
 
-#define SDA_PIN 23
 #define SCL_PIN 18
+#define SDA_PIN 23
 
-#define BUTTON_PIN 2
+#define RESET_BUTTON_PIN 2
 
 //SoftwareSerial serial(10, 11); // RX, TXピンを適宜変更
 
@@ -21,6 +21,15 @@ volatile float rx = 0;   //出力データ(X軸角速度)
 volatile float ry = 0;   //出力データ(Y軸角速度)
 volatile float rz = 0;   //出力データ(Z軸角速度)
 
+const int FirstButton = 19;   // IO19
+const int SecondButton = 5;  // IO5
+const int ThirdButton = 12;   // IO16
+const int LeftButton = 27;    // IO21
+const int RightButton = 17;   // IO22
+const int EnterButton = 26;   // IO23
+//const int ResetButton = 26;   // IO18
+
+bool buttonFlag = false;
 void setup() {
   //Serial.begin(115200);
   Wire.begin(SDA_PIN, SCL_PIN); // I2C通信を開始する
@@ -31,23 +40,22 @@ void setup() {
   i2cWriteReg(0x68, 0x1c, 0x00); //加速度レンジ設定(±2G)
 
   pinMode(BUTTON_PIN, INPUT_PULLUP);
+  pinMode(FirstButton, INPUT_PULLUP);    // IO19
+  pinMode(SecondButton, INPUT_PULLUP);   // IO5
+  pinMode(ThirdButton, INPUT_PULLUP);    // IO16
+  pinMode(LeftButton, INPUT_PULLUP);     // IO21
+  pinMode(RightButton, INPUT_PULLUP);    // IO22
+  pinMode(EnterButton, INPUT_PULLUP);    // IO23
+  pinMode(ResetButton, INPUT_PULLUP);    // IO18
+
 }
 
 void loop() {
   MPU_DATAGET();
 
-  if (digitalRead(BUTTON_PIN) == LOW) {
-    ax = 0;
-    ay = 0;
-    az = 0;
-    rx = 0;
-    ry = 0;
-    rz = 0;
-  }
   // データをシリアルポートに送信する
   // 出力は以下の順番
   //ax,ay,az,rx,ry,rz
-  // test
   Serial.print(ax);
   Serial.print(",");
   Serial.print(ay);
@@ -68,7 +76,47 @@ void loop() {
 
   delay(100);
 }
-
+void Button(){
+    /* 以下、ボタンを押された時の処理 */
+  if (digitalRead(BUTTON_PIN) == LOW) {
+    // ax = 0;
+    // ay = 0;
+    // az = 0;
+    // rx = 0;
+    // ry = 0;
+    // rz = 0;
+    buttonFlag = true;
+    Serial.print(buttonFlag);
+  }
+  else if(digitalRead(FirstButton) == LOW)
+  {
+    SerialBT.println("1F");
+  }
+  else if(digitalRead(SecondButton) == LOW)
+  {
+    SerialBT.println("2F");
+  }
+  else if(digitalRead(ThirdButton) == LOW)
+  {
+    SerialBT.println("3F");
+  }
+  else if(digitalRead(LeftButton) == LOW)
+  {
+    SerialBT.println("Left");
+  }
+  else if(digitalRead(RightButton) == LOW)
+  {
+    SerialBT.println("Right");
+  }
+  else if(digitalRead(EnterButton) == LOW)
+  {
+    SerialBT.println("Enter");
+  }
+  else
+  {
+    SerialBT.println("null");
+  }
+}
 void MPU_DATAGET() {
   Wire.beginTransmission(0x68); //送信処理を開始する
   Wire.write(0x3b);             //(取得値の先頭を指定)
