@@ -26,7 +26,6 @@ public class CameraControle : MonoBehaviour
 
     void FixedUpdate()
     {
-
         // ˆÚ“®
         Move();
     }

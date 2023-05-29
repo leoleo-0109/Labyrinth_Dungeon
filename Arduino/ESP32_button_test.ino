@@ -18,7 +18,7 @@
  *   VCC    GND    SCL    SDA     |      |      |      |      |      |      |
  *           MPU6050側            1F     2F     3F    Left  Right  Enter  RESET
  *                                 タクトスイッチ側             操作ボタン側   
- *           
+ *
  */
 
 const int FirstButton = 18;   // IO19
@@ -33,23 +33,23 @@ const int Y = 0;            // IO0   I2Cピン SDA
 
 BluetoothSerial SerialBT;
 
-void setup() 
+void setup()
 {
   SerialBT.begin("ESP32");    // Bluetooth device name
 
   pinMode(FirstButton, INPUT_PULLUP);    // IO19
   pinMode(SecondButton, INPUT_PULLUP);   // IO5
-  pinMode(ThirdButton, INPUT_PULLUP);    // IO16 
+  pinMode(ThirdButton, INPUT_PULLUP);    // IO16
   pinMode(LeftButton, INPUT_PULLUP);     // IO21
   pinMode(RightButton, INPUT_PULLUP);    // IO22
   pinMode(EnterButton, INPUT_PULLUP);    // IO23
-  pinMode(ResetButton, INPUT_PULLUP);    // IO18       
+  pinMode(ResetButton, INPUT_PULLUP);    // IO18
   pinMode(X, INPUT);                   // A6ピンを入力ピンにする
   pinMode(Y, INPUT);                   // A7ピンを入力ピンにする
   Serial.println("----- RESET -----");
 }
 
-void loop() 
+void loop()
 {
   button();
   delay(100);
@@ -86,8 +86,8 @@ void button()
   {
     SerialBT.println("Reset");
   }
-  else 
+  else
   {
     SerialBT.println("null");
-  }  
+  }
 }
