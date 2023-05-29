@@ -1,3 +1,5 @@
+#include <BluetoothSerial.h>
+
 #include <Wire.h>
 //#include <SoftwareSerial.h>
 
@@ -7,9 +9,11 @@
 #define SCL_PIN 18
 #define SDA_PIN 23
 
-#define RESET_BUTTON_PIN 2
+#define RESET_BUTTON_PIN 14
 
 //SoftwareSerial serial(10, 11); // RX, TXピンを適宜変更
+
+BluetoothSerial SerialBT;
 
 volatile uint8_t data[14]; //センサからのデータ格納用配列
 
@@ -27,7 +31,6 @@ const int ThirdButton = 12;   // IO16
 const int LeftButton = 27;    // IO21
 const int RightButton = 17;   // IO22
 const int EnterButton = 26;   // IO23
-//const int ResetButton = 26;   // IO18
 
 bool buttonFlag = false;
 void setup() {
@@ -39,15 +42,13 @@ void setup() {
   i2cWriteReg(0x68, 0x1b, 0x00); //角速度レンジ設定(±250[deg/s])
   i2cWriteReg(0x68, 0x1c, 0x00); //加速度レンジ設定(±2G)
 
-  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  //pinMode(RESET_BUTTON_PIN, INPUT_PULLUP);
   pinMode(FirstButton, INPUT_PULLUP);    // IO19
   pinMode(SecondButton, INPUT_PULLUP);   // IO5
   pinMode(ThirdButton, INPUT_PULLUP);    // IO16
   pinMode(LeftButton, INPUT_PULLUP);     // IO21
   pinMode(RightButton, INPUT_PULLUP);    // IO22
   pinMode(EnterButton, INPUT_PULLUP);    // IO23
-  pinMode(ResetButton, INPUT_PULLUP);    // IO18
-
 }
 
 void loop() {
@@ -56,39 +57,29 @@ void loop() {
   // データをシリアルポートに送信する
   // 出力は以下の順番
   //ax,ay,az,rx,ry,rz
-  Serial.print(ax);
-  Serial.print(",");
-  Serial.print(ay);
-  Serial.print(",");
-  Serial.print(az);
-  Serial.print(",");
-  Serial.print(rx);
-  Serial.print(",");
-  Serial.print(ry);
-  Serial.print(",");
-  Serial.println(rz);
-  // Serial.print("X axis acceleration: "); Serial.println(ax);
-  // Serial.print("Y axis acceleration: "); Serial.println(ay);
-  // Serial.print("Z axis acceleration: "); Serial.println(az);
-  // Serial.print("X axis angular velocity: "); Serial.println(rx);
-  // Serial.print("Y axis angular velocity: "); Serial.println(ry);
-  // Serial.print("Z axis angular velocity: "); Serial.println(rz);
+  SerialBT.print(ax);
+  SerialBT.print(",");
+  SerialBT.print(ay);
+  SerialBT.print(",");
+  SerialBT.print(az);
+  SerialBT.print(",");
+  SerialBT.print(rx);
+  SerialBT.print(",");
+  SerialBT.print(ry);
+  SerialBT.print(",");
+  SerialBT.println(rz);
+  //Button();
 
   delay(100);
 }
 void Button(){
     /* 以下、ボタンを押された時の処理 */
-  if (digitalRead(BUTTON_PIN) == LOW) {
-    // ax = 0;
-    // ay = 0;
-    // az = 0;
-    // rx = 0;
-    // ry = 0;
-    // rz = 0;
+  if (digitalRead(RESET_BUTTON_PIN) == LOW) {
     buttonFlag = true;
     Serial.print(buttonFlag);
+    Serial.print(",");
   }
-  else if(digitalRead(FirstButton) == LOW)
+  if(digitalRead(FirstButton) == LOW)
   {
     SerialBT.println("1F");
   }

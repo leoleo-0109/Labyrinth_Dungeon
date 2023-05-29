@@ -1,5 +1,4 @@
 {
-    "configuration": "PSRAM=disabled,PartitionScheme=default,CPUFreq=240,FlashMode=qio,FlashFreq=80,FlashSize=4M,UploadSpeed=115200,DebugLevel=none",
     "board": "esp32:esp32:esp32",
     "port": "COM4",
     "sketch": "Arduino\\ESP32_MPU6050\\ESP32_MPU6050.ino"
