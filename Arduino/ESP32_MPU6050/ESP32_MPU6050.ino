@@ -6,8 +6,8 @@
 #define ACC_RATE_2G 1671.8 // 加速度(2G)用の変換係数(生値→[m/s2]) ※32767/2/9.8
 #define GYO_RATE_250 131.1 // 角速度(250[deg/s])用の変換係数(生値→[deg/s])
 
-#define SCL_PIN 18
-#define SDA_PIN 23
+#define SCL_PIN 15
+#define SDA_PIN 0
 
 #define RESET_BUTTON_PIN 14
 
@@ -25,24 +25,23 @@ volatile float rx = 0;   //出力データ(X軸角速度)
 volatile float ry = 0;   //出力データ(Y軸角速度)
 volatile float rz = 0;   //出力データ(Z軸角速度)
 
-const int FirstButton = 19;   // IO19
+const int FirstButton = 15;   // IO19
 const int SecondButton = 5;  // IO5
-const int ThirdButton = 12;   // IO16
-const int LeftButton = 27;    // IO21
-const int RightButton = 17;   // IO22
-const int EnterButton = 26;   // IO23
+const int ThirdButton = 19;   // IO16
+const int LeftButton = 21;    // IO21
+const int RightButton = 22;   // IO22
+const int EnterButton = 23;   // IO23
 
 bool buttonFlag = false;
 void setup() {
-  //Serial.begin(115200);
   Wire.begin(SDA_PIN, SCL_PIN); // I2C通信を開始する
   Serial.begin(115200); // シリアル通信を開始する
-
+  SerialBT.begin("ESP32"); // Bluetoothデバイス名を入力
   i2cWriteReg(0x68, 0x6b, 0x00); //センサーをONにする
   i2cWriteReg(0x68, 0x1b, 0x00); //角速度レンジ設定(±250[deg/s])
   i2cWriteReg(0x68, 0x1c, 0x00); //加速度レンジ設定(±2G)
 
-  //pinMode(RESET_BUTTON_PIN, INPUT_PULLUP);
+  pinMode(RESET_BUTTON_PIN, INPUT_PULLUP);
   pinMode(FirstButton, INPUT_PULLUP);    // IO19
   pinMode(SecondButton, INPUT_PULLUP);   // IO5
   pinMode(ThirdButton, INPUT_PULLUP);    // IO16
@@ -68,7 +67,7 @@ void loop() {
   SerialBT.print(ry);
   SerialBT.print(",");
   SerialBT.println(rz);
-  //Button();
+  Button();
 
   delay(100);
 }
