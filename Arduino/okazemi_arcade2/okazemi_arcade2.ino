@@ -6,16 +6,16 @@
 
 // Pin Assingment
 
-const int buttonUp = 26;     // 23
+const int buttonUp = 23;     // 23
 const int buttonDown = 17;   // 19
-const int buttonLeft = 27;    // 5 
-const int buttonRight = 12;  // 18
+const int buttonLeft = 25;    // 5 
+const int buttonRight = 26;  // 18
 
 BluetoothSerial SerialBT;
 
 void setup() {
   SerialBT.begin("ESP32"); //Bluetooth device name
-  
+  //Serial.begin(115200);
   pinMode(buttonUp, INPUT_PULLUP);
   pinMode(buttonDown, INPUT_PULLUP);
   pinMode(buttonLeft, INPUT_PULLUP);
@@ -24,6 +24,7 @@ void setup() {
 
 void loop() 
 {
+  //Serial.print("NO FORMAT");
   if(digitalRead(buttonUp) == LOW)
   {
     SerialBT.println("Up");
@@ -41,7 +42,7 @@ void loop()
     SerialBT.println("Right");
   }
   else {
-    SerialBT.println();
+    SerialBT.println("null");
   }
   delay(100);
 }

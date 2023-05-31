@@ -9,7 +9,6 @@ public class SerialPortScript : MonoBehaviour
 
     private string portName = "COM6";
     private int baudRate = 115200;
-
     void Start()
     {
         serialPort = new SerialPort(portName, baudRate);
@@ -24,7 +23,7 @@ public class SerialPortScript : MonoBehaviour
             string data = serialPort.ReadLine();  // 1行読み取る
             string[] values = data.Split(',');  // カンマで分割する
 
-            if (values.Length == 6)
+            if (values.Length == 7)
             {
                 float ax = float.Parse(values[0]);
                 float ay = float.Parse(values[1]);
@@ -32,7 +31,7 @@ public class SerialPortScript : MonoBehaviour
                 float rx = float.Parse(values[3]);
                 float ry = float.Parse(values[4]);
                 float rz = float.Parse(values[5]);
-                //bool ButtonFlag = bool.Parse(values[6]);
+                bool ButtonFlag = bool.Parse(values[6]);
                 // 値の確認
                 Debug.Log("ax: " + ax + ", ay: " + ay + ", az: " + az + ", rx: " + rx + ", ry: " + ry + ", rz: " + rz);
             }

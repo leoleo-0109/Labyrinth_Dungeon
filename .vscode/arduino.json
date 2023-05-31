@@ -1,5 +1,5 @@
 {
     "board": "esp32:esp32:esp32",
-    "port": "COM4",
+    "port": "COM6",
     "sketch": "Arduino\\ESP32_MPU6050\\ESP32_MPU6050.ino"
 }
