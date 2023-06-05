@@ -7,7 +7,7 @@ public class SerialPortScript : MonoBehaviour
 {
     SerialPort serialPort;
 
-    private string portName = "COM6";
+    [SerializeField] private string portName = "COM10";
     private int baudRate = 115200;
 
     void Start()
@@ -39,7 +39,7 @@ public class SerialPortScript : MonoBehaviour
         }
         catch (System.TimeoutException)
         {
-            // a
+            // 
         }
     }
 
