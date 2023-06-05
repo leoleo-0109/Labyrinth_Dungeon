@@ -3,11 +3,12 @@
 #include <Wire.h>
 //#include <SoftwareSerial.h>
 
-#define ACC_RATE_2G 1671.8 // 加速度(2G)用の変換係数(生値→[m/s2]) ※32767/2/9.8
+//#define ACC_RATE_2G 1671.8 // 加速度(2G)用の変換係数(生値→[m/s2]) ※32767/2/9.8
+#define ACC_RATE_4G 835.9
 #define GYO_RATE_250 131.1 // 角速度(250[deg/s])用の変換係数(生値→[deg/s])
 
-#define SCL_PIN 18
-#define SDA_PIN 23
+#define SCL_PIN 14 // TKD15
+#define SDA_PIN 27 // TKD0
 
 #define RESET_BUTTON_PIN 14
 
@@ -25,35 +26,34 @@ volatile float rx = 0;   //出力データ(X軸角速度)
 volatile float ry = 0;   //出力データ(Y軸角速度)
 volatile float rz = 0;   //出力データ(Z軸角速度)
 
-const int FirstButton = 19;   // IO19
-const int SecondButton = 5;  // IO5
-const int ThirdButton = 12;   // IO16
-const int LeftButton = 27;    // IO21
-const int RightButton = 17;   // IO22
-const int EnterButton = 26;   // IO23
+const int FirstButton = 4;   // TKDIO4 // null
+const int SecondButton = 19;  // TKDIO5 // 19
+const int ThirdButton = 23;   // TKDIO19 // 23
+const int LeftButton = 17;    // TKDIO21 // 17
+const int RightButton = 25;   // TKDIO22 // 25
+const int EnterButton = 26;   // TKDIO23 // 26
 
 bool buttonFlag = false;
 void setup() {
-  //Serial.begin(115200);
-  Wire.begin(SDA_PIN, SCL_PIN); // I2C通信を開始する
-  Serial.begin(115200); // シリアル通信を開始する
+  //Wire.begin(SDA_PIN, SCL_PIN); // I2C通信を開始する
+  //Serial.begin(115200); // シリアル通信を開始する
+  SerialBT.begin("ESP32"); // Bluetoothデバイス名を入力
+  //i2cWriteReg(0x68, 0x6b, 0x00); //センサーをONにする
+  //i2cWriteReg(0x68, 0x1b, 0x00); //角速度レンジ設定(±250[deg/s])
+  //i2cWriteReg(0x68, 0x1c, 0x00); //加速度レンジ設定(±2G)
 
-  i2cWriteReg(0x68, 0x6b, 0x00); //センサーをONにする
-  i2cWriteReg(0x68, 0x1b, 0x00); //角速度レンジ設定(±250[deg/s])
-  i2cWriteReg(0x68, 0x1c, 0x00); //加速度レンジ設定(±2G)
-
-  //pinMode(RESET_BUTTON_PIN, INPUT_PULLUP);
-  pinMode(FirstButton, INPUT_PULLUP);    // IO19
-  pinMode(SecondButton, INPUT_PULLUP);   // IO5
-  pinMode(ThirdButton, INPUT_PULLUP);    // IO16
-  pinMode(LeftButton, INPUT_PULLUP);     // IO21
-  pinMode(RightButton, INPUT_PULLUP);    // IO22
-  pinMode(EnterButton, INPUT_PULLUP);    // IO23
+  pinMode(RESET_BUTTON_PIN, INPUT_PULLUP);
+  pinMode(FirstButton, INPUT_PULLUP);
+  pinMode(SecondButton, INPUT_PULLUP);
+  pinMode(ThirdButton, INPUT_PULLUP);
+  pinMode(LeftButton, INPUT_PULLUP);
+  pinMode(RightButton, INPUT_PULLUP);
+  pinMode(EnterButton, INPUT_PULLUP);
 }
 
 void loop() {
-  MPU_DATAGET();
-
+  //MPU_DATAGET();
+  Button();
   // データをシリアルポートに送信する
   // 出力は以下の順番
   //ax,ay,az,rx,ry,rz
@@ -68,7 +68,6 @@ void loop() {
   SerialBT.print(ry);
   SerialBT.print(",");
   SerialBT.println(rz);
-  //Button();
 
   delay(100);
 }
@@ -120,9 +119,9 @@ void MPU_DATAGET() {
   }
 
                  //2byteの値
-  ax = (float)((data[0] << 8) | data[1]) / ACC_RATE_2G; //LowとHighを連結して、値を取得する
-  ay = (float)((data[2] << 8) | data[3]) / ACC_RATE_2G; //LowとHighを連結して、値を取得する
-  az = (float)((data[4] << 8) | data[5]) / ACC_RATE_2G; //LowとHighを連結して、値を取得する
+  ax = (float)((data[0] << 8) | data[1]) / ACC_RATE_4G; //LowとHighを連結して、値を取得する
+  ay = (float)((data[2] << 8) | data[3]) / ACC_RATE_4G; //LowとHighを連結して、値を取得する
+  az = (float)((data[4] << 8) | data[5]) / ACC_RATE_4G; //LowとHighを連結して、値を取得する
 
   rx = (float)((data[8] << 8) | data[9]) / GYO_RATE_250; //LowとHighを連結して、値を取得する
   ry = (float)((data[10] << 8) | data[11]) / GYO_RATE_250; //LowとHighを連結して、値を取得する
