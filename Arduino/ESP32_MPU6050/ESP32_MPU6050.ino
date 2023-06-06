@@ -62,37 +62,37 @@ void loop() {
   // データをシリアルポートに送信する
   // 出力は以下の順番
   //ax,ay,az,rx,ry,rz
-  SerialBT.print("ax = ");
+  //SerialBT.print("ax = ");
   SerialBT.print(ax);
-  SerialBT.print(", ");
-  SerialBT.print("ay = ");
+  SerialBT.print(",");
+  //SerialBT.print("ay = ");
   SerialBT.print(ay);
-  SerialBT.print(", ");
-  SerialBT.print("az = ");
-  SerialBT.print(az);
-  SerialBT.print(", ");
-  SerialBT.print("rx = ");
-  SerialBT.print(rx);
-  SerialBT.print(", ");
-  SerialBT.print("ry = ");
-  SerialBT.print(ry);
-  SerialBT.print(", ");
-  SerialBT.print("rz = ");
-  SerialBT.println(rz);
+  SerialBT.print(",");
+  //SerialBT.print("az = ");
+  SerialBT.println(az);
+  //SerialBT.print(",");
+  //erialBT.print("rx = ");
+  //SerialBT.print(rx);
+  //SerialBT.print(",");
+  //SerialBT.print("ry = ");
+  //SerialBT.print(ry);
+  //SerialBT.print(",");
+  //SerialBT.print("rz = ");
+  //SerialBT.println(rz);
   Button();
 
   delay(100);
 }
 void Button(){
     /* 以下、ボタンを押された時の処理 */
-  if (digitalRead(RESET_BUTTON_PIN) == LOW) {
+  if (digitalRead(RESET_BUTTON_PIN) == LOW) 
+  {
     buttonFlag = true;
-    Serial.print(buttonFlag);
-    Serial.print(",");
+    //Serial.print(buttonFlag);
   }
   if(digitalRead(FirstButton) == LOW)
   {
-    SerialBT.println("1F");
+    //SerialBT.println("1F");
   }
 /*  else if(digitalRead(SecondButton) == LOW)
   {
@@ -104,23 +104,23 @@ void Button(){
   }*/
   else if(digitalRead(AdvanceButton) == LOW)
   {
-    SerialBT.println("Advance");
+    //SerialBT.println("Advance");
   }
   else if(digitalRead(BackButton) == LOW)
   {
-    SerialBT.println("Back");
+    //SerialBT.println("Back");
   }
   else if(digitalRead(LeftButton) == LOW)
   {
-    SerialBT.println("Left");
+    //SerialBT.println("Left");
   }
   else if(digitalRead(RightButton) == LOW)
   {
-    SerialBT.println("Right");
+    //SerialBT.println("Right");
   }
   else if(digitalRead(EnterButton) == LOW)
   {
-    SerialBT.println("Enter");
+    //SerialBT.println("Enter");
   }
   else
   {

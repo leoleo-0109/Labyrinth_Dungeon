@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using UnityEngine;
 
+
 public class SerialPortScript : MonoBehaviour
 {
-    SerialPort serialPort;
-
     [SerializeField] private string portName = "COM10";
-    private int baudRate = 115200;
+    [SerializeField] private int baudRate = 115200;
+    private SerialPort serialPort;
+
+    public Vector3 accel;
+    public GameObject playerObject;
 
     void Start()
     {
         serialPort = new SerialPort(portName, baudRate);
         //serialPort.ReadTimeout = 500;
-        serialPort.Open();
+        serialPort.Open(); // portの取得ができているかの確認が必要
     }
 
     void Update()
@@ -23,6 +26,7 @@ public class SerialPortScript : MonoBehaviour
         {
             string data = serialPort.ReadLine();  // 1行読み取る
             string[] values = data.Split(',');  // カンマで分割する
+            
 
             if (values.Length == 6)
             {
@@ -34,6 +38,9 @@ public class SerialPortScript : MonoBehaviour
                 float rz = float.Parse(values[5]);
                 //bool ButtonFlag = bool.Parse(values[6]);
                 // 値の確認
+                
+                accel = new Vector3(ax, ay, az);
+                playerObject.transform.Translate(accel * Time.deltaTime);
                 Debug.Log("ax: " + ax + ", ay: " + ay + ", az: " + az + ", rx: " + rx + ", ry: " + ry + ", rz: " + rz);
             }
         }
@@ -46,6 +53,8 @@ public class SerialPortScript : MonoBehaviour
     void OnDestroy()
     {
         if (serialPort != null && serialPort.IsOpen)
+        {
             serialPort.Close();
+        }
     }
 }
