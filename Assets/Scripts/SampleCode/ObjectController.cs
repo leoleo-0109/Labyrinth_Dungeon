@@ -10,6 +10,7 @@ namespace Button
         private SerialPort serialPort;
         public SerialHandler serialHandler;
         public float delta = 0.01f;
+        [SerializeField] private float speed = 4.00f;
         private float deltaPos;
         private Vector3 pos;
         public Vector3 accel;
@@ -24,7 +25,7 @@ namespace Button
         {
             // Vector3 pos = transform.localPosition;
             var data = message.Split(
-                new string[] { "," }, System.StringSplitOptions.None);
+                new string[] { "," }, System.StringSplitOptions.None); // カンマで分割する
             // Debug.Log(message);
              
             //string data = serialPort.ReadLine();  // 1行読み取る
@@ -34,18 +35,25 @@ namespace Button
             if (data.Length == 3)
             {
                 float ax = float.Parse(data[0]);
-                float ay = float.Parse(data[1]);
-                float az = float.Parse(data[2]);
-                // float rx = float.Parse(data[3]);
-                // float ry = float.Parse(data[4]);
+                //float ay = float.Parse(data[1]);
+                float az = float.Parse(data[1]);
+                float rx = float.Parse(data[2]);
+                //float ry = float.Parse(data[2]);
                 // float rz = float.Parse(data[5]);
                 //bool ButtonFlag = bool.Parse(values[6]);
                 // 値の確認
                 
-                //accel = new Vector3(ax, ay, az);
-                playerObject.transform.Translate(ax * delta, az * delta, ay * delta);
-                Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + ay);
-                //Debug.Log("ax: " + ax + ", ay: " + ay + ", az: " + az + ", rx: " + rx + ", ry: " + ry + ", rz: " + rz);
+                if(ax < 10.00f)
+                {
+                    ax = ax * (-1) * speed;
+                }
+                if(az < 10.00f)
+                {
+                    az = az * (-1) * speed;
+                }
+                playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
+                //playerObject.transform.Rotate(new Vector3(rx * delta, 0.00f, 0.00f));
+                Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", rx: " + rx);
             }
             
             
