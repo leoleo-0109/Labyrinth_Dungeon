@@ -7,14 +7,21 @@ namespace Button
 {
     public class ObjectController : MonoBehaviour    
     {
+        [SerializeField]
+        GameObject _camera;
+        private int counts;
         private SerialPort serialPort;
         public SerialHandler serialHandler;
         public float delta = 0.01f;
         [SerializeField] private float speed = 4.00f;
+        [SerializeField] private float cameraSpeed = 1.00f;
         private float deltaPos;
         private Vector3 pos;
         public Vector3 accel;
         public GameObject playerObject;
+
+        private bool isLeftPressed = false;
+        private bool isRightPressed = false;
 
         void Start()
         {
@@ -37,12 +44,12 @@ namespace Button
                 float ax = float.Parse(data[0]);
                 //float ay = float.Parse(data[1]);
                 float az = float.Parse(data[1]);
-                float rx = float.Parse(data[2]);
+                //float rx = float.Parse(data[2]);
                 //float ry = float.Parse(data[2]);
                 // float rz = float.Parse(data[5]);
                 //bool ButtonFlag = bool.Parse(values[6]);
-                // 値の確認
                 
+                // 感度調整
                 if(ax < 10.00f)
                 {
                     ax = ax * (-1) * speed;
@@ -51,35 +58,40 @@ namespace Button
                 {
                     az = az * (-1) * speed;
                 }
-                playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
-                //playerObject.transform.Rotate(new Vector3(rx * delta, 0.00f, 0.00f));
-                Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", rx: " + rx);
-            }
-            
-            
+                //playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
+                //playerObject.transform.Rotate(new Vector3(0.00f, ry * delta, 0.00f));
+                //Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f);
 
-            // switch (data[0])
-            // {
-            //     case "Advance":
-            //         deltaPos = delta * 30;
-            //         pos.z += deltaPos;
-            //         break;
-            //     case "Back":
-            //         deltaPos = delta * -30;
-            //         pos.z += deltaPos;
-            //         break;
-            //     case "Left":
-            //         deltaPos = delta * -30;
-            //         pos.x += deltaPos;
-            //         break;
-            //     case "Right":
-            //         deltaPos = delta * 30;
-            //         pos.x += deltaPos;
-            //         break;
-            //     default:
-            //         break;
-            // }
-            //transform.localPosition = pos;
-        }
+                // カメラの挙動
+                if (data[2] == "Left")
+                {
+                    Debug.Log("Left");
+                    /*isLeftPressed = true;
+                    isRightPressed = false;*/
+                    //if (isLeftPressed){
+                    // メインカメラを半時計回りに回転させる処理を追加
+                    //playerObject.transform.Rotate(new Vector3(0.0f, -cameraSpeed * Time.deltaTime, 0.0f));
+                    _camera.transform.Rotate(new Vector3(0,-5f,0));
+                    this.gameObject.transform.Rotate(new Vector3(0,-5f,0));
+                    //}
+                }
+                
+                if (data[2] == "Right")
+                {
+                    Debug.Log("Right");
+                    /*isLeftPressed = false;
+                    isRightPressed = true;*/
+                    //if (isRightPressed){
+                    _camera.transform.Rotate(new Vector3(0,5f,0));
+                    this.gameObject.transform.Rotate(new Vector3(0,5f,0));
+                    // メインカメラを時計回りに回転させる処理を追加
+                    //playerObject.transform.Rotate(new Vector3(0.0f, cameraSpeed * Time.deltaTime, 0.0f));
+                    //}
+                }
+                
+                playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
+                Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", camera: " + data[2]);
+            }
+        }            
     } 
 }
