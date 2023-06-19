@@ -4,7 +4,30 @@ using UnityEngine;
 
 public class Transfer : MonoBehaviour
 {
+    private int itemRemoveCount{ get; set; }
     private int transferCount = 0;
+    [SerializeField] private ScoreModel[] scoreModels;
+    void Start()
+    {
+        foreach (ScoreModel scoreModel in scoreModels)
+        {
+            scoreModel.ScoreAdd += IncrementRemoveCount;
+        }
+        gameObject.SetActive(false);
+    }
+    public void IncrementRemoveCount()
+    {
+        itemRemoveCount++;
+        Debug.Log(itemRemoveCount);
+        ItemView();
+    }
+    private void ItemView()
+    {
+        if(itemRemoveCount == 3)
+        {
+            gameObject.SetActive(true);
+        }
+    }
     void OnTriggerEnter(Collider other)
     {
         // TODO ステージ完成後に下記のコメントアウトを削除
