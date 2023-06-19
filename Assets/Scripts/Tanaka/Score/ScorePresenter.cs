@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UniRx;
-using UniRx.Triggers;
 
 public class ScorePresenter : MonoBehaviour
 {
@@ -15,7 +13,6 @@ public class ScorePresenter : MonoBehaviour
         {
             scoreModel.ScoreAdd += AddScore;
         }
-
         UpdateScore();
     }
     private void AddScore()
@@ -23,10 +20,6 @@ public class ScorePresenter : MonoBehaviour
         score++;
         UpdateScore();
     }
-    // private void Presentation()
-    // {
-    //     scoreView.ScoreDisplay(scoreModel.count);
-    // }
     private void UpdateScore()
     {
         scoreView.ScoreDisplay(score);

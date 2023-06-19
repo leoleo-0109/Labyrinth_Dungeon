@@ -14,6 +14,7 @@ public class ScoreModel : MonoBehaviour
         {
             count++;
             ScoreAdd.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }
