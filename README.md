@@ -1,6 +1,6 @@
 # Labyrinth Dungeon
 
-![Gameplay](labyrinth_dungeon_screenshot.png)
+![Gameplay](Labyrinth_Dungeon_ScreenShot.png)
 
 本プロジェクトは、マイクロコンピュータと加速度センサー、3Dプリンタを用いた自作コントローラでプレイする、体験型ゲームです。コントローラとPCは有線接続およびBluetooth接続の切り替えが可能です。
 
