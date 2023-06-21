@@ -2,21 +2,18 @@
 // れおっちのESP32の場合 BluetoothポートはCOM10　書き込みするポートCOM12
 // れおっちのESP32(黄色)の場合 BluetoothポートはCOM15
 
-#include <BluetoothSerial.h>
+//#include <BluetoothSerial.h>
 #include <Wire.h>
-//#include <SoftwareSerial.h>
+#include <SoftwareSerial.h>
 
 #define ACC_RATE_2G 1671.8 // 加速度(2G)用の変換係数(生値→[m/s2]) ※32767/2/9.8
 #define GYO_RATE_250 131.1 // 角速度(250[deg/s])用の変換係数(生値→[deg/s])
-
-#define SCL_PIN 17
-#define SDA_PIN 16
 
 //#define RESET_BUTTON_PIN 2
 
 //SoftwareSerial serial(10, 11); // RX, TXピンを適宜変更
 
-BluetoothSerial SerialBT;
+//BluetoothSerial SerialBT;
 
 volatile uint8_t data[14]; //センサからのデータ格納用配列
 
@@ -28,20 +25,22 @@ volatile float rx = 0;   //出力データ(X軸角速度)
 volatile float ry = 0;   //出力データ(Y軸角速度)
 volatile float rz = 0;   //出力データ(Z軸角速度)
 
-const int SecondButton = 15;  // IO15, D12
-const int ThirdButton = 0;    // IO0,  D2 
-const int LeftButton = 33;    // IO33, D8
-const int RightButton = 32;   // IO32, D10
-const int EnterButton = 14;   // IO14, D4
-const int ResetButton = 26;   // IO26, D6
+const int SecondButton = 12;  // IO15, D12
+const int ThirdButton = 2;    // IO0,  D2 
+const int LeftButton = 8;     // IO33, D8
+const int RightButton = 10;   // IO32, D10
+const int EnterButton = 4;    // IO14, D4
+const int ResetButton = 6;    // IO26, D6
+const int SCL_PIN = A5;
+const int SDA_PIN = A4;
 
 //bool buttonFlag = false;
 
 void setup()
 {
-  Wire.begin(SDA_PIN, SCL_PIN); // I2C通信を開始する
+  //Wire.begin(SDA_PIN, SCL_PIN); // I2C通信を開始する
   Serial.begin(115200); // シリアル通信を開始する
-  SerialBT.begin("ESP32");
+  //SerialBT.begin("ESP32");
 
   i2cWriteReg(0x68, 0x6b, 0x00); //センサーをONにする
   i2cWriteReg(0x68, 0x1b, 0x00); //角速度レンジ設定(±250[deg/s])
@@ -51,7 +50,7 @@ void setup()
   pinMode(SecondButton, INPUT_PULLUP);   // IO15
   pinMode(ThirdButton, INPUT_PULLUP);    // IO0
   pinMode(LeftButton, INPUT_PULLUP);     // IO33
-  pinMode(RightButton, INPUT_PULLUP);    // IO32
+  pinMode(RightButton, INPUT_PULLUP);    // IO35
   pinMode(EnterButton, INPUT_PULLUP);    // IO14
   pinMode(ResetButton, INPUT_PULLUP);    // IO26
 }
@@ -64,11 +63,11 @@ void loop()
   // 出力は以下の順番
   //ax,ay,az,rx,ry,rz
   //SerialBT.print("ax = ");
-  SerialBT.print(ax);
-  SerialBT.print(",");
+  Serial.print(ax);
+  Serial.print(",");
   //SerialBT.print("ay = ");
-  SerialBT.print(ay);
-  SerialBT.print(",");
+  Serial.print(ay);
+  Serial.print(",");
   //SerialBT.print("az = ");
   //SerialBT.println(az);
   //SerialBT.print(",");
@@ -96,31 +95,31 @@ void Button()
   
   if(digitalRead(SecondButton) == LOW)
   {
-    SerialBT.println("2F");
+    Serial.println("2F");
   }
   else if(digitalRead(ThirdButton) == LOW)
   {
-    SerialBT.println("3F");
+    Serial.println("3F");
   }
   else if(digitalRead(LeftButton) == LOW)
   {
-    SerialBT.println("Left");
+    Serial.println("Left");
   }
   else if(digitalRead(RightButton) == LOW)
   {
-    SerialBT.println("Right");
+    Serial.println("Right");
   }
   else if(digitalRead(EnterButton) == LOW)
   {
-    SerialBT.println("Enter");
+    Serial.println("Enter");
   }
   else if(digitalRead(ResetButton) == LOW)
   {
-    SerialBT.println("Reset");
+    Serial.println("Reset");
   }
   else
   {
-    SerialBT.println("null");
+    Serial.println("null");
   }
 }
 

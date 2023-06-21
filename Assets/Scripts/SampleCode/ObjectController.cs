@@ -13,7 +13,9 @@ namespace Button
         private SerialPort serialPort;
         public SerialHandler serialHandler;
         public float delta = 0.01f;
-        [SerializeField] private float speed = 4.00f;
+        [SerializeField, Header("左＆後の移動に使用")] private float minusSpeed = 4.00f; // 固定で4倍すること
+        [SerializeField, Header("速度変更")] private float speed = 1.00f;
+
         [SerializeField] private float cameraSpeed = 1.00f;
         private float deltaPos;
         private Vector3 pos;
@@ -52,12 +54,17 @@ namespace Button
                 // 感度調整
                 if(ax < 10.00f)
                 {
-                    ax = ax * (-1) * speed;
+                    ax = ax * (-1) * minusSpeed; // left
+                    //ax = ax * (-1) * minusSpeed * speed; // left
                 }
                 if(az < 10.00f)
                 {
-                    az = az * (-1) * speed;
+                    az = az * (-1) * minusSpeed; // back
+                    //az = az * (-1) * minusSpeed * speed; // back
                 }
+                 //ax = ax * speed; // right
+                 //az = az * speed; // front
+
                 //playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
                 //playerObject.transform.Rotate(new Vector3(0.00f, ry * delta, 0.00f));
                 //Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f);
@@ -71,8 +78,8 @@ namespace Button
                     //if (isLeftPressed){
                     // メインカメラを半時計回りに回転させる処理を追加
                     //playerObject.transform.Rotate(new Vector3(0.0f, -cameraSpeed * Time.deltaTime, 0.0f));
-                    _camera.transform.Rotate(new Vector3(0,-5f,0));
-                    this.gameObject.transform.Rotate(new Vector3(0,-5f,0));
+                    _camera.transform.Rotate(new Vector3(0, -5.0f, 0));
+                    this.gameObject.transform.Rotate(new Vector3(0, -5.0f, 0));
                     //}
                 }
                 
@@ -82,8 +89,8 @@ namespace Button
                     /*isLeftPressed = false;
                     isRightPressed = true;*/
                     //if (isRightPressed){
-                    _camera.transform.Rotate(new Vector3(0,5f,0));
-                    this.gameObject.transform.Rotate(new Vector3(0,5f,0));
+                    _camera.transform.Rotate(new Vector3(0, 5.0f, 0));
+                    this.gameObject.transform.Rotate(new Vector3(0, 5.0f, 0));
                     // メインカメラを時計回りに回転させる処理を追加
                     //playerObject.transform.Rotate(new Vector3(0.0f, cameraSpeed * Time.deltaTime, 0.0f));
                     //}
