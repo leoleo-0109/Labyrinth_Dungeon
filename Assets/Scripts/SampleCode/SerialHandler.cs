@@ -10,8 +10,8 @@ namespace Button
         public delegate void SerialDataReceivedEventHandler(string message);
         public event SerialDataReceivedEventHandler OnDataReceived;
 
-        [SerializeField] private string portName = "ESP32";
-        //public string portName = "COM8";
+        [SerializeField, Header("dsESP:COM9, leoESP:COM10, nano:COM6")] private string portName = "ESP32";
+        //public string portName = "COM6";
         public int baudRate = 115200;
 
         private SerialPort serialPort_;
