@@ -30,7 +30,11 @@ public class Transfer : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        // TODO ステージ完成後に下記のコメントアウトを削除
+        if(other.gameObject.CompareTag(TagName.Player))
+        {
+            SceneTransition.Stage1();
+        }
+        // TODO 全ステージ完成後に下記のコメントアウトを削除
         // if(other.gameObject.CompareTag(TagName.Player) && transferCount == 0)
         // {
         //     SceneTransition.Stage1();
