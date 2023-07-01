@@ -6,11 +6,13 @@ namespace Button
 {
     public class ConsoleOutput : MonoBehaviour
     {
-        public SerialHandler serialHandler;
+        public ESPSerialHandler espSerialHandler;
+        public NanoSerialHandler nanoSerialHandler;
 
         void Start()
         {
-            serialHandler.OnDataReceived += OnDataReceived;
+            espSerialHandler.OnDataReceived += OnDataReceived;
+            nanoSerialHandler.OnDataReceived += OnDataReceived;
         }
 
         void OnDataReceived(string message)
