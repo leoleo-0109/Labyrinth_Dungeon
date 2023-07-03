@@ -28,7 +28,7 @@ public class Transfer : MonoBehaviour
             gameObject.SetActive(true);
         }
     }
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.CompareTag(TagName.Player))
         {
