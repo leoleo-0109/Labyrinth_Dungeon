@@ -107,6 +107,7 @@ namespace Button
                     _camera.transform.Rotate(new Vector3(0, 5.0f, 0));
                     this.gameObject.transform.Rotate(new Vector3(0, 5.0f, 0));
                 }
+                // フロア遷移
                 if(data[2]=="2F"||data[2]=="3F")
                 {
                     Debug.Log("2F");
