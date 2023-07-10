@@ -30,7 +30,6 @@ namespace Button
         private void Start()
         {
             nanoSerialHandler.OnDataReceived += OnDataReceived;
-            nanoSerialHandler.OnButtonDataReceived += 
             originalSpeed = mSpeed;
         }
         private void OnCollisionEnter(Collision other)
@@ -54,10 +53,6 @@ namespace Button
                 mSpeed = originalSpeed;
                 Debug.Log("離れた"+mSpeed);
             }
-        }
-        public void OnButtonDataReceived(string message)
-        {
-            
         }
         public void OnDataReceived(string message)
         {

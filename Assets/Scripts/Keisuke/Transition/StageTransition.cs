@@ -19,15 +19,8 @@ public class StageTransition : MonoBehaviour
                 stagePosition.y += pos.y;
                 player.transform.position = stagePosition;
                 eventTriggered = true;
+                NanoObjectController.eventFlag = false;
             }
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag(TagName.Player))
-        {
-            eventTriggered = false;
-            Debug.Log("eventTriggered"+eventTriggered);
         }
     }
 }
