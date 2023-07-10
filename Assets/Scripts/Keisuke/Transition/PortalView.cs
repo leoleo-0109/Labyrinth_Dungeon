@@ -17,7 +17,6 @@ public class PortalView : MonoBehaviour
     public void IncrementRemoveCount()
     {
         itemRemoveCount++;
-        Debug.Log(itemRemoveCount);
         View();
     }
     private void View()

@@ -19,6 +19,10 @@ public static class TagName
 	public const string Stage1 = "Stage1";
 	public const string Stage2 = "Stage2";
 	public const string Stage3 = "Stage3";
+	public const string Stage1Warp = "Stage1Warp";
+	public const string Stage2Warp = "Stage2Warp";
+	public const string Stage3Warp = "Stage3Warp";
+
 	public const string Temp = "Temp";
 
 }
