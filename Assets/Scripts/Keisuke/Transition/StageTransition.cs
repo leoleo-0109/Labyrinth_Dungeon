@@ -14,7 +14,7 @@ public class StageTransition : MonoBehaviour
         {
             if (stageChangeCount < stages.Length && NanoObjectController.eventFlag == true)
             {
-                Vector3 pos = new Vector3(0,1,0);
+                Vector3 pos = new Vector3(0,1.6f,0);
                 Vector3 stagePosition = stages[stageChangeCount].transform.position;
                 stagePosition.y += pos.y;
                 player.transform.position = stagePosition;
