@@ -20,6 +20,8 @@ public class StageTransition : MonoBehaviour
                 player.transform.position = stagePosition;
                 eventTriggered = true;
                 NanoObjectController.eventFlag = false;
+                Debug.Log(eventTriggered);
+                Debug.Log(NanoObjectController.eventFlag);
             }
         }
     }
