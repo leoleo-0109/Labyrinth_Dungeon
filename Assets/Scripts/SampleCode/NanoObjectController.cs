@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System;
+using UniRx;
 
 namespace Button
 {
@@ -22,10 +24,9 @@ namespace Button
         private Vector3 pos;
         public Vector3 accel;
         public GameObject playerObject;
-
         private bool isLeftPressed = false;
         private bool isRightPressed = false;
-
+        public static bool eventFlag = false;
         void Start()
         {
             nanoSerialHandler.OnDataReceived += OnDataReceived;
@@ -106,9 +107,14 @@ namespace Button
                     _camera.transform.Rotate(new Vector3(0, 5.0f, 0));
                     this.gameObject.transform.Rotate(new Vector3(0, 5.0f, 0));
                 }
-
+                if(data[2]=="2F"||data[2]=="3F")
+                {
+                    Debug.Log("2F");
+                    eventFlag = true;
+                    Debug.Log(eventFlag);
+                }
                 playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
-                Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", camera: " + data[2]);
+                //Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", camera: " + data[2]);
             }
         }
     }
