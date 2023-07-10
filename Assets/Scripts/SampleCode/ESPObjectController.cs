@@ -16,15 +16,14 @@ namespace Button
         [SerializeField, Header("left＆back移動に使用")] private float minusSpeed = 4.00f; // 固定で4倍すること
         [SerializeField, Header("ステータの壁に当たった際のスロー効果")] private float slowSpeed;
         private float originalSpeed;
-
         [SerializeField] private float cameraSpeed = 1.00f;
         private float deltaPos;
         private Vector3 pos;
         public Vector3 accel;
         public GameObject playerObject;
-
         private bool isLeftPressed = false;
         private bool isRightPressed = false;
+        public static bool eventFlag = false;
 
         void Start()
         {
@@ -105,7 +104,13 @@ namespace Button
                     _camera.transform.Rotate(new Vector3(0, 5.0f, 0));
                     this.gameObject.transform.Rotate(new Vector3(0, 5.0f, 0));
                 }
-
+                // フロア遷移
+                if(data[2]=="2F"||data[2]=="3F")
+                {
+                    Debug.Log("2F");
+                    eventFlag = true;
+                    Debug.Log(eventFlag);
+                }
                 playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
                 Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", camera: " + data[2]);
             }
