@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System;
+using UniRx;
 
 namespace Button
 {
@@ -14,42 +16,52 @@ namespace Button
         public NanoSerialHandler nanoSerialHandler;
         public float delta = 0.01f;
         [SerializeField, Header("左＆後の移動に使用")] private float mSpeed = 8.00f; // 固定で8倍すること
+        [SerializeField, Header("ステータの壁に当たった際のスロー効果")] private float slowSpeed;
+        private float originalSpeed;
 
         [SerializeField] private float cameraSpeed = 1.00f;
         private float deltaPos;
         private Vector3 pos;
         public Vector3 accel;
         public GameObject playerObject;
-
         private bool isLeftPressed = false;
         private bool isRightPressed = false;
-
+        public static bool eventFlag = false;
         void Start()
         {
             nanoSerialHandler.OnDataReceived += OnDataReceived;
+            originalSpeed = mSpeed;
         }
-
+        void OnCollisionEnter(Collision other)
+        {
+            if(other.gameObject.CompareTag(TagName.Stage1)
+            ||other.gameObject.CompareTag(TagName.Stage2)
+            ||other.gameObject.CompareTag(TagName.Stage3))
+            {
+                Debug.Log("Wall");
+                mSpeed -= slowSpeed;
+                Debug.Log(mSpeed);
+            }
+        }
+        void OnCollisionExit(Collision other)
+        {
+            if(other.gameObject.CompareTag(TagName.Stage1)
+            ||other.gameObject.CompareTag(TagName.Stage2)
+            ||other.gameObject.CompareTag(TagName.Stage3))
+            {
+                Debug.Log("Wall");
+                mSpeed = originalSpeed;
+                Debug.Log("離れた"+mSpeed);
+            }
+        }
         void OnDataReceived(string message)
         {
-            // Vector3 pos = transform.localPosition;
             var data = message.Split(
                 new string[] { "," }, System.StringSplitOptions.None); // カンマで分割する
-            // Debug.Log(message);
-             
-            //string data = serialPort.ReadLine();  // 1行読み取る
-            //string[] values = data.Split(',');  // カンマで分割する
-            
-
             if (data.Length == 3)
             {
                 float ax = float.Parse(data[0]);
-                //float ay = float.Parse(data[1]);
                 float az = float.Parse(data[1]);
-                //float rx = float.Parse(data[2]);
-                //float ry = float.Parse(data[2]);
-                // float rz = float.Parse(data[5]);
-                //bool ButtonFlag = bool.Parse(values[6]);
-                
                 // 感度調整 Nano用
                 if(ax < 10.00f)
                 {
@@ -81,43 +93,29 @@ namespace Button
                     az = -32.00f; // back上限速度
                 }
 
-                //ax = ax * speed; // right
-                //az = az * speed; // front
-
-                //playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
-                //playerObject.transform.Rotate(new Vector3(0.00f, ry * delta, 0.00f));
-                //Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f);
-
                 // カメラの挙動
                 if (data[2] == "Left")
                 {
                     Debug.Log("Left");
-                    /*isLeftPressed = true;
-                    isRightPressed = false;*/
-                    //if (isLeftPressed){
-                    // メインカメラを半時計回りに回転させる処理を追加
-                    //playerObject.transform.Rotate(new Vector3(0.0f, -cameraSpeed * Time.deltaTime, 0.0f));
                     _camera.transform.Rotate(new Vector3(0, -5.0f, 0));
                     this.gameObject.transform.Rotate(new Vector3(0, -5.0f, 0));
-                    //}
                 }
-                
+
                 if (data[2] == "Right")
                 {
                     Debug.Log("Right");
-                    /*isLeftPressed = false;
-                    isRightPressed = true;*/
-                    //if (isRightPressed){
                     _camera.transform.Rotate(new Vector3(0, 5.0f, 0));
                     this.gameObject.transform.Rotate(new Vector3(0, 5.0f, 0));
-                    // メインカメラを時計回りに回転させる処理を追加
-                    //playerObject.transform.Rotate(new Vector3(0.0f, cameraSpeed * Time.deltaTime, 0.0f));
-                    //}
                 }
-                
+                if(data[2]=="2F"||data[2]=="3F")
+                {
+                    Debug.Log("2F");
+                    eventFlag = true;
+                    Debug.Log(eventFlag);
+                }
                 playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
-                Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", camera: " + data[2]);
+                //Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", camera: " + data[2]);
             }
-        }            
-    } 
+        }
+    }
 }
