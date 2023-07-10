@@ -18,6 +18,7 @@ public class ScorePresenter : MonoBehaviour
     private void AddScore()
     {
         score++;
+        Debug.Log(score);
         UpdateScore();
     }
     private void UpdateScore()

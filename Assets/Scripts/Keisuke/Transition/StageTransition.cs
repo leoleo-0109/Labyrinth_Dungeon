@@ -6,22 +6,28 @@ using Button;
 public class StageTransition : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject[] stages;
-    private int stageChangeCount = 0;
-    void OnTriggerStay(Collider other)
+    [SerializeField] private GameObject stage;
+    private bool eventTriggered = false;
+    private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.CompareTag(TagName.Player))
         {
-            if (stageChangeCount < stages.Length && NanoObjectController.eventFlag == true)
+            if (NanoObjectController.eventFlag && !eventTriggered)
             {
                 Vector3 pos = new Vector3(0,1.6f,0);
-                Vector3 stagePosition = stages[stageChangeCount].transform.position;
+                Vector3 stagePosition = stage.transform.position;
                 stagePosition.y += pos.y;
                 player.transform.position = stagePosition;
-                stageChangeCount++;
-                NanoObjectController.eventFlag = false;
+                eventTriggered = true;
             }
         }
     }
-
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag(TagName.Player))
+        {
+            eventTriggered = false;
+            Debug.Log("eventTriggered"+eventTriggered);
+        }
+    }
 }
