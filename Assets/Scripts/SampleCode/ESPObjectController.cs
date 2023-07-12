@@ -43,6 +43,15 @@ namespace Button
                 Debug.Log(minusSpeed);
             }
         }
+        private void OnTriggerStay(Collider other)
+        {
+            if(other.gameObject.CompareTag(TagName.Portal1)
+            ||other.gameObject.CompareTag(TagName.Portal2)
+            ||other.gameObject.CompareTag(TagName.Portal3))
+            {
+                buttonPressedRequest = true;
+            }
+        }
         void OnCollisionExit(Collision other)
         {
             if(other.gameObject.CompareTag(TagName.Stage1)

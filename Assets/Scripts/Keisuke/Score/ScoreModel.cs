@@ -6,7 +6,6 @@ using UnityEngine;
 public class ScoreModel : MonoBehaviour
 {
     public event Action ScoreAdd = delegate { };
-
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag(TagName.Player))

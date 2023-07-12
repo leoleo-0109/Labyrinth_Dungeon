@@ -36,9 +36,9 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.CompareTag(TagName.Stage1Warp)
-        ||other.gameObject.CompareTag(TagName.Stage2Warp)
-        ||other.gameObject.CompareTag(TagName.Stage3Warp))
+        if(other.gameObject.CompareTag(TagName.Portal1)
+        ||other.gameObject.CompareTag(TagName.Portal2)
+        ||other.gameObject.CompareTag(TagName.Portal3))
         {
             buttonPressedRequest = true;
         }

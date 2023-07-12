@@ -8,9 +8,9 @@ TagManager:
   - Stage1
   - Stage2
   - Stage3
-  - Stage1Warp
-  - Stage2Warp
-  - Stage3Warp
+  - Portal1
+  - Portal2
+  - Portal3
   layers:
   - Default
   - TransparentFX
