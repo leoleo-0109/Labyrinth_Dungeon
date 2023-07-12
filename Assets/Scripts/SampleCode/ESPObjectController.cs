@@ -24,6 +24,8 @@ namespace Button
         private bool isLeftPressed = false;
         private bool isRightPressed = false;
         public static bool eventFlag = false;
+        private bool buttonPressed = false;
+        private bool buttonPressedRequest = false;
 
         void Start()
         {
@@ -105,11 +107,22 @@ namespace Button
                     this.gameObject.transform.Rotate(new Vector3(0, 5.0f, 0));
                 }
                 // フロア遷移
-                if(data[2]=="2F"||data[2]=="3F")
+                if(buttonPressedRequest)
                 {
-                    Debug.Log("2F");
-                    eventFlag = true;
-                    Debug.Log(eventFlag);
+                    Debug.Log("ボタン入力準備完了");
+                    if((data[2]=="2F"||data[2]=="3F") && !buttonPressed)
+                    {
+                        Debug.Log("2F");
+                        eventFlag = true;
+                        buttonPressed = true;
+                        Debug.Log(eventFlag);
+                    }
+                    else if((data[2]!="2F"&&data[2]!="3F") && buttonPressed)
+                    {
+                        Debug.Log("現在ボタン入力を受け付けません");
+                        buttonPressed = false;
+                        buttonPressedRequest = false;
+                    }
                 }
                 playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
                 Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", camera: " + data[2]);
