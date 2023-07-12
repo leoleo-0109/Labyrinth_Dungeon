@@ -12,7 +12,7 @@ public class StageTransition : MonoBehaviour
     {
         if(other.gameObject.CompareTag(TagName.Player))
         {
-            if (NanoObjectController.eventFlag && !eventTriggered)
+            if (NanoObjectController.eventFlag && !eventTriggered||PlayerController.eventFlag && !eventTriggered)
             {
                 Vector3 pos = new Vector3(0,1.6f,0);
                 Vector3 stagePosition = stage.transform.position;
@@ -20,6 +20,7 @@ public class StageTransition : MonoBehaviour
                 player.transform.position = stagePosition;
                 eventTriggered = true;
                 NanoObjectController.eventFlag = false;
+                PlayerController.eventFlag = false;
                 Debug.Log(eventTriggered);
                 Debug.Log(NanoObjectController.eventFlag);
             }
