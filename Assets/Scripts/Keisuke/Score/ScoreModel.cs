@@ -1,16 +1,19 @@
 using System;
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UniRx;
+using UniRx.Triggers;
 public class ScoreModel : MonoBehaviour
 {
-    public event Action ScoreAdd = delegate { };
+    private Subject<Unit> onEventTrigger = new Subject<Unit>();
+    public IObservable<Unit> OnEventTrigger => onEventTrigger;
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag(TagName.Player))
         {
-            ScoreAdd.Invoke();
+            onEventTrigger.OnNext(Unit.Default);
             gameObject.SetActive(false);
         }
     }
