@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class ScorePresenter : MonoBehaviour
 {
@@ -11,10 +13,10 @@ public class ScorePresenter : MonoBehaviour
     private int scoreCountType2 = 0;
     private int scoreCountType3 = 0;
 
-    [SerializeField] private ScoreModel[] scoreModels;
+    //[SerializeField] private ScoreModel[] scoreModels;
     [SerializeField] private ScoreView scoreView;
     private float score = 0;
-    void Start()
+    async void Start()
     {
         // foreach (ScoreModel scoreModel in scoreModels)
         // {
@@ -23,17 +25,20 @@ public class ScorePresenter : MonoBehaviour
         // TODO:scoreCountTypeをステージが変わったらすべて値をリセットしてあげる必要がある。
         foreach (ScoreModel scoreModelType1 in scoreModelsType1)
         {
-            scoreModelType1.ScoreAdd += AddScore;
+            await scoreModelType1.ScoreAdd += AddScore;
+            Debug.Log("Type1");
             scoreCountType1++;
         }
         foreach (ScoreModel scoreModelType2 in scoreModelsType2)
         {
-            scoreModelType1.ScoreAdd += AddScore;
-            scoreCountType1++;
+            await scoreModelType2.ScoreAdd += AddScore;
+            Debug.Log("Type2");
+            scoreCountType2++;
         }
         foreach (ScoreModel scoreModelType3 in scoreModelsType3)
         {
-            scoreModelType1.ScoreAdd += AddScore;
+            await scoreModelType3.ScoreAdd += AddScore;
+            Debug.Log("Type3");
             scoreCountType3++;
         }
         UpdateScore();
@@ -42,22 +47,22 @@ public class ScorePresenter : MonoBehaviour
     {
         // TODO:これどうにかする。
         if(scoreCountType1==2){
-            score* 1.2f;
+            score *= 1.2f;
         }
         if(scoreCountType1==3){
-            score * 1.5f;
+            score *= 1.5f;
         }
         if(scoreCountType2==2){
-            score* 1.2f;
+            score *= 1.2f;
         }
         if(scoreCountType3==3){
-            score * 1.5f;
+            score *= 1.5f;
         }
         if(scoreCountType2==2){
-            score* 1.2f;
+            score *= 1.2f;
         }
         if(scoreCountType3==3){
-            score * 1.5f;
+            score *= 1.5f;
         }
         score++;
         Debug.Log(score);
