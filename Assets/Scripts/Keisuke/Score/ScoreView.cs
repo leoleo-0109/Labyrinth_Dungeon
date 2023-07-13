@@ -7,7 +7,7 @@ using TMPro;
 public class ScoreView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
-    public void ScoreDisplay(int count)
+    public void ScoreDisplay(float count)
     {
         scoreText.text = "ScoreCount: " + count.ToString();
     }
