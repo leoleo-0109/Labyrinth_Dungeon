@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Button;
+using BananaClient;
 
 public class StageTransition : MonoBehaviour
 {
@@ -12,17 +13,15 @@ public class StageTransition : MonoBehaviour
     {
         if(other.gameObject.CompareTag(TagName.Player))
         {
-            if (NanoObjectController.eventFlag && !eventTriggered||PlayerController.eventFlag && !eventTriggered)
+            if (EventFlagHolder.eventFlag && !eventTriggered)
             {
                 Vector3 pos = new Vector3(0,1.6f,0);
                 Vector3 stagePosition = stage.transform.position;
                 stagePosition.y += pos.y;
                 player.transform.position = stagePosition;
                 eventTriggered = true;
-                NanoObjectController.eventFlag = false;
-                PlayerController.eventFlag = false;
+                EventFlagHolder.eventFlag = false;
                 Debug.Log(eventTriggered);
-                Debug.Log(NanoObjectController.eventFlag);
             }
         }
     }

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
+using BananaClient;
 
 public class PlayerController : MonoBehaviour
 {
-    public float dfjklsfkljsfkljs;
-    public static bool eventFlag = false;
+    public float speed;
     private bool buttonPressed = false;
     private bool buttonPressedRequest = false;
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -25,19 +25,19 @@ public class PlayerController : MonoBehaviour
             Vector3 pos = transform.position;
             if(Input.GetKey(KeyCode.W))
             {
-                pos.z += dfjklsfkljsfkljs * Time.deltaTime;
+                pos.z += speed * Time.deltaTime;
             }
-                    if(Input.GetKey(KeyCode.A))
+            if(Input.GetKey(KeyCode.A))
             {
-                pos.x -= dfjklsfkljsfkljs * Time.deltaTime;
+                pos.x -= speed * Time.deltaTime;
             }
-                    if(Input.GetKey(KeyCode.S))
+            if(Input.GetKey(KeyCode.S))
             {
-                pos.z -= dfjklsfkljsfkljs * Time.deltaTime;
+                pos.z -= speed * Time.deltaTime;
             }
-                    if(Input.GetKey(KeyCode.D))
+            if(Input.GetKey(KeyCode.D))
             {
-                pos.x += dfjklsfkljsfkljs * Time.deltaTime;
+                pos.x += speed * Time.deltaTime;
             }
             transform.position = pos;
         }).AddTo(disposable);
@@ -63,9 +63,8 @@ public class PlayerController : MonoBehaviour
                 if(Input.GetKey(KeyCode.K) && !buttonPressed)
                 {
                     Debug.Log("2F");
-                    eventFlag = true;
+                    EventFlagHolder.eventFlag = true;
                     buttonPressed = true;
-                    Debug.Log(eventFlag);
                 }
                 else if(!Input.GetKey(KeyCode.K) && buttonPressed)
                 {
