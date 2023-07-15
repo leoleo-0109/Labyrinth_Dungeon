@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System;
 using UniRx;
+using BananaClient;
 
 namespace Button
 {
@@ -26,14 +27,23 @@ namespace Button
         public GameObject playerObject;
         private bool isLeftPressed = false;
         private bool isRightPressed = false;
-        public static bool eventFlag = false;
         private bool buttonPressed = false;
         private bool buttonPressedRequest = false;
         private void Start()
         {
             nanoSerialHandler.OnDataReceived += OnDataReceived;
-            originalSpeed = mSpeed;
+            originalSpeed = mSpeed; // mSpeedの初期値を格納する変数の初期化
         }
+        private void OnTriggerStay(Collider other)
+        {
+            if(other.gameObject.CompareTag(TagName.Portal1)
+            ||other.gameObject.CompareTag(TagName.Portal2)
+            ||other.gameObject.CompareTag(TagName.Portal3))
+            {
+                buttonPressedRequest = true;
+            }
+        }
+        // 壁との当たり判定、当たっている間は速度を落とす
         private void OnCollisionEnter(Collision other)
         {
             if(other.gameObject.CompareTag(TagName.Stage1)
@@ -45,15 +55,7 @@ namespace Button
                 Debug.Log(mSpeed);
             }
         }
-        private void OnTriggerStay(Collider other)
-        {
-            if(other.gameObject.CompareTag(TagName.Portal1)
-            ||other.gameObject.CompareTag(TagName.Portal2)
-            ||other.gameObject.CompareTag(TagName.Portal3))
-            {
-                buttonPressedRequest = true;
-            }
-        }
+        // 壁との当たり判定、離れたら元の速度に戻す
         private void OnCollisionExit(Collision other)
         {
             if(other.gameObject.CompareTag(TagName.Stage1)
@@ -65,6 +67,7 @@ namespace Button
                 Debug.Log("離れた"+mSpeed);
             }
         }
+        // シリアル通信のデータ受信関数
         public void OnDataReceived(string message)
         {
             var data = message.Split(
@@ -125,9 +128,8 @@ namespace Button
                     if((data[2]=="2F"||data[2]=="3F") && !buttonPressed)
                     {
                         Debug.Log("2F");
-                        eventFlag = true;
+                        EventFlagHolder.eventFlag = true;
                         buttonPressed = true;
-                        Debug.Log(eventFlag);
                     }
                     else if((data[2]!="2F"&&data[2]!="3F") && buttonPressed)
                     {
