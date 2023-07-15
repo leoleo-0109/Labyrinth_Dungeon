@@ -16,6 +16,8 @@
 - Arduino: シリアル通信により加速度センサーの値を取得します。
 - ESP32: 加速度センサーから取得した値をBluetoothシリアル経由でUnityに送信します。
 - Unity: 受け取った加速度センサーの値を使用して、プレイヤーの操作を制御します。
+- [UniRx GitHub Repository](https://github.com/neuecc/UniRx)
+- [UniRx Documentation](https://unirx.dev/)
 
 ## ゲームの特徴
 
