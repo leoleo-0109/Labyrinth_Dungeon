@@ -18,11 +18,11 @@ public class ScorePresenter : MonoBehaviour
     private float score = 0;
     void Start()
     {
-        Temp();
+        AddScoreEventTrigger();
         UpdateScore();
     }
 
-    private void Temp()
+    private void AddScoreEventTrigger()
     {
         // TODO:scoreCountTypeをステージが変わったらすべて値をリセットしてあげる必要がある。
         foreach (ScoreModel scoreModelType1 in scoreModelsType1)
