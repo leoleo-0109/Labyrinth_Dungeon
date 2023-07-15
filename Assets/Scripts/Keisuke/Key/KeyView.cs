@@ -11,7 +11,7 @@ namespace BananaClient
         [SerializeField] private TextMeshProUGUI keyCountText;
         public void KeyCountDisplay(int count)
         {
-            keyCountText.text = "ScoreCount: " + count.ToString();
+            keyCountText.text = count.ToString()+"/3";
         }
     }
 }
