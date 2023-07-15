@@ -1,25 +1,38 @@
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class SceneTransition
+public class SceneTransition : MonoBehaviour
 {
-    public static void MainGameTransition()
+    public void ESP32MainGame()
     {
-        SceneManager.LoadScene(TagName.MainGame);
+        SceneManager.LoadScene(TagName.ESP32MainGame);
     }
-    public static void ResultTransition()
+    public void NanoMainGame()
+    {
+        SceneManager.LoadScene(TagName.NanoMainGame);
+    }
+    public void KeyBoardMainGame()
+    {
+        SceneManager.LoadScene(TagName.KeyBoardMainGame);
+    }
+    public void Title()
+    {
+        SceneManager.LoadScene(TagName.Title);
+    }
+    public void ResultTransition()
     {
         SceneManager.LoadScene(TagName.Result);
     }
-    public static void Stage1()
+    public void Stage1()
     {
         SceneManager.LoadScene(TagName.Stage1);
     }
-    public static void Stage2()
+    public void Stage2()
     {
         SceneManager.LoadScene(TagName.Stage2);
 
     }
-    public static void Stage3()
+    public void Stage3()
     {
         SceneManager.LoadScene(TagName.Stage3);
     }
