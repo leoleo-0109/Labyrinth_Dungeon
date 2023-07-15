@@ -128,7 +128,6 @@ namespace Button
                     if((data[2]=="2F"||data[2]=="3F") && !buttonPressed)
                     {
                         Debug.Log("2F");
-                        //eventFlag = true;
                         EventFlagHolder.eventFlag = true;
                         buttonPressed = true;
                     }
