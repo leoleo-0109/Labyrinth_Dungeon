@@ -11,9 +11,9 @@ namespace BananaClient
 {
     public class ScorePresenter : MonoBehaviour
     {
-        [SerializeField] private ScoreModel[] scoreModelsType1;
-        [SerializeField] private ScoreModel[] scoreModelsType2;
-        [SerializeField] private ScoreModel[] scoreModelsType3;
+        [SerializeField,Header("Type1アイテムを設定")] private ScoreModel[] scoreModelsType1;
+        [SerializeField,Header("Type2アイテムを設定")] private ScoreModel[] scoreModelsType2;
+        [SerializeField,Header("Type3アイテムを設定")] private ScoreModel[] scoreModelsType3;
         private int scoreCountType1 = 0;
         private int scoreCountType2 = 0;
         private int scoreCountType3 = 0;

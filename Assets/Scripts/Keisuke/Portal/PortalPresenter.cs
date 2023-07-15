@@ -8,8 +8,8 @@ namespace BananaClient
     public class PortalPresenter : MonoBehaviour
     {
         private int RemoveCount{ get; set; }
-        [SerializeField] private PortalModel[] portalModels;
-        [SerializeField] private PortalView[] portalViews;
+        [SerializeField,Header("ポータルの表示に必要な鍵を設定")] private PortalModel[] portalModels;
+        [SerializeField,Header("表示させたいポータルを設定")] private PortalView[] portalViews;
         void Start()
         {
             foreach (PortalModel portalModel in portalModels)
