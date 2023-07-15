@@ -8,12 +8,15 @@ using BananaClient;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
+    [SerializeField] GameObject _camera;
+    public float moveSpeed = 5f; // プレイヤーの移動速度
+    private Rigidbody rb;
     private bool buttonPressed = false;
     private bool buttonPressedRequest = false;
     private CompositeDisposable disposable = new CompositeDisposable();
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         Move();
         WarpButton();
     }
@@ -22,24 +25,23 @@ public class PlayerController : MonoBehaviour
         this.UpdateAsObservable()
         .Subscribe(_ =>
         {
-            Vector3 pos = transform.position;
-            if(Input.GetKey(KeyCode.W))
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+            // 移動方向をカメラの方向に合わせる
+            Vector3 cameraForward = Vector3.Scale(_camera.transform.forward, new Vector3(1, 0, 1)).normalized;
+            Vector3 movement = (moveHorizontal * _camera.transform.right + moveVertical * cameraForward).normalized;
+
+            rb.velocity = movement * moveSpeed;
+            if(Input.GetKey(KeyCode.LeftArrow))
             {
-                pos.z += speed * Time.deltaTime;
+                _camera.transform.Rotate(new Vector3(0, -0.5f, 0));
+                this.gameObject.transform.Rotate(new Vector3(0, -0.5f, 0));
             }
-            if(Input.GetKey(KeyCode.A))
+            if(Input.GetKey(KeyCode.RightArrow))
             {
-                pos.x -= speed * Time.deltaTime;
+                _camera.transform.Rotate(new Vector3(0, 0.5f, 0));
+                this.gameObject.transform.Rotate(new Vector3(0, 0.5f, 0));
             }
-            if(Input.GetKey(KeyCode.S))
-            {
-                pos.z -= speed * Time.deltaTime;
-            }
-            if(Input.GetKey(KeyCode.D))
-            {
-                pos.x += speed * Time.deltaTime;
-            }
-            transform.position = pos;
         }).AddTo(disposable);
     }
     private void OnTriggerStay(Collider other)
