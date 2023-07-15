@@ -1,28 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BananaClient;
 
-public class KeyPresenter : MonoBehaviour
+namespace BananaClient
 {
-    [SerializeField] private KeyModel[] keyModels;
-    [SerializeField] private KeyView keyView;
-    private int keyCount = 0;
-    void Start()
+    public class KeyPresenter : MonoBehaviour
     {
-        foreach (KeyModel keyModel in keyModels)
+        [SerializeField] private KeyModel[] keyModels;
+        [SerializeField] private KeyView keyView;
+        private int keyCount = 0;
+        void Start()
         {
-            keyModel.KeyCountAdd += AddKeyCount;
+            foreach (KeyModel keyModel in keyModels)
+            {
+                keyModel.KeyCountAdd += AddKeyCount;
+            }
+            UpdateKeyCount();
         }
-        UpdateKeyCount();
-    }
-    private void AddKeyCount()
-    {
-        keyCount++;
-        Debug.Log(keyCount);
-        UpdateKeyCount();
-    }
-    private void UpdateKeyCount()
-    {
-        keyView.KeyCountDisplay(keyCount);
+        private void AddKeyCount()
+        {
+            keyCount++;
+            Debug.Log(keyCount);
+            UpdateKeyCount();
+        }
+        private void UpdateKeyCount()
+        {
+            keyView.KeyCountDisplay(keyCount);
+        }
     }
 }

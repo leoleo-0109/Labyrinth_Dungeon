@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class KeyView : MonoBehaviour
+
+namespace BananaClient
 {
-    [SerializeField] private TextMeshProUGUI keyCountText;
-    public void KeyCountDisplay(int count)
+    public class KeyView : MonoBehaviour
     {
-        keyCountText.text = "ScoreCount: " + count.ToString();
+        [SerializeField] private TextMeshProUGUI keyCountText;
+        public void KeyCountDisplay(int count)
+        {
+            keyCountText.text = "ScoreCount: " + count.ToString();
+        }
     }
 }

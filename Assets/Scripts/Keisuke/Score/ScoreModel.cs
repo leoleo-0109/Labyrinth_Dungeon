@@ -4,16 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
-public class ScoreModel : MonoBehaviour
+
+namespace BananaClient
 {
-    private Subject<Unit> onEventTrigger = new Subject<Unit>();
-    public IObservable<Unit> OnEventTrigger => onEventTrigger;
-    void OnCollisionEnter(Collision other)
+    public class ScoreModel : MonoBehaviour
     {
-        if (other.gameObject.CompareTag(TagName.Player))
+        private Subject<Unit> onEventTrigger = new Subject<Unit>();
+        public IObservable<Unit> OnEventTrigger => onEventTrigger;
+        void OnCollisionEnter(Collision other)
         {
-            onEventTrigger.OnNext(Unit.Default);
-            gameObject.SetActive(false);
+            if (other.gameObject.CompareTag(TagName.Player))
+            {
+                onEventTrigger.OnNext(Unit.Default);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

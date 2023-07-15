@@ -2,16 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*このスクリプトは鍵のオブジェクトにアタッチしてください。*/
-public class PortalModel : MonoBehaviour
+
+namespace BananaClient
 {
-    public event Action CountAdd = delegate { };
-    void OnCollisionEnter(Collision other)
+    /*このスクリプトは鍵のオブジェクトにアタッチしてください。*/
+    public class PortalModel : MonoBehaviour
     {
-        if (other.gameObject.CompareTag(TagName.Player))
+        public event Action CountAdd = delegate { };
+        void OnCollisionEnter(Collision other)
         {
-            CountAdd.Invoke();
-            gameObject.SetActive(false);
+            if (other.gameObject.CompareTag(TagName.Player))
+            {
+                CountAdd.Invoke();
+                gameObject.SetActive(false);
+            }
         }
     }
 }

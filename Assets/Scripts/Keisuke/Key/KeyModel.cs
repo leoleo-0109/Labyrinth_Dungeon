@@ -3,17 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyModel : MonoBehaviour
+namespace BananaClient
 {
-    public event Action KeyCountAdd = delegate { };
-
-    void OnCollisionEnter(Collision other)
+    public class KeyModel : MonoBehaviour
     {
-        if (other.gameObject.CompareTag(TagName.Player))
+        public event Action KeyCountAdd = delegate { };
+        void OnCollisionEnter(Collision other)
         {
-            KeyCountAdd.Invoke();
-            gameObject.SetActive(false);
+            if (other.gameObject.CompareTag(TagName.Player))
+            {
+                KeyCountAdd.Invoke();
+                gameObject.SetActive(false);
+            }
         }
     }
-
 }

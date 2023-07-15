@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PortalView : MonoBehaviour
+namespace BananaClient
 {
-    // ポータルを表示
-    private void View()
+    public class PortalView : MonoBehaviour
     {
-        gameObject.SetActive(true);
-    }
+        // ポータルを表示
+        private void View()
+        {
+            gameObject.SetActive(true);
+        }
 
+    }
 }
