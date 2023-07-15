@@ -7,7 +7,9 @@ public static class TagName
 	public const string MainCamera = "MainCamera";
 	public const string Player = "Player";
 	public const string Enemy = "Enemy";
-    public const string MainGame = "SampleScene";
+    public const string ESP32MainGame = "MainGameESP32Ver";
+    public const string NanoMainGame = "MainGameNanoVer";
+    public const string KeyBoardMainGame = "KeyBoardMainGame";
     public const string Title = "Title";
     public const string Result = "Result";
 	public const string Stage1 = "Stage1";
