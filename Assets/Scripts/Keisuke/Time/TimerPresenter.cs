@@ -21,10 +21,12 @@ namespace BananaClient
             Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
+                    // ModelとViewの処理
                     timer.DecrementTime(TimeSpan.FromSeconds(Time.deltaTime));
                     timerView.DisplayTime(timer.RemainingTime.Value);
                 }).AddTo(this);
         }
+        // 必要な場所で呼び出す
         public void StartCountdown()
         {
             StartCoroutine(CountdownCoroutine());
@@ -32,6 +34,7 @@ namespace BananaClient
 
         private IEnumerator CountdownCoroutine()
         {
+            // 3,2,1のカウントダウン処理
             float countdownTime = 3.0f;
             while (countdownTime > 0)
             {

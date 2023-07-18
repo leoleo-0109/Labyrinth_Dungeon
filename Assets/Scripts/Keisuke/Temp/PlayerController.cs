@@ -8,7 +8,9 @@ using BananaClient;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] GameObject _camera;
+    [SerializeField] private GameObject _camera;
+    [SerializeField] private float cameraLeftSens = -0.5f;
+    [SerializeField] private float cameraRightSens = 0.5f;
     public float moveSpeed = 5f; // プレイヤーの移動速度
     private Rigidbody rb;
     private bool buttonPressed = false;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         Move();
+        CameraMove();
         WarpButton();
     }
     public void Move()
@@ -32,15 +35,22 @@ public class PlayerController : MonoBehaviour
             Vector3 movement = (moveHorizontal * _camera.transform.right + moveVertical * cameraForward).normalized;
 
             rb.velocity = movement * moveSpeed;
-            if(Input.GetKey(KeyCode.LeftArrow))
+        }).AddTo(disposable);
+    }
+    public void CameraMove()
+    {
+        this.UpdateAsObservable()
+        .Subscribe(_ =>
+        {
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
-                _camera.transform.Rotate(new Vector3(0, -0.5f, 0));
-                this.gameObject.transform.Rotate(new Vector3(0, -0.5f, 0));
+                _camera.transform.Rotate(new Vector3(0, cameraLeftSens, 0));
+                this.gameObject.transform.Rotate(new Vector3(0, cameraLeftSens, 0));
             }
-            if(Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
-                _camera.transform.Rotate(new Vector3(0, 0.5f, 0));
-                this.gameObject.transform.Rotate(new Vector3(0, 0.5f, 0));
+                _camera.transform.Rotate(new Vector3(0, cameraRightSens, 0));
+                this.gameObject.transform.Rotate(new Vector3(0, cameraRightSens, 0));
             }
         }).AddTo(disposable);
     }
