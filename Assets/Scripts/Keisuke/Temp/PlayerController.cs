@@ -9,8 +9,8 @@ using BananaClient;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject _camera;
-    [SerializeField] private float cameraLeftSens = -0.5f;
-    [SerializeField] private float cameraRightSens = 0.5f;
+    [SerializeField,Header("左の視点移動速度")] private float cameraLeftSens = -0.5f;
+    [SerializeField,Header("右の視点移動速度")] private float cameraRightSens = 0.5f;
     public float moveSpeed = 5f; // プレイヤーの移動速度
     private Rigidbody rb;
     private bool buttonPressed = false;
