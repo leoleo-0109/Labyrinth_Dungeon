@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Button;
-using BananaClient;
 using UniRx;
 using System;
-
 namespace BananaClient
 {
     public class StageTransition : MonoBehaviour
@@ -22,15 +17,19 @@ namespace BananaClient
                 if (EventFlagHolder.eventFlag && !eventTriggered)
                 {
                     onWarpEventTrigger.OnNext(Unit.Default);
-                    Vector3 pos = new Vector3(0,1.6f,0);
-                    Vector3 stagePosition = stage.transform.position;
-                    stagePosition.y += pos.y;
-                    player.transform.position = stagePosition;
+                    Warp();
                     eventTriggered = true;
                     EventFlagHolder.eventFlag = false;
                     Debug.Log(eventTriggered);
                 }
             }
+        }
+        public void Warp()
+        {
+            Vector3 pos = new Vector3(0,1.6f,0);
+            Vector3 stagePosition = stage.transform.position;
+            stagePosition.y += pos.y;
+            player.transform.position = stagePosition;
         }
     }
 }
