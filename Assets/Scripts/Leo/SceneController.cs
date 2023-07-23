@@ -1,23 +1,35 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    private bool firstflag = false;
-    private bool Secondflag = false;
-    private bool thirdflag = false;
-    
-    void Start()
+    // TitleSceneで使用
+    public void OnClickStartButton() // タイトル(スタート)ボタン
     {
-        
+        SceneManager.LoadScene("IntroductionScene");
     }
 
-    void Update()
+    // TitleSceneで使用
+    public void OnClickRankingButton() // タイトル(ランキング)ボタン
     {
-        
+        SceneManager.LoadScene("RankingScene");
     }
 
-    public void SceneChange()
+    // IntroductionSceneで使用
+    public void OnClickGameButton() // ゲームボタン
     {
+        SceneManager.LoadScene("GameScene");
+    }
 
+    // RankingSceneで使用
+    public void OnClickTitleButton() // タイトルボタン
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    // TitleSceneで使用
+    public void OnClickRetryButton() // リトライボタン
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }
