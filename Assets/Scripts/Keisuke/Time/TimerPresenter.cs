@@ -2,39 +2,46 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UniRx;
+using BananaClient;
 
-public class TimerPresenter : MonoBehaviour
+namespace BananaClient
 {
-    [SerializeField] private TimerView timerView;
-    [SerializeField] private float initialTime = 60;
-
-    private Timer timer;
-
-    private void Start()
+    public class TimerPresenter : MonoBehaviour
     {
-        TimeSpan initialTimeSpan = TimeSpan.FromSeconds(initialTime);
-        timer = new Timer(initialTimeSpan);
+        [SerializeField] private TimerView timerView;
+        [SerializeField] private float initialTime = 60;
 
-        Observable.EveryUpdate()
-            .Subscribe(_ =>
-            {
-                timer.DecrementTime(TimeSpan.FromSeconds(Time.deltaTime));
-                timerView.DisplayTime(timer.RemainingTime.Value);
-            }).AddTo(this);
-    }
-    public void StartCountdown()
-    {
-        StartCoroutine(CountdownCoroutine());
-    }
+        private Timer timer;
 
-    private IEnumerator CountdownCoroutine()
-    {
-        float countdownTime = 3.0f;
-        while (countdownTime > 0)
+        private void Start()
         {
-            yield return new WaitForSeconds(1.0f);
-            countdownTime -= 1.0f;
+            TimeSpan initialTimeSpan = TimeSpan.FromSeconds(initialTime);
+            timer = new Timer(initialTimeSpan);
+
+            Observable.EveryUpdate()
+                .Subscribe(_ =>
+                {
+                    // ModelとViewの処理
+                    timer.DecrementTime(TimeSpan.FromSeconds(Time.deltaTime));
+                    timerView.DisplayTime(timer.RemainingTime.Value);
+                }).AddTo(this);
         }
-        Debug.Log("かうんとだうんおわり");
+        // 必要な場所で呼び出す
+        public void StartCountdown()
+        {
+            StartCoroutine(CountdownCoroutine());
+        }
+
+        private IEnumerator CountdownCoroutine()
+        {
+            // 3,2,1のカウントダウン処理
+            float countdownTime = 3.0f;
+            while (countdownTime > 0)
+            {
+                yield return new WaitForSeconds(1.0f);
+                countdownTime -= 1.0f;
+            }
+            Debug.Log("カウントダウン終了");
+        }
     }
 }

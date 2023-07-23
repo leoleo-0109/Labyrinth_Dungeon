@@ -4,11 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ScoreView : MonoBehaviour
+namespace BananaClient
 {
-    [SerializeField] private TextMeshProUGUI scoreText;
-    public void ScoreDisplay(int count)
+    public class ScoreView : MonoBehaviour
     {
-        scoreText.text = "ScoreCount: " + count.ToString();
+        [SerializeField] private TextMeshProUGUI scoreText;
+        public void ScoreDisplay(float count)
+        {
+            scoreText.text = "ScoreCount: " + count.ToString();
+        }
     }
 }
+

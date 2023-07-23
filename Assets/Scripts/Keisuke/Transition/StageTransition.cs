@@ -1,26 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class StageTransition : MonoBehaviour
+using UniRx;
+using System;
+namespace BananaClient
 {
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject[] stages;
-    private int stageChangeCount = 0;
-
-    void OnTriggerEnter(Collider other)
+    public class StageTransition : MonoBehaviour
     {
-        if(other.gameObject.CompareTag(TagName.Player))
+        private Subject<Unit> onWarpEventTrigger = new Subject<Unit>();
+        public IObservable<Unit> OnWarpEventTrigger => onWarpEventTrigger;
+        [SerializeField] private GameObject player;
+        [SerializeField] private GameObject stage;
+        private bool eventTriggered = false;
+        private void OnTriggerStay(Collider other)
         {
-            Debug.Log("tag");
-            if (stageChangeCount < stages.Length)
+            if(other.gameObject.CompareTag(TagName.Player))
             {
-                        Vector3 stagePosition = stages[stageChangeCount].transform.position;
-        Debug.Log("Teleporting to stage " + stageChangeCount + " at position " + stagePosition);
-        player.transform.position = stagePosition;
-        stageChangeCount++;
+                if (EventFlagHolder.eventFlag && !eventTriggered)
+                {
+                    onWarpEventTrigger.OnNext(Unit.Default);
+                    Warp();
+                    eventTriggered = true;
+                    EventFlagHolder.eventFlag = false;
+                    Debug.Log(eventTriggered);
+                }
             }
         }
+        public void Warp()
+        {
+            Vector3 pos = new Vector3(0,1.6f,0);
+            Vector3 stagePosition = stage.transform.position;
+            stagePosition.y += pos.y;
+            player.transform.position = stagePosition;
+        }
     }
-
 }

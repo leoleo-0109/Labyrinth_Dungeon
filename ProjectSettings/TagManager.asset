@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Temp
+  - Stage1
+  - Stage2
+  - Stage3
+  - Portal1
+  - Portal2
+  - Portal3
   layers:
   - Default
   - TransparentFX
