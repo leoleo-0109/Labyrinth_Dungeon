@@ -8,6 +8,8 @@ using BananaClient;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private HierarchyDistinct hierarchyDistinct;
+    [SerializeField,Header("リセットボタンでワープしたい位置")] private GameObject[] stageStartPosition;
     [SerializeField] private GameObject _camera;
     [SerializeField,Header("左の視点移動速度")] private float cameraLeftSens = -0.5f;
     [SerializeField,Header("右の視点移動速度")] private float cameraRightSens = 0.5f;
@@ -16,12 +18,15 @@ public class PlayerController : MonoBehaviour
     private bool buttonPressed = false;
     private bool buttonPressedRequest = false;
     private CompositeDisposable disposable = new CompositeDisposable();
+    private bool isResetButtonPress = false; // リセットボタンが押されたかどうか
+    private float holdButtonTime = 0; // ボタンを長押ししたボタン
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Move();
         CameraMove();
         WarpButton();
+        RessetButton();
     }
     public void Move()
     {
@@ -84,6 +89,58 @@ public class PlayerController : MonoBehaviour
                     buttonPressed = false;
                     buttonPressedRequest = false;
                 }
+            }
+        }).AddTo(disposable);
+    }
+    public void RessetButton()
+    {
+        this.UpdateAsObservable()
+        .Subscribe(_ =>
+        {
+            // リセットボタン
+            if(Input.GetKey(KeyCode.R)&&!isResetButtonPress)
+            {
+                holdButtonTime += 1 * Time.deltaTime;
+                Debug.Log(holdButtonTime);
+                if(holdButtonTime > 3f)
+                {
+                    // リセット処理
+                    hierarchyDistinct.HierarchyNumNotice
+                    .Where(hierarchy => hierarchy == 0)
+                    .Subscribe(_ =>
+                    {
+                        Vector3 pos = new Vector3(0,1.6f,0);
+                        Vector3 startPos = stageStartPosition[1].transform.position;
+                        startPos += pos; // 座標調整
+                        gameObject.transform.position = startPos;
+                    }).AddTo(this);
+
+                    hierarchyDistinct.HierarchyNumNotice
+                    .Where(hierarchy => hierarchy == 1)
+                    .Subscribe(_ =>
+                    {
+                        Vector3 pos = new Vector3(0,1.6f,0);
+                        Vector3 startPos = stageStartPosition[2].transform.position;
+                        startPos += pos; // 座標調整
+                        gameObject.transform.position = startPos;
+                    }).AddTo(this);
+
+                    hierarchyDistinct.HierarchyNumNotice
+                    .Where(hierarchy => hierarchy == 2)
+                    .Subscribe(_ =>
+                    {
+                        Vector3 pos = new Vector3(0,1.6f,0);
+                        Vector3 startPos = stageStartPosition[3].transform.position;
+                        startPos += pos; // 座標調整
+                        gameObject.transform.position = startPos;
+                    }).AddTo(this);
+
+                    isResetButtonPress = true;
+                }
+            }
+            else if(Input.GetKey(KeyCode.R)&&isResetButtonPress)
+            {
+                isResetButtonPress = false; // Resetという文字列のシリアルが送られてきていなかったらfalse
             }
         }).AddTo(disposable);
     }
