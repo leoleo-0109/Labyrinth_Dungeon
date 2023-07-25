@@ -8,8 +8,8 @@ using BananaClient;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PortalPresenter portalHierarchy;
-    [SerializeField] private GameObject[] stageStartPosition;
+    [SerializeField] private StageTransition portalHierarchy;
+    [SerializeField,Header("リセットボタンでワープしたい位置")] private GameObject[] stageStartPosition;
     [SerializeField] private GameObject _camera;
     [SerializeField,Header("左の視点移動速度")] private float cameraLeftSens = -0.5f;
     [SerializeField,Header("右の視点移動速度")] private float cameraRightSens = 0.5f;
@@ -100,13 +100,13 @@ public class PlayerController : MonoBehaviour
             // リセットボタン
             if(Input.GetKey(KeyCode.R)&&!isResetButtonPress)
             {
-                holdButtonTime += Time.deltaTime;
+                holdButtonTime += 1 * Time.deltaTime;
                 Debug.Log(holdButtonTime);
-                if(holdButtonTime < 3)
+                if(holdButtonTime > 3f)
                 {
                     // リセット処理
                     portalHierarchy.HierarchyDistinct
-                    .Where(hierarchy => hierarchy == 1)
+                    .Where(hierarchy => hierarchy == 0)
                     .Subscribe(_ =>
                     {
                         Vector3 pos = new Vector3(0,1.6f,0);
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
                     }).AddTo(this);
 
                     portalHierarchy.HierarchyDistinct
-                    .Where(hierarchy => hierarchy == 2)
+                    .Where(hierarchy => hierarchy == 1)
                     .Subscribe(_ =>
                     {
                         Vector3 pos = new Vector3(0,1.6f,0);
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
                     }).AddTo(this);
 
                     portalHierarchy.HierarchyDistinct
-                    .Where(hierarchy => hierarchy == 3)
+                    .Where(hierarchy => hierarchy == 2)
                     .Subscribe(_ =>
                     {
                         Vector3 pos = new Vector3(0,1.6f,0);
