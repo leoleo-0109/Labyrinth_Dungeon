@@ -25,6 +25,8 @@ namespace Button
         private bool isRightPressed = false;
         private bool buttonPressed = false;
         private bool buttonPressedRequest = false;
+        private bool isResetButtonPress = false; // リセットボタンが押されたかどうか
+        private float holdButtonTime = 0; // ボタンを長押ししたボタン
 
         void Start()
         {
@@ -68,6 +70,7 @@ namespace Button
         {
             var data = message.Split(
                 new string[] { "," }, System.StringSplitOptions.None); // カンマで分割する
+            // TODO:リセットボタンの文字列を取りたかったら長さを4に変更
             if (data.Length == 3)
             {
                 float ax = float.Parse(data[0]);
@@ -132,6 +135,22 @@ namespace Button
                         buttonPressed = false;
                         buttonPressedRequest = false;
                     }
+                }
+                // リセットボタン
+                if(data[3]=="Reset"&&!isResetButtonPress)
+                {
+                    holdButtonTime += Time.deltaTime;
+                    Debug.Log(holdButtonTime);
+                    if(holdButtonTime < 3)
+                    {
+                        // リセット処理
+
+                        isResetButtonPress = true;
+                    }
+                }
+                else if(data[3]!="Reset"&&isResetButtonPress)
+                {
+                    isResetButtonPress = false; // Resetという文字列のシリアルが送られてきていなかったらfalse
                 }
                 playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
                 Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", camera: " + data[2]);

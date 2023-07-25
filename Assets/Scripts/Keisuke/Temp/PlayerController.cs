@@ -16,12 +16,15 @@ public class PlayerController : MonoBehaviour
     private bool buttonPressed = false;
     private bool buttonPressedRequest = false;
     private CompositeDisposable disposable = new CompositeDisposable();
+    private bool isResetButtonPress = false; // リセットボタンが押されたかどうか
+    private float holdButtonTime = 0; // ボタンを長押ししたボタン
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Move();
         CameraMove();
         WarpButton();
+        RessetButton();
     }
     public void Move()
     {
@@ -84,6 +87,29 @@ public class PlayerController : MonoBehaviour
                     buttonPressed = false;
                     buttonPressedRequest = false;
                 }
+            }
+        }).AddTo(disposable);
+    }
+    public void RessetButton()
+    {
+        this.UpdateAsObservable()
+        .Subscribe(_ =>
+        {
+            // リセットボタン
+            if(Input.GetKey(KeyCode.R)&&!isResetButtonPress)
+            {
+                holdButtonTime += Time.deltaTime;
+                Debug.Log(holdButtonTime);
+                if(holdButtonTime < 3)
+                {
+                    // リセット処理
+
+                    isResetButtonPress = true;
+                }
+            }
+            else if(Input.GetKey(KeyCode.R)&&isResetButtonPress)
+            {
+                isResetButtonPress = false; // Resetという文字列のシリアルが送られてきていなかったらfalse
             }
         }).AddTo(disposable);
     }
