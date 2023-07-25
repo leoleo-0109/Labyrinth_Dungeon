@@ -8,6 +8,8 @@ using BananaClient;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private PortalPresenter portalHierarchy;
+    [SerializeField] private GameObject[] stageStartPosition;
     [SerializeField] private GameObject _camera;
     [SerializeField,Header("左の視点移動速度")] private float cameraLeftSens = -0.5f;
     [SerializeField,Header("右の視点移動速度")] private float cameraRightSens = 0.5f;
@@ -103,6 +105,35 @@ public class PlayerController : MonoBehaviour
                 if(holdButtonTime < 3)
                 {
                     // リセット処理
+                    portalHierarchy.HierarchyDistinct
+                    .Where(hierarchy => hierarchy == 1)
+                    .Subscribe(_ =>
+                    {
+                        Vector3 pos = new Vector3(0,1.6f,0);
+                        Vector3 startPos = stageStartPosition[1].transform.position;
+                        startPos += pos; // 座標調整
+                        gameObject.transform.position = startPos;
+                    }).AddTo(this);
+
+                    portalHierarchy.HierarchyDistinct
+                    .Where(hierarchy => hierarchy == 2)
+                    .Subscribe(_ =>
+                    {
+                        Vector3 pos = new Vector3(0,1.6f,0);
+                        Vector3 startPos = stageStartPosition[2].transform.position;
+                        startPos += pos; // 座標調整
+                        gameObject.transform.position = startPos;
+                    }).AddTo(this);
+
+                    portalHierarchy.HierarchyDistinct
+                    .Where(hierarchy => hierarchy == 3)
+                    .Subscribe(_ =>
+                    {
+                        Vector3 pos = new Vector3(0,1.6f,0);
+                        Vector3 startPos = stageStartPosition[3].transform.position;
+                        startPos += pos; // 座標調整
+                        gameObject.transform.position = startPos;
+                    }).AddTo(this);
 
                     isResetButtonPress = true;
                 }
