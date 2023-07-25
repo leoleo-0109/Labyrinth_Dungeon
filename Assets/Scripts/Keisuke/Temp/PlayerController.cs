@@ -8,7 +8,7 @@ using BananaClient;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private StageTransition portalHierarchy;
+    [SerializeField] private HierarchyDistinct hierarchyDistinct;
     [SerializeField,Header("リセットボタンでワープしたい位置")] private GameObject[] stageStartPosition;
     [SerializeField] private GameObject _camera;
     [SerializeField,Header("左の視点移動速度")] private float cameraLeftSens = -0.5f;
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
                 if(holdButtonTime > 3f)
                 {
                     // リセット処理
-                    portalHierarchy.HierarchyDistinct
+                    hierarchyDistinct.HierarchyNumNotice
                     .Where(hierarchy => hierarchy == 0)
                     .Subscribe(_ =>
                     {
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
                         gameObject.transform.position = startPos;
                     }).AddTo(this);
 
-                    portalHierarchy.HierarchyDistinct
+                    hierarchyDistinct.HierarchyNumNotice
                     .Where(hierarchy => hierarchy == 1)
                     .Subscribe(_ =>
                     {
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
                         gameObject.transform.position = startPos;
                     }).AddTo(this);
 
-                    portalHierarchy.HierarchyDistinct
+                    hierarchyDistinct.HierarchyNumNotice
                     .Where(hierarchy => hierarchy == 2)
                     .Subscribe(_ =>
                     {
