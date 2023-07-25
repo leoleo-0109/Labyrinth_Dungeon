@@ -11,6 +11,8 @@ namespace BananaClient
 {
     public class ScorePresenter : MonoBehaviour
     {
+        [SerializeField,Header("全てのステージに配置しているアイテムの数")] private int itemMaxCount = 0;
+        private int currentItemGetCount = 0; // 現在アイテムを取得した回数
         [SerializeField,Header("Type1アイテムを設定")] private ScoreModel[] scoreModelsType1;
         [SerializeField,Header("Type2アイテムを設定")] private ScoreModel[] scoreModelsType2;
         [SerializeField,Header("Type3アイテムを設定")] private ScoreModel[] scoreModelsType3;
@@ -86,9 +88,19 @@ namespace BananaClient
                 default:
                     break;
             }
+            currentItemGetCount++;// 合計取得回数を記録
             score += addedScore; // ここで倍率計算する
             Debug.Log(score);
+            ExtraScore(); // TODO:クリア時に呼び出すほうがいいかも
             UpdateScore();
+        }
+        private void ExtraScore()
+        {
+            if(currentItemGetCount==itemMaxCount)
+            {
+                // TODO:追加スコアの値が決まったら書く
+                //score +=
+            }
         }
         private void UpdateScore()
         {
