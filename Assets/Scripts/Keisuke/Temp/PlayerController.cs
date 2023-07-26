@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
             buttonPressedRequest = true;
         }
     }
-
+    // 階層遷移
     public void WarpButton()
     {
         this.UpdateAsObservable()
@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("ボタン入力準備完了");
                 if(Input.GetKey(KeyCode.K) && !buttonPressed)
                 {
+                    eventObserver.TriggerStageTransition();
                     Debug.Log("2F");
                     EventFlagHolder.eventFlag = true;
                     buttonPressed = true;
@@ -98,35 +99,39 @@ public class PlayerController : MonoBehaviour
         this.UpdateAsObservable()
         .Subscribe(_ =>
         {
-            if(Input.GetKey(KeyCode.R)&&!isResetButtonPress)
+            if(Input.GetKey(KeyCode.R))
             {
                 holdButtonTime += Time.deltaTime;
                 Debug.Log(holdButtonTime);
-                if(holdButtonTime > 3f)
+                if (holdButtonTime > 3f && !isResetButtonPress)
                 {
-                    eventObserver.TriggerStageTransition();
-                    // リセット処理
-                    eventObserver.HierarchyCount.Where(count => count == 0).Subscribe(_ =>
-                    {
-                        ResetPlayerPosition(stageStartPosition[0]);
-                    }).AddTo(this);
-                    eventObserver.HierarchyCount.Where(count => count == 0).Subscribe(_ =>
-                    {
-                        ResetPlayerPosition(stageStartPosition[1]);
-                    }).AddTo(this);
-                    eventObserver.HierarchyCount.Where(count => count == 0).Subscribe(_ =>
-                    {
-                        ResetPlayerPosition(stageStartPosition[2]);
-                    }).AddTo(this);
+                    Debug.Log("true");
+                    ResetPlayerPositionBasedOnCount(eventObserver.HierarchyCount.Value);
                     isResetButtonPress = true;
                 }
             }
-            else if(isResetButtonPress)
+            else
             {
+                Debug.Log("false");
                 holdButtonTime = 0f;
                 isResetButtonPress = false;
             }
         }).AddTo(disposable);
+    }
+    void ResetPlayerPositionBasedOnCount(int count)
+    {
+        switch (count)
+        {
+            case 0:
+                ResetPlayerPosition(stageStartPosition[0]);
+                break;
+            case 1:
+                ResetPlayerPosition(stageStartPosition[1]);
+                break;
+            case 2:
+                ResetPlayerPosition(stageStartPosition[2]);
+                break;
+        }
     }
     void ResetPlayerPosition(GameObject startPosition)
     {

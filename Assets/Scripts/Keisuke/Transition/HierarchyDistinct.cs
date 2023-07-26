@@ -11,6 +11,7 @@ public class HierarchyDistinct : MonoBehaviour
     private int count = 0;
     void Start()
     {
+        eventObserver.hierarchyCount.Value = count;
         UpdateHierarchyCount();
     }
 
@@ -19,19 +20,11 @@ public class HierarchyDistinct : MonoBehaviour
         eventObserver.OnStageTransitionTriggered
         .Subscribe(_ =>
         {
-            if(count==0){
-                eventObserver.hierarchyCount.OnNext(0);
-            }
-            if(count==1){
-                eventObserver.hierarchyCount.OnNext(1);
-            }
-            if(count==2){
-                eventObserver.hierarchyCount.OnNext(2);
-            }
             count++;
-            Debug.Log("Subscribe");  // Add debug log
+            Debug.Log("UpdateHierarchyCount");
             previousHierarchyCount = hierarchyCount;
             hierarchyCount++;
+            eventObserver.hierarchyCount.Value = count;
         }).AddTo(this);
     }
 }
