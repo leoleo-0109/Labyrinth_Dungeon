@@ -9,7 +9,6 @@ using BananaClient;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private EventObserver eventObserver;
-    [SerializeField] private HierarchyDistinct hierarchyDistinct;
     [SerializeField,Header("リセットボタンでワープしたい位置")] private GameObject[] stageStartPosition;
     [SerializeField] private GameObject _camera;
     [SerializeField,Header("左の視点移動速度")] private float cameraLeftSens = -0.5f;
