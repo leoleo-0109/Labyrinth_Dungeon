@@ -10,6 +10,8 @@ namespace BananaClient
     {
         private Subject<Unit> onStageTransitionTriggered = new Subject<Unit>();
         public IObservable<Unit> OnStageTransitionTriggered => onStageTransitionTriggered;
+        public Subject<int> hierarchyCount = new Subject<int>();
+        public IObservable<int> HierarchyCount => hierarchyCount;
 
         public void TriggerStageTransition()
         {
