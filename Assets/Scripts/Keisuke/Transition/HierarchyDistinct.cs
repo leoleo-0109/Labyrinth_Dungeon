@@ -6,13 +6,11 @@ using BananaClient;
 public class HierarchyDistinct : MonoBehaviour
 {
     [SerializeField] private EventObserver eventObserver;
-    public BehaviorSubject<int> HierarchyNumNotice = new BehaviorSubject<int>(0);
-    [SerializeField] private PortalPresenter stageTransition;
     private int hierarchyCount = 0;
     private int previousHierarchyCount = 0;
+    private int count = 0;
     void Start()
     {
-        DistinctCount();
         UpdateHierarchyCount();
     }
 
@@ -21,15 +19,19 @@ public class HierarchyDistinct : MonoBehaviour
         eventObserver.OnStageTransitionTriggered
         .Subscribe(_ =>
         {
+            if(count==0){
+                eventObserver.hierarchyCount.OnNext(0);
+            }
+            if(count==1){
+                eventObserver.hierarchyCount.OnNext(1);
+            }
+            if(count==2){
+                eventObserver.hierarchyCount.OnNext(2);
+            }
+            count++;
             Debug.Log("Subscribe");  // Add debug log
             previousHierarchyCount = hierarchyCount;
             hierarchyCount++;
-            DistinctCount();
         }).AddTo(this);
-    }
-
-    private void DistinctCount()
-    {
-        HierarchyNumNotice.OnNext(previousHierarchyCount);
     }
 }

@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private CompositeDisposable disposable = new CompositeDisposable();
     private bool isResetButtonPress = false; // リセットボタンが押されたかどうか
     private float holdButtonTime = 0f; // ボタンを長押ししたボタン
-    private Subject<int> subject = new Subject<int>();
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -51,7 +50,6 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                subject.OnNext(1);
                 _camera.transform.Rotate(new Vector3(0, cameraLeftSens, 0));
                 this.gameObject.transform.Rotate(new Vector3(0, cameraLeftSens, 0));
             }
@@ -106,23 +104,20 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(holdButtonTime);
                 if(holdButtonTime > 3f)
                 {
-                    int currentHierarchy = hierarchyDistinct.HierarchyNumNotice.Value;
                     eventObserver.TriggerStageTransition();
                     // リセット処理
-                    switch (currentHierarchy)
+                    eventObserver.HierarchyCount.Where(count => count == 0).Subscribe(_ =>
                     {
-                        case 0:
-                            ResetPlayerPosition(stageStartPosition[0]);
-                            break;
-                        case 1:
-                            ResetPlayerPosition(stageStartPosition[1]);
-                            break;
-                        case 2:
-                            ResetPlayerPosition(stageStartPosition[2]);
-                            break;
-                        default:
-                            break;
-                    }
+                        ResetPlayerPosition(stageStartPosition[0]);
+                    }).AddTo(this);
+                    eventObserver.HierarchyCount.Where(count => count == 0).Subscribe(_ =>
+                    {
+                        ResetPlayerPosition(stageStartPosition[1]);
+                    }).AddTo(this);
+                    eventObserver.HierarchyCount.Where(count => count == 0).Subscribe(_ =>
+                    {
+                        ResetPlayerPosition(stageStartPosition[2]);
+                    }).AddTo(this);
                     isResetButtonPress = true;
                 }
             }
