@@ -6,8 +6,6 @@ using BananaClient;
 public class HierarchyDistinct : MonoBehaviour
 {
     [SerializeField] private EventObserver eventObserver;
-    private int hierarchyCount = 0;
-    private int previousHierarchyCount = 0;
     private int count = 0;
     void Start()
     {
@@ -22,8 +20,6 @@ public class HierarchyDistinct : MonoBehaviour
         {
             count++;
             Debug.Log("UpdateHierarchyCount");
-            previousHierarchyCount = hierarchyCount;
-            hierarchyCount++;
             eventObserver.hierarchyCount.Value = count;
         }).AddTo(this);
     }
