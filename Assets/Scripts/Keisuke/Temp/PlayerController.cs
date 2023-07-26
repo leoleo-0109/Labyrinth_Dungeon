@@ -104,16 +104,18 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(holdButtonTime);
                 if(holdButtonTime > 3f)
                 {
+                    Debug.Log("Sotoifnaka");
                     // リセット処理
                     hierarchyDistinct.HierarchyNumNotice
                     .Where(hierarchy => hierarchy == 0)
                     .Subscribe(_ =>
                     {
+                        Debug.Log("naka");
                         Vector3 pos = new Vector3(0,1.6f,0);
                         Vector3 startPos = stageStartPosition[1].transform.position;
                         startPos += pos; // 座標調整
                         gameObject.transform.position = startPos;
-                    }).AddTo(this);
+                    }).AddTo(disposable);
 
                     hierarchyDistinct.HierarchyNumNotice
                     .Where(hierarchy => hierarchy == 1)
@@ -123,7 +125,7 @@ public class PlayerController : MonoBehaviour
                         Vector3 startPos = stageStartPosition[2].transform.position;
                         startPos += pos; // 座標調整
                         gameObject.transform.position = startPos;
-                    }).AddTo(this);
+                    }).AddTo(disposable);
 
                     hierarchyDistinct.HierarchyNumNotice
                     .Where(hierarchy => hierarchy == 2)
@@ -133,7 +135,7 @@ public class PlayerController : MonoBehaviour
                         Vector3 startPos = stageStartPosition[3].transform.position;
                         startPos += pos; // 座標調整
                         gameObject.transform.position = startPos;
-                    }).AddTo(this);
+                    }).AddTo(disposable);
 
                     isResetButtonPress = true;
                 }
@@ -141,6 +143,7 @@ public class PlayerController : MonoBehaviour
             else if(Input.GetKey(KeyCode.R)&&isResetButtonPress)
             {
                 isResetButtonPress = false; // Resetという文字列のシリアルが送られてきていなかったらfalse
+                //holdButtonTime = 0f;
             }
         }).AddTo(disposable);
     }
