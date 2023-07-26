@@ -5,36 +5,31 @@ using BananaClient;
 
 public class HierarchyDistinct : MonoBehaviour
 {
-    private Subject<int> hierarchyNumNotice = new Subject<int>();
-    public IObservable<int> HierarchyNumNotice => hierarchyNumNotice;
-    private StageTransition warpEvent = new StageTransition();
+    [SerializeField] private EventObserver eventObserver;
+    public BehaviorSubject<int> HierarchyNumNotice = new BehaviorSubject<int>(0);
+    [SerializeField] private PortalPresenter stageTransition;
     private int hierarchyCount = 0;
-    CompositeDisposable disposable = new CompositeDisposable();
+    private int previousHierarchyCount = 0;
     void Start()
     {
-        // TODO:イベント発行タイミングを調整
         DistinctCount();
         UpdateHierarchyCount();
     }
+
     public void UpdateHierarchyCount()
     {
-        warpEvent.OnWarpEventTrigger.Subscribe(_ =>
+        eventObserver.OnStageTransitionTriggered
+        .Subscribe(_ =>
         {
-            Debug.Log("Subscribe");
+            Debug.Log("Subscribe");  // Add debug log
+            previousHierarchyCount = hierarchyCount;
             hierarchyCount++;
             DistinctCount();
-        }).AddTo(disposable);
+        }).AddTo(this);
     }
+
     private void DistinctCount()
     {
-        if(hierarchyCount==0){
-            hierarchyNumNotice.OnNext(0);
-        }
-        if(hierarchyCount==1){
-            hierarchyNumNotice.OnNext(1);
-        }
-        if(hierarchyCount==2){
-            hierarchyNumNotice.OnNext(2);
-        }
+        HierarchyNumNotice.OnNext(previousHierarchyCount);
     }
 }

@@ -8,6 +8,7 @@ using BananaClient;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private EventObserver eventObserver;
     [SerializeField] private HierarchyDistinct hierarchyDistinct;
     [SerializeField,Header("リセットボタンでワープしたい位置")] private GameObject[] stageStartPosition;
     [SerializeField] private GameObject _camera;
@@ -19,7 +20,8 @@ public class PlayerController : MonoBehaviour
     private bool buttonPressedRequest = false;
     private CompositeDisposable disposable = new CompositeDisposable();
     private bool isResetButtonPress = false; // リセットボタンが押されたかどうか
-    private float holdButtonTime = 0; // ボタンを長押ししたボタン
+    private float holdButtonTime = 0f; // ボタンを長押ししたボタン
+    private Subject<int> subject = new Subject<int>();
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
+                subject.OnNext(1);
                 _camera.transform.Rotate(new Vector3(0, cameraLeftSens, 0));
                 this.gameObject.transform.Rotate(new Vector3(0, cameraLeftSens, 0));
             }
@@ -97,52 +100,44 @@ public class PlayerController : MonoBehaviour
         this.UpdateAsObservable()
         .Subscribe(_ =>
         {
-            if(Input.GetKey(KeyCode.R))
+            if(Input.GetKey(KeyCode.R)&&!isResetButtonPress)
             {
                 holdButtonTime += Time.deltaTime;
                 Debug.Log(holdButtonTime);
                 if(holdButtonTime > 3f)
                 {
+                    int currentHierarchy = hierarchyDistinct.HierarchyNumNotice.Value;
+                    eventObserver.TriggerStageTransition();
+                    // リセット処理
+                    switch (currentHierarchy)
+                    {
+                        case 0:
+                            ResetPlayerPosition(stageStartPosition[0]);
+                            break;
+                        case 1:
+                            ResetPlayerPosition(stageStartPosition[1]);
+                            break;
+                        case 2:
+                            ResetPlayerPosition(stageStartPosition[2]);
+                            break;
+                        default:
+                            break;
+                    }
                     isResetButtonPress = true;
                 }
             }
             else if(isResetButtonPress)
             {
-                Debug.Log("a");
-                hierarchyDistinct.HierarchyNumNotice
-                .Where(hierarchy => hierarchy == 0)
-                .Subscribe(_ =>
-                {
-                    Debug.Log("Subscribe");
-                    Vector3 pos = new Vector3(0,1.6f,0);
-                    Vector3 startPos = stageStartPosition[1].transform.position;
-                    startPos += pos;
-                    gameObject.transform.position = startPos;
-                }).AddTo(this);
-
-                hierarchyDistinct.HierarchyNumNotice
-                .Where(hierarchy => hierarchy == 1)
-                .Subscribe(_ =>
-                {
-                    Vector3 pos = new Vector3(0,1.6f,0);
-                    Vector3 startPos = stageStartPosition[2].transform.position;
-                    startPos += pos;
-                    gameObject.transform.position = startPos;
-                }).AddTo(this);
-
-                hierarchyDistinct.HierarchyNumNotice
-                .Where(hierarchy => hierarchy == 2)
-                .Subscribe(_ =>
-                {
-                    Vector3 pos = new Vector3(0,1.6f,0);
-                    Vector3 startPos = stageStartPosition[3].transform.position;
-                    startPos += pos;
-                    gameObject.transform.position = startPos;
-                }).AddTo(this);
-
                 holdButtonTime = 0f;
                 isResetButtonPress = false;
             }
         }).AddTo(disposable);
+    }
+    void ResetPlayerPosition(GameObject startPosition)
+    {
+        Vector3 pos = new Vector3(0, 1.6f, 0);
+        Vector3 startPos = startPosition.transform.position;
+        startPos += pos; // 座標調整
+        gameObject.transform.position = startPos;
     }
 }
