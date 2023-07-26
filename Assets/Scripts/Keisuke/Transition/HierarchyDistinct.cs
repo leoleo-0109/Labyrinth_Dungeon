@@ -12,6 +12,7 @@ public class HierarchyDistinct : MonoBehaviour
     CompositeDisposable disposable = new CompositeDisposable();
     void Start()
     {
+        // TODO:イベント発行タイミングを調整
         DistinctCount();
         UpdateHierarchyCount();
     }
