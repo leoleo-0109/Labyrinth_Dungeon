@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         Move();
         CameraMove();
         WarpButton();
-        RessetButton();
+        ResetButton();
     }
     public void Move()
     {
@@ -92,55 +92,56 @@ public class PlayerController : MonoBehaviour
             }
         }).AddTo(disposable);
     }
-    public void RessetButton()
+    public void ResetButton()
     {
         this.UpdateAsObservable()
         .Subscribe(_ =>
         {
-            // リセットボタン
-            if(Input.GetKey(KeyCode.R)&&!isResetButtonPress)
+            if(Input.GetKey(KeyCode.R))
             {
-                holdButtonTime += 1 * Time.deltaTime;
+                holdButtonTime += Time.deltaTime;
                 Debug.Log(holdButtonTime);
                 if(holdButtonTime > 3f)
                 {
-                    // リセット処理
-                    hierarchyDistinct.HierarchyNumNotice
-                    .Where(hierarchy => hierarchy == 0)
-                    .Subscribe(_ =>
-                    {
-                        Vector3 pos = new Vector3(0,1.6f,0);
-                        Vector3 startPos = stageStartPosition[1].transform.position;
-                        startPos += pos; // 座標調整
-                        gameObject.transform.position = startPos;
-                    }).AddTo(this);
-
-                    hierarchyDistinct.HierarchyNumNotice
-                    .Where(hierarchy => hierarchy == 1)
-                    .Subscribe(_ =>
-                    {
-                        Vector3 pos = new Vector3(0,1.6f,0);
-                        Vector3 startPos = stageStartPosition[2].transform.position;
-                        startPos += pos; // 座標調整
-                        gameObject.transform.position = startPos;
-                    }).AddTo(this);
-
-                    hierarchyDistinct.HierarchyNumNotice
-                    .Where(hierarchy => hierarchy == 2)
-                    .Subscribe(_ =>
-                    {
-                        Vector3 pos = new Vector3(0,1.6f,0);
-                        Vector3 startPos = stageStartPosition[3].transform.position;
-                        startPos += pos; // 座標調整
-                        gameObject.transform.position = startPos;
-                    }).AddTo(this);
-
                     isResetButtonPress = true;
                 }
             }
-            else if(Input.GetKey(KeyCode.R)&&isResetButtonPress)
+            else if(isResetButtonPress)
             {
-                isResetButtonPress = false; // Resetという文字列のシリアルが送られてきていなかったらfalse
+                Debug.Log("a");
+                hierarchyDistinct.HierarchyNumNotice
+                .Where(hierarchy => hierarchy == 0)
+                .Subscribe(_ =>
+                {
+                    Debug.Log("Subscribe");
+                    Vector3 pos = new Vector3(0,1.6f,0);
+                    Vector3 startPos = stageStartPosition[1].transform.position;
+                    startPos += pos;
+                    gameObject.transform.position = startPos;
+                }).AddTo(this);
+
+                hierarchyDistinct.HierarchyNumNotice
+                .Where(hierarchy => hierarchy == 1)
+                .Subscribe(_ =>
+                {
+                    Vector3 pos = new Vector3(0,1.6f,0);
+                    Vector3 startPos = stageStartPosition[2].transform.position;
+                    startPos += pos;
+                    gameObject.transform.position = startPos;
+                }).AddTo(this);
+
+                hierarchyDistinct.HierarchyNumNotice
+                .Where(hierarchy => hierarchy == 2)
+                .Subscribe(_ =>
+                {
+                    Vector3 pos = new Vector3(0,1.6f,0);
+                    Vector3 startPos = stageStartPosition[3].transform.position;
+                    startPos += pos;
+                    gameObject.transform.position = startPos;
+                }).AddTo(this);
+
+                holdButtonTime = 0f;
+                isResetButtonPress = false;
             }
         }).AddTo(disposable);
     }
