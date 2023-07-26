@@ -8,20 +8,9 @@ namespace BananaClient
     {
         private Subject<Unit> onWarpEventTrigger = new Subject<Unit>();
         public IObservable<Unit> OnWarpEventTrigger => onWarpEventTrigger;
-        // private Subject<Unit> notifyCurrentHierarchy = new Subject<Unit>();
-        // public IObservable<Unit> NotifyCurrentHierarchy => notifyCurrentHierarchy;
         [SerializeField] private GameObject player;
         [SerializeField] private GameObject stage;
         private bool eventTriggered = false;
-        // TODO:最悪の場合
-        // void Start(){
-        //     // 購読
-        //     NotifyCurrentHierarchy
-        //     .Subscribe(_ =>
-        //     {
-        //         Debug.Log("Subscribe in StageTransition");
-        //     }).AddTo(this);
-        // }
         private void OnTriggerStay(Collider other)
         {
             if(other.gameObject.CompareTag(TagName.Player))
@@ -30,7 +19,6 @@ namespace BananaClient
                 {
                     Debug.Log("発火");
                     onWarpEventTrigger.OnNext(Unit.Default);
-                    //notifyCurrentHierarchy.OnNext(Unit.Default);
                     Warp();
                     eventTriggered = true;
                     EventFlagHolder.eventFlag = false;
