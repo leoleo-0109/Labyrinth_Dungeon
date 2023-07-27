@@ -8,10 +8,12 @@ namespace BananaClient
 {
     public class TimerPresenter : MonoBehaviour
     {
+        [SerializeField] private EventObserver eventObserver;
         [SerializeField] private TimerView timerView;
         [SerializeField] private TimerModel[] timerModels;
         private Timer timer;
-        private int timeItemRemovedCount = 0; // タイムアイテムが消えた回数を保持する変数
+        private int timeItemRemoved = 0; // タイムアイテムが消えた回数を保持する変数
+        private int timeItemCount = 0;
         private float magnification = 100; // タイムに掛けたい倍率
         [SerializeField,Header("全てのステージに配置しているタイムアイテムの数")] private int timeItemMaxCount = 0; // ステージ全体に存在するタイムアイテムの数
         [SerializeField] private float initialTime = 60; // 初期時間を設定するためのSerializedField
@@ -21,8 +23,7 @@ namespace BananaClient
             // 初期時間を秒数からTimeSpan型に変換
             TimeSpan initialTimeSpan = TimeSpan.FromSeconds(initialTime);
             timer = new Timer(initialTimeSpan);
-            //timerModel = GetComponent<TimerModel>();
-
+            TimeItemRemovedCount();
             Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
@@ -60,6 +61,32 @@ namespace BananaClient
                 timer.IncrementTime(TimeSpan.FromSeconds(remainingTimeInSeconds * magnification));
             }
         }
+        private void TimeItemRemovedCount()
+        {
+            // ワープイベントが発生したらtimeItemCountを0にする
+            // ワープポイントの数だけ処理する
+            foreach (EventObserver eventInstance in eventObserver)
+            {
+                eventInstance.OnTimeItemCountResetEvent
+                    .Subscribe(_ =>
+                    {
+                        timeItemCount = 0;
+                        UpdateTimeItemCount();
+                    })
+                    .AddTo(this);
+            }
+        }
+        private void AddTimeItemCount()
+        {
+            timeItemCount++;
+            Debug.Log(timeItemCount);
+            UpdateTimeItemCount();
+        }
+        private void UpdateTimeItemCount()
+        {
+            timerView.DisplayTimeItemCount(timeItemCount);
+        }
+
         // 必要な場所で呼び出す
         public void StartCountdown()
         {

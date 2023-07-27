@@ -20,7 +20,7 @@ namespace BananaClient
         private int scoreCountType2 = 0;
         private int scoreCountType3 = 0;
         [SerializeField] private ScoreView scoreView;
-        private float score = 0;
+        private float score = 0; // スコアがこいつに保存されてる
         void Start()
         {
             AddScoreEventTrigger();
@@ -90,10 +90,13 @@ namespace BananaClient
             }
             currentItemGetCount++;// 合計取得回数を記録
             score += addedScore; // ここで倍率計算する
+            // TODO:クリア時のイベントを作る？
+            // TODO:ゲームが終了した際にscoreを保存する処理が必要
             Debug.Log(score);
             ExtraScore(); // TODO:クリア時に呼び出すほうがいいかも
             UpdateScore();
         }
+        // クリア時の追加スコア？
         private void ExtraScore()
         {
             if(currentItemGetCount==itemMaxCount)
