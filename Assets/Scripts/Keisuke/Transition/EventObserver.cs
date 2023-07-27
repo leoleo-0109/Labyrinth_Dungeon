@@ -10,7 +10,7 @@ namespace BananaClient
     {
         private Subject<Unit> onStageTransitionTriggered = new Subject<Unit>();
         public IObservable<Unit> OnStageTransitionTriggered => onStageTransitionTriggered;
-        public ReactiveProperty<int> hierarchyCount = new ReactiveProperty<int>(-1);
+        [HideInInspector] public ReactiveProperty<int> hierarchyCount = new ReactiveProperty<int>(-1);
         public IReadOnlyReactiveProperty<int> HierarchyCount => hierarchyCount;
 
         // ステージが切り替わったタイミングで呼び出す
