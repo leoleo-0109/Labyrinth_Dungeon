@@ -3,32 +3,32 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    // TitleScene‚Åg—p
-    public void OnClickStartButton() // ƒ^ƒCƒgƒ‹(ƒXƒ^[ƒg)ƒ{ƒ^ƒ“
+    // TitleSceneï¿½Ågï¿½p
+    public void OnClickStartButton() // ï¿½^ï¿½Cï¿½gï¿½ï¿½(ï¿½Xï¿½^ï¿½[ï¿½g)ï¿½{ï¿½^ï¿½ï¿½
     {
         SceneManager.LoadScene("IntroductionScene");
     }
 
-    // TitleScene‚Åg—p
-    public void OnClickRankingButton() // ƒ^ƒCƒgƒ‹(ƒ‰ƒ“ƒLƒ“ƒO)ƒ{ƒ^ƒ“
+    // TitleSceneï¿½Ågï¿½p
+    public void OnClickRankingButton() // ï¿½^ï¿½Cï¿½gï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½O)ï¿½{ï¿½^ï¿½ï¿½
     {
         SceneManager.LoadScene("RankingScene");
     }
 
-    // IntroductionScene‚Åg—p
-    public void OnClickGameButton() // ƒQ[ƒ€ƒ{ƒ^ƒ“
+    // IntroductionSceneï¿½Ågï¿½p
+    public void OnClickGameButton() // ï¿½Qï¿½[ï¿½ï¿½ï¿½{ï¿½^ï¿½ï¿½
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("KeyBoardMainGame");
     }
 
-    // RankingScene‚Åg—p
-    public void OnClickTitleButton() // ƒ^ƒCƒgƒ‹ƒ{ƒ^ƒ“
+    // RankingSceneï¿½Ågï¿½p
+    public void OnClickTitleButton() // ï¿½^ï¿½Cï¿½gï¿½ï¿½ï¿½{ï¿½^ï¿½ï¿½
     {
         SceneManager.LoadScene("TitleScene");
     }
 
-    // TitleScene‚Åg—p
-    public void OnClickRetryButton() // ƒŠƒgƒ‰ƒCƒ{ƒ^ƒ“
+    // TitleSceneï¿½Ågï¿½p
+    public void OnClickRetryButton() // ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½{ï¿½^ï¿½ï¿½
     {
         SceneManager.LoadScene("GameScene");
     }
