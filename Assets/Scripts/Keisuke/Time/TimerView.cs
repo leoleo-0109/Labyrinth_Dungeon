@@ -20,7 +20,7 @@ namespace BananaClient
         }
         public void DisplayTimeItemCount(int count,int maxCount)
         {
-            timerItemCountText.text = count.ToString()+"/"+maxCount;// TODO:ここの0/3どうにかしてくれ
+            timerItemCountText.text = count.ToString()+"/"+maxCount;
         }
     }
 }

@@ -16,11 +16,13 @@ namespace BananaClient
         {
             if(other.gameObject.CompareTag(TagName.Player))
             {
+                // ワープ処理
                 if (EventFlagHolder.eventFlag && !eventTriggered)
                 {
                     Debug.Log("発火");
                     onWarpEventTrigger.OnNext(Unit.Default);
                     eventObserver.OnTimeItemCountResetTrigger();
+                    eventObserver.OnScoreItemCountResetTrigger();
                     Warp();
                     eventTriggered = true;
                     EventFlagHolder.eventFlag = false;

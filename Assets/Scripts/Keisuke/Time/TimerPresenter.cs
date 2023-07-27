@@ -8,11 +8,11 @@ namespace BananaClient
 {
     public class TimerPresenter : MonoBehaviour
     {
-        [SerializeField] private EventObserver[] eventObserver; // テレポートイベントを呼びたい回数だけインスペクターで配列の長さを変えて
+        [SerializeField,Header("ワープする回数分長さを変えて")] private EventObserver[] eventObserver; // テレポートイベントを呼びたい回数だけインスペクターで配列の長さを変えて
         [SerializeField] private TimerView timerView; // 制限時間のテキスト
         [SerializeField] private TimerView itemView; // タイムアイテムのカウントテキスト
         [SerializeField] private TimerModel[] timerModels;
-        [SerializeField,Header("全てのステージに配置しているタイムアイテムの数")] private int AllTimeItemMaxCount = 0; // ステージ全体に存在するタイムアイテムの数
+        [SerializeField,Header("全てのステージに配置しているタイムアイテムの数")] private int allTimeItemMaxCount = 0; // ステージ全体に存在するタイムアイテムの数
         private int itemCurrentMaxCount = 0; // 現在のステージに存在するタイムアイテムの数
         [SerializeField,Header("ステージ1に存在するタイムアイテムの数")] private int itemCurrentMaxCountStage1; // ステージ1に存在するタイムアイテムの数
         [SerializeField,Header("ステージ2に存在するタイムアイテムの数")] private int itemCurrentMaxCountStage2; // ステージ2に存在するタイムアイテムの数
@@ -68,7 +68,7 @@ namespace BananaClient
         public void AppendTime()
         {
             // アイテムが消えた回数と最大アイテム数をif条件で監視して特定する
-            if(timeItemRemovedCount == AllTimeItemMaxCount){
+            if(timeItemRemovedCount == allTimeItemMaxCount){
                 Debug.Log("appendTime");
                 // remainingTimeinSecondsに整数型の現在のTimeが入ってる
                 int remainingTimeInSeconds = Mathf.RoundToInt((float)timer.RemainingTime.Value.TotalSeconds);

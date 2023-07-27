@@ -13,7 +13,9 @@ namespace BananaClient
         private Subject<Unit> gameEndEvent = new Subject<Unit>();
         public IObservable<Unit> GameEndEvent => gameEndEvent;
         private Subject<Unit> onTimeItemCountResetEvent = new Subject<Unit>();
-        public IObservable<Unit> OnTimeItemCountResetEvent => onTimeItemCountResetEvent;
+        public IObservable<Unit> OnTimeItemCountResetEvent => onScoreItemCountResetEvent;
+        private Subject<Unit> onScoreItemCountResetEvent = new Subject<Unit>();
+        public IObservable<Unit> OnScoreItemCountResetEvent => onScoreItemCountResetEvent;
         [HideInInspector] public ReactiveProperty<int> hierarchyCount = new ReactiveProperty<int>(-1);
         public IReadOnlyReactiveProperty<int> HierarchyCount => hierarchyCount;
 
@@ -29,6 +31,10 @@ namespace BananaClient
         public void OnTimeItemCountResetTrigger()
         {
             onTimeItemCountResetEvent.OnNext(Unit.Default);
+        }
+        public void OnScoreItemCountResetTrigger()
+        {
+            onScoreItemCountResetEvent.OnNext(Unit.Default);
         }
     }
 }
