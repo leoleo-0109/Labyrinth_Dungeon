@@ -18,9 +18,9 @@ namespace BananaClient
             string timeFormatted = string.Format("{0}{1:D2}:{2:D2}", sign, Math.Abs(timeSpan.Minutes), Math.Abs(timeSpan.Seconds));
             timerText.text = timeFormatted;
         }
-        public void DisplayTimeItemCount(int count)
+        public void DisplayTimeItemCount(int count,int maxCount)
         {
-            timerItemCountText.text = count.ToString()+"/3";// TODO:ここの0/3どうにかしてくれ
+            timerItemCountText.text = count.ToString()+"/"+maxCount;// TODO:ここの0/3どうにかしてくれ
         }
     }
 }

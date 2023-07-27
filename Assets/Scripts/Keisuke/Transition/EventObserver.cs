@@ -26,7 +26,7 @@ namespace BananaClient
         {
             gameEndEvent.OnNext(Unit.Default);
         }
-        public void OnTimeCountResetTrigger()
+        public void OnTimeItemCountResetTrigger()
         {
             onTimeItemCountResetEvent.OnNext(Unit.Default);
         }
