@@ -9,9 +9,14 @@ namespace BananaClient
     public class ScoreView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI scoreItemCountText;
         public void ScoreDisplay(float count)
         {
             scoreText.text = count.ToString();
+        }
+        public void DisplayScoreItemCount(int count,int maxCount)
+        {
+            scoreItemCountText.text = count.ToString()+"/"+maxCount;
         }
     }
 }
