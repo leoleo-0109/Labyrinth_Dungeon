@@ -18,5 +18,9 @@ namespace BananaClient
         {
             RemainingTime.Value -= deltaTime;
         }
+        public void IncrementTime(TimeSpan deltaTime)
+        {
+            RemainingTime.Value += deltaTime;
+        }
     }
 }

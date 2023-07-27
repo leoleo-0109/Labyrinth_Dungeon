@@ -9,15 +9,16 @@ namespace BananaClient
     public class TimerPresenter : MonoBehaviour
     {
         [SerializeField] private TimerView timerView;
-        [SerializeField] private float initialTime = 60; // 初期時間を設定するためのSerializedField
-
+        [SerializeField] private TimerModel[] timerModels;
         private Timer timer;
-
+        [SerializeField] private float initialTime = 60; // 初期時間を設定するためのSerializedField
+        [SerializeField,Header("アイテムを取った時に追加するタイム")] private float addTimeElement = 0;
         private void Start()
         {
             // 初期時間を秒数からTimeSpan型に変換
             TimeSpan initialTimeSpan = TimeSpan.FromSeconds(initialTime);
             timer = new Timer(initialTimeSpan);
+            //timerModel = GetComponent<TimerModel>();
 
             Observable.EveryUpdate()
                 .Subscribe(_ =>
@@ -29,6 +30,14 @@ namespace BananaClient
                     // TimerViewにタイマーの残り時間を表示
                     timerView.DisplayTime(timer.RemainingTime.Value);
                 }).AddTo(this);
+            foreach (TimerModel timerModel in timerModels)
+            {
+                timerModel.TimerItemObserver.Subscribe(_ =>
+                {
+                    // タイム追加処理
+                    timer.IncrementTime(TimeSpan.FromSeconds(addTimeElement));
+                }).AddTo(this);
+            }
         }
         // 必要な場所で呼び出す
         public void StartCountdown()
