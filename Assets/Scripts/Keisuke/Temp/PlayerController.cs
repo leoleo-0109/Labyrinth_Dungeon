@@ -104,14 +104,12 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(holdButtonTime);
                 if (holdButtonTime > 3f && !isResetButtonPress)
                 {
-                    Debug.Log("true");
                     ResetPlayerPositionBasedOnCount(eventObserver.HierarchyCount.Value);
                     isResetButtonPress = true;
                 }
             }
             else
             {
-                Debug.Log("false");
                 holdButtonTime = 0f;
                 isResetButtonPress = false;
             }

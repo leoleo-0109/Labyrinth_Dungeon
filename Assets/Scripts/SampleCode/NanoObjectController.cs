@@ -10,6 +10,9 @@ namespace Button
 {
     public class NanoObjectController : MonoBehaviour
     {
+        [SerializeField] private EventObserver eventObserver;
+        [SerializeField,Header("リセットボタンでワープしたい位置")] private GameObject[] stageStartPosition;
+
         [SerializeField]
         GameObject _camera;
         private int counts;
@@ -30,7 +33,8 @@ namespace Button
         private bool buttonPressed = false;
         private bool buttonPressedRequest = false;
         private bool isResetButtonPress = false; // リセットボタンが押されたかどうか
-        private float holdButtonTime = 0; // ボタンを長押ししたボタン
+        private float holdButtonTime = 0f; // ボタンを長押ししたボタン
+
         private void Start()
         {
             nanoSerialHandler.OnDataReceived += OnDataReceived;
@@ -130,6 +134,7 @@ namespace Button
                     Debug.Log("ボタン入力準備完了");
                     if((data[2]=="2F"||data[2]=="3F") && !buttonPressed)
                     {
+                        eventObserver.TriggerStageTransition();
                         Debug.Log("2F");
                         EventFlagHolder.eventFlag = true;
                         buttonPressed = true;
@@ -146,20 +151,43 @@ namespace Button
                 {
                     holdButtonTime += Time.deltaTime;
                     Debug.Log(holdButtonTime);
-                    if(holdButtonTime < 3)
+                    if (holdButtonTime > 3f && !isResetButtonPress)
                     {
-                        // リセット処理
-
+                        ResetPlayerPositionBasedOnCount(eventObserver.HierarchyCount.Value);
                         isResetButtonPress = true;
                     }
                 }
                 else if(data[3]!="Reset"&&isResetButtonPress)
                 {
-                    isResetButtonPress = false; // Resetという文字列のシリアルが送られてきていなかったらfalse
+                    holdButtonTime = 0f;
+                    isResetButtonPress = false;
                 }
                 playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
                 //Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", camera: " + data[2]);
             }
         }
+        void ResetPlayerPositionBasedOnCount(int count)
+        {
+            switch (count)
+            {
+                case 0:
+                    ResetPlayerPosition(stageStartPosition[0]);
+                    break;
+                case 1:
+                    ResetPlayerPosition(stageStartPosition[1]);
+                    break;
+                case 2:
+                    ResetPlayerPosition(stageStartPosition[2]);
+                    break;
+            }
+        }
+        void ResetPlayerPosition(GameObject startPosition)
+        {
+            Vector3 pos = new Vector3(0, 1.6f, 0);
+            Vector3 startPos = startPosition.transform.position;
+            startPos += pos; // 座標調整
+            gameObject.transform.position = startPos;
+        }
+
     }
 }
