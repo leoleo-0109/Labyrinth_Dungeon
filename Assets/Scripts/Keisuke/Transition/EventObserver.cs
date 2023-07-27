@@ -10,6 +10,10 @@ namespace BananaClient
     {
         private Subject<Unit> onStageTransitionTriggered = new Subject<Unit>();
         public IObservable<Unit> OnStageTransitionTriggered => onStageTransitionTriggered;
+        private Subject<Unit> gameEndEvent = new Subject<Unit>();
+        public IObservable<Unit> GameEndEvent => gameEndEvent;
+        private Subject<Unit> onTimeItemCountResetEvent = new Subject<Unit>();
+        public IObservable<Unit> OnTimeItemCountResetEvent => onTimeItemCountResetEvent;
         [HideInInspector] public ReactiveProperty<int> hierarchyCount = new ReactiveProperty<int>(-1);
         public IReadOnlyReactiveProperty<int> HierarchyCount => hierarchyCount;
 
@@ -17,6 +21,14 @@ namespace BananaClient
         public void TriggerStageTransition()
         {
             onStageTransitionTriggered.OnNext(Unit.Default);
+        }
+        public void GameEventTrigger()
+        {
+            gameEndEvent.OnNext(Unit.Default);
+        }
+        public void OnTimeItemCountResetTrigger()
+        {
+            onTimeItemCountResetEvent.OnNext(Unit.Default);
         }
     }
 }

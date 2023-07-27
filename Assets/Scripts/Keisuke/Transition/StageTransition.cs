@@ -6,6 +6,7 @@ namespace BananaClient
 {
     public class StageTransition : MonoBehaviour
     {
+        [SerializeField] private EventObserver eventObserver;
         private Subject<Unit> onWarpEventTrigger = new Subject<Unit>();
         public IObservable<Unit> OnWarpEventTrigger => onWarpEventTrigger;
         [SerializeField] private GameObject player;
@@ -19,6 +20,7 @@ namespace BananaClient
                 {
                     Debug.Log("発火");
                     onWarpEventTrigger.OnNext(Unit.Default);
+                    eventObserver.OnTimeItemCountResetTrigger();
                     Warp();
                     eventTriggered = true;
                     EventFlagHolder.eventFlag = false;
