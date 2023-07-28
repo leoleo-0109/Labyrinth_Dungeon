@@ -28,7 +28,7 @@ namespace BananaClient
         private int scoreCountType3 = 0;
         [SerializeField] private ScoreView scoreView; // スコア
         [SerializeField] private ScoreView scoreItemView; // スコアアイテム
-        private float score = 0; // スコアがこいつに保存されてる
+        public float score = 0; // スコアがこいつに保存されてる
         void Start()
         {
             ChangeMaxCount(0);

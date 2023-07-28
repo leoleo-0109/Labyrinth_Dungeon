@@ -24,6 +24,7 @@ namespace BananaClient
         private float magnification = 100; // タイムに掛けたい倍率
         [SerializeField,Header("初期時間")] private float initialTime = 60; // 初期時間
         [SerializeField,Header("アイテムを取った時に追加するタイム")] private float addTimeElement = 0;
+        public int keepNowTime;
         private void Start()
         {
             ChangeMaxCount(0); // Stage1は0
@@ -72,7 +73,9 @@ namespace BananaClient
                 Debug.Log("appendTime");
                 // remainingTimeinSecondsに整数型の現在のTimeが入ってる
                 int remainingTimeInSeconds = Mathf.RoundToInt((float)timer.RemainingTime.Value.TotalSeconds);
+                keepNowTime = remainingTimeInSeconds;
                 timer.IncrementTime(TimeSpan.FromSeconds(remainingTimeInSeconds * magnification));
+                Debug.Log(keepNowTime);
             }
         }
         private void WarpEventObserver()

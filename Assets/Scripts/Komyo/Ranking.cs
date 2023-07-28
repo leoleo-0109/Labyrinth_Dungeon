@@ -1,18 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Save;
 
 public class Ranking : MonoBehaviour
 {
     //テスト用の変数ここをscoreに
     [SerializeField, Header("数値")]
-    int point;
+    float point;
     string[] ranking = { "1位", "2位", "3位", "4位", "5位" };
-    int[] rankingValue = new int[5];
+    float[] rankingValue = new float[5];
     [SerializeField, Header("表示させるテキスト")]
     Text[] rankingText = new Text[5];
 
     void Start()
     {
+        point = PlayerPrefs.GetFloat("score");
         //この辺の処理をStartからランキング表示時に変更
         GetRanking();
         SetRanking(point);
@@ -24,12 +26,16 @@ public class Ranking : MonoBehaviour
     void GetRanking()
     {
         //ランキング呼び出し
+        /*for (int i = 0; i < ranking.Length; i++)
+        {
+            rankingValue[i] = PlayerPrefs.GetInt(ranking[i]);
+        }*/
         for (int i = 0; i < ranking.Length; i++)
         {
             rankingValue[i] = PlayerPrefs.GetInt(ranking[i]);
         }
     }
-    void SetRanking(int returnValue)
+    void SetRanking(float returnValue)
     {
         //ランキング書き込み
         for (int i = 0; i < ranking.Length; i++)
@@ -37,7 +43,7 @@ public class Ranking : MonoBehaviour
             //取得した値とRankingの値を入れ替え
             if (returnValue > rankingValue[i])
             {
-                int change = rankingValue[i];
+                float change = rankingValue[i];
                 rankingValue[i] = returnValue;
                 returnValue = change;
             }
@@ -45,7 +51,7 @@ public class Ranking : MonoBehaviour
         //入れ替えた値を保存
         for (int i = 0; i < ranking.Length; i++)
         {
-            PlayerPrefs.SetInt(ranking[i], rankingValue[i]);
+            PlayerPrefs.SetFloat(ranking[i], rankingValue[i]);
         }
     }
 }
