@@ -11,18 +11,29 @@ namespace BananaClient
 {
     public class ScorePresenter : MonoBehaviour
     {
-        [SerializeField,Header("全てのステージに配置しているアイテムの数")] private int itemMaxCount = 0;
-        private int currentItemGetCount = 0; // 現在アイテムを取得した回数
+        [SerializeField,Header("ワープする回数分長さを変えて")] private EventObserver[] eventObserver;
+        [SerializeField,Header("全てのステージに配置しているアイテムの数")] private int allScoreItemMaxCount = 0;
+        private int itemCurrentMaxCount = 0; // 現在のステージに存在するタイムアイテムの数
+        private int stageChangeCount = 0; // ステージが変化した回数を記録する
+        private int scoreItemRemoveCount = 0; // スコアアイテムが消えた回数を記録
+        private int currentItemGetCount = 0; // 現在アイテムを取得した回数、上の変数と役割かぶってるけど上の変数は値をリセットするからこの変数が必要になってくる
+        [SerializeField,Header("ステージ1に存在するタイムアイテムの数")] private int itemCurrentMaxCountStage1; // ステージ1に存在するタイムアイテムの数
+        [SerializeField,Header("ステージ2に存在するタイムアイテムの数")] private int itemCurrentMaxCountStage2; // ステージ2に存在するタイムアイテムの数
+        [SerializeField,Header("ステージ3に存在するタイムアイテムの数")] private int itemCurrentMaxCountStage3; // ステージ3に存在するタイムアイテムの数
         [SerializeField,Header("Type1アイテムを設定")] private ScoreModel[] scoreModelsType1;
         [SerializeField,Header("Type2アイテムを設定")] private ScoreModel[] scoreModelsType2;
         [SerializeField,Header("Type3アイテムを設定")] private ScoreModel[] scoreModelsType3;
         private int scoreCountType1 = 0;
         private int scoreCountType2 = 0;
         private int scoreCountType3 = 0;
-        [SerializeField] private ScoreView scoreView;
-        private float score = 0;
+        [SerializeField] private ScoreView scoreView; // スコア
+        [SerializeField] private ScoreView scoreItemView; // スコアアイテム
+        public float score = 0; // スコアがこいつに保存されてる
         void Start()
         {
+            ChangeMaxCount(0);
+            UpdateScoreItemCount();
+            StageChangeObserver();
             AddScoreEventTrigger();
             UpdateScore();
         }
@@ -88,15 +99,57 @@ namespace BananaClient
                 default:
                     break;
             }
+            scoreItemRemoveCount++;
             currentItemGetCount++;// 合計取得回数を記録
             score += addedScore; // ここで倍率計算する
+            // TODO:クリア時のイベントを作る？
+            // TODO:ゲームが終了した際にscoreを保存する処理が必要
             Debug.Log(score);
             ExtraScore(); // TODO:クリア時に呼び出すほうがいいかも
+            UpdateScoreItemCount();
             UpdateScore();
         }
+        private void StageChangeObserver()
+        {
+            // ワープイベントが発生したらtimeItemCountを0にする
+            // ワープポイントの数だけ処理する
+            foreach (EventObserver eventInstance in eventObserver)
+            {
+                eventInstance.OnScoreItemCountResetEvent
+                    .Subscribe(_ =>
+                    {
+                        stageChangeCount++; // ステージが変わるたびにインクリメント
+                        scoreItemRemoveCount = 0;
+                        ChangeMaxCount(stageChangeCount); // stageChangeCountはステージが変化した回数の値を持っているので引数に返す
+                        UpdateScoreItemCount();
+                    })
+                    .AddTo(this);
+            }
+
+        }
+        // stageChangeCountの値を受け取るメソッド
+        private void ChangeMaxCount(int stageNum)
+        {
+            switch(stageNum)
+            {
+                case 0:
+                    itemCurrentMaxCount = itemCurrentMaxCountStage1;
+                    break;
+                case 1:
+                    itemCurrentMaxCount = itemCurrentMaxCountStage2;
+                    break;
+                case 2:
+                    itemCurrentMaxCount = itemCurrentMaxCountStage3;
+                    break;
+                default:
+                    break;
+            }
+        }
+        // スコアアイテムコンプリート時の追加スコア処理
         private void ExtraScore()
         {
-            if(currentItemGetCount==itemMaxCount)
+            // スコアアイテムの合計取得取得数とステージ1,2,3にある全てのスコアアイテムの数が等しかったら処理を行う
+            if(currentItemGetCount==allScoreItemMaxCount)
             {
                 // TODO:追加スコアの値が決まったら書く
                 //score +=
@@ -105,6 +158,10 @@ namespace BananaClient
         private void UpdateScore()
         {
             scoreView.ScoreDisplay(score);
+        }
+        private void UpdateScoreItemCount()
+        {
+            scoreItemView.DisplayScoreItemCount(scoreItemRemoveCount,itemCurrentMaxCount);
         }
     }
 }

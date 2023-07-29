@@ -8,7 +8,7 @@ using BananaClient;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private HierarchyDistinct hierarchyDistinct;
+    [SerializeField] private EventObserver eventObserver;
     [SerializeField,Header("リセットボタンでワープしたい位置")] private GameObject[] stageStartPosition;
     [SerializeField] private GameObject _camera;
     [SerializeField,Header("左の視点移動速度")] private float cameraLeftSens = -0.5f;
@@ -19,14 +19,14 @@ public class PlayerController : MonoBehaviour
     private bool buttonPressedRequest = false;
     private CompositeDisposable disposable = new CompositeDisposable();
     private bool isResetButtonPress = false; // リセットボタンが押されたかどうか
-    private float holdButtonTime = 0; // ボタンを長押ししたボタン
+    private float holdButtonTime = 0f; // ボタンを長押ししたボタン
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Move();
         CameraMove();
         WarpButton();
-        RessetButton();
+        ResetButton();
     }
     public void Move()
     {
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
             buttonPressedRequest = true;
         }
     }
-
+    // 階層遷移
     public void WarpButton()
     {
         this.UpdateAsObservable()
@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("ボタン入力準備完了");
                 if(Input.GetKey(KeyCode.K) && !buttonPressed)
                 {
+                    eventObserver.TriggerStageTransition();
                     Debug.Log("2F");
                     EventFlagHolder.eventFlag = true;
                     buttonPressed = true;
@@ -92,56 +93,48 @@ public class PlayerController : MonoBehaviour
             }
         }).AddTo(disposable);
     }
-    public void RessetButton()
+    public void ResetButton()
     {
         this.UpdateAsObservable()
         .Subscribe(_ =>
         {
-            // リセットボタン
-            if(Input.GetKey(KeyCode.R)&&!isResetButtonPress)
+            if(Input.GetKey(KeyCode.R))
             {
-                holdButtonTime += 1 * Time.deltaTime;
+                holdButtonTime += Time.deltaTime;
                 Debug.Log(holdButtonTime);
-                if(holdButtonTime > 3f)
+                if (holdButtonTime > 3f && !isResetButtonPress)
                 {
-                    // リセット処理
-                    hierarchyDistinct.HierarchyNumNotice
-                    .Where(hierarchy => hierarchy == 0)
-                    .Subscribe(_ =>
-                    {
-                        Vector3 pos = new Vector3(0,1.6f,0);
-                        Vector3 startPos = stageStartPosition[1].transform.position;
-                        startPos += pos; // 座標調整
-                        gameObject.transform.position = startPos;
-                    }).AddTo(this);
-
-                    hierarchyDistinct.HierarchyNumNotice
-                    .Where(hierarchy => hierarchy == 1)
-                    .Subscribe(_ =>
-                    {
-                        Vector3 pos = new Vector3(0,1.6f,0);
-                        Vector3 startPos = stageStartPosition[2].transform.position;
-                        startPos += pos; // 座標調整
-                        gameObject.transform.position = startPos;
-                    }).AddTo(this);
-
-                    hierarchyDistinct.HierarchyNumNotice
-                    .Where(hierarchy => hierarchy == 2)
-                    .Subscribe(_ =>
-                    {
-                        Vector3 pos = new Vector3(0,1.6f,0);
-                        Vector3 startPos = stageStartPosition[3].transform.position;
-                        startPos += pos; // 座標調整
-                        gameObject.transform.position = startPos;
-                    }).AddTo(this);
-
+                    ResetPlayerPositionBasedOnCount(eventObserver.HierarchyCount.Value);
                     isResetButtonPress = true;
                 }
             }
-            else if(Input.GetKey(KeyCode.R)&&isResetButtonPress)
+            else
             {
-                isResetButtonPress = false; // Resetという文字列のシリアルが送られてきていなかったらfalse
+                holdButtonTime = 0f;
+                isResetButtonPress = false;
             }
         }).AddTo(disposable);
+    }
+    void ResetPlayerPositionBasedOnCount(int count)
+    {
+        switch (count)
+        {
+            case 0:
+                ResetPlayerPosition(stageStartPosition[0]);
+                break;
+            case 1:
+                ResetPlayerPosition(stageStartPosition[1]);
+                break;
+            case 2:
+                ResetPlayerPosition(stageStartPosition[2]);
+                break;
+        }
+    }
+    void ResetPlayerPosition(GameObject startPosition)
+    {
+        Vector3 pos = new Vector3(0, 1.6f, 0);
+        Vector3 startPos = startPosition.transform.position;
+        startPos += pos; // 座標調整
+        gameObject.transform.position = startPos;
     }
 }

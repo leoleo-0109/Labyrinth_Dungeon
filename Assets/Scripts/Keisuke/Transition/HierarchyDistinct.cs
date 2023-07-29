@@ -1,25 +1,26 @@
 using UnityEngine;
 using UniRx;
 using System;
+using BananaClient;
 
 public class HierarchyDistinct : MonoBehaviour
 {
-    private Subject<int> hierarchyNumNotice = new Subject<int>();
-    public IObservable<int> HierarchyNumNotice => hierarchyNumNotice;
-    private int hierarchyCount = 0;
-    void Start(){
-        hierarchyCount++;
-    }
-    public void Distinct()
+    [SerializeField] private EventObserver eventObserver;
+    private int count = 0;
+    void Start()
     {
-        if(hierarchyCount==0){
-            hierarchyNumNotice.OnNext(0);
-        }
-        if(hierarchyCount==1){
-            hierarchyNumNotice.OnNext(1);
-        }
-        if(hierarchyCount==2){
-            hierarchyNumNotice.OnNext(2);
-        }
+        eventObserver.hierarchyCount.Value = count;
+        UpdateHierarchyCount();
+    }
+
+    public void UpdateHierarchyCount()
+    {
+        eventObserver.OnStageTransitionTriggered
+        .Subscribe(_ =>
+        {
+            count++;
+            Debug.Log("UpdateHierarchyCount");
+            eventObserver.hierarchyCount.Value = count;
+        }).AddTo(this);
     }
 }
