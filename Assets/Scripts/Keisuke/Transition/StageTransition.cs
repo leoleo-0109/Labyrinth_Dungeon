@@ -2,23 +2,20 @@ using UnityEngine;
 using UniRx;
 using System;
 using BananaClient;
+using Save;
 namespace BananaClient
 {
     public class StageTransition : MonoBehaviour
     {
         [SerializeField]
-        GameObject clearCanvas;
-        private int warpCounte = 0;
+        ClearManager clearManager;
+        private int warpCounte;
         [SerializeField] private EventObserver eventObserver;
         private Subject<Unit> onWarpEventTrigger = new Subject<Unit>();
         public IObservable<Unit> OnWarpEventTrigger => onWarpEventTrigger;
         [SerializeField] private GameObject player;
         [SerializeField] private GameObject stage;
         private bool eventTriggered = false;
-        private void Awake()
-        {
-            clearCanvas.gameObject.SetActive(false);
-        }
         private void OnTriggerStay(Collider other)
         {
             if(other.gameObject.CompareTag(TagName.Player))
@@ -31,7 +28,7 @@ namespace BananaClient
                     eventObserver.OnTimeItemCountResetTrigger();
                     eventObserver.OnScoreItemCountResetTrigger();
                     Warp();
-                    ClearManager();
+                    clearManager.Clear();
                     eventTriggered = true;
                     EventFlagHolder.eventFlag = false;
                 }
@@ -43,14 +40,6 @@ namespace BananaClient
             Vector3 stagePortalPosition = stage.transform.position;
             stagePortalPosition.y += pos.y;
             player.transform.position = stagePortalPosition;
-        }
-        public void ClearManager() {
-            Debug.Log("aaa");
-            warpCounte++;
-            if (warpCounte >= 3) {
-                Debug.Log(warpCounte);
-                clearCanvas.gameObject.SetActive(true);
-            }
         }
     }
 }
