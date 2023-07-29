@@ -4,13 +4,20 @@ using Save;
 
 public class Ranking : MonoBehaviour
 {
+    [SerializeField]
+    InputText iText;
     //テスト用の変数ここをscoreに
     [SerializeField, Header("数値")]
     float point;
     string[] ranking = { "1位", "2位", "3位", "4位", "5位" };
     float[] rankingValue = new float[5];
+    //ここに入れてもらった名前をin
     [SerializeField, Header("表示させるテキスト")]
     Text[] rankingText = new Text[5];
+    public struct userData {
+        float _ranking;
+        string _name;
+    }
 
     void Start()
     {
