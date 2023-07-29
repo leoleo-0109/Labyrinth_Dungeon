@@ -12,7 +12,7 @@ namespace BananaClient
         [SerializeField] private TextMeshProUGUI scoreItemCountText;
         public void ScoreDisplay(float count)
         {
-            scoreText.text = count.ToString();
+            scoreText.text = count.ToString("F1");
         }
         public void DisplayScoreItemCount(int count,int maxCount)
         {
