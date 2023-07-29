@@ -29,17 +29,5 @@ namespace Save
             confirmScore = scorePresenter.score += confirmTime;
             PlayerPrefs.SetFloat("score", scorePresenter.score);
         }
-        //テスト用
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                KeepKey();
-            }
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                Debug.Log(confirmScore);
-            }
-        }
     }
 }

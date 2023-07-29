@@ -24,7 +24,7 @@ public class SceneController : MonoBehaviour
     // RankingScene�Ŏg�p
     public void OnClickTitleButton() // �^�C�g���{�^��
     {
-        SceneManager.LoadScene("TitleScene");
+        SceneManager.LoadScene("Title");
     }
 
     // TitleScene�Ŏg�p
