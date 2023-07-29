@@ -9,7 +9,6 @@ public class SpriteMainScript : MonoBehaviour
     bool Moveswitch=true;
     private void start(){
 
-     
     }
     private void Update()
     {

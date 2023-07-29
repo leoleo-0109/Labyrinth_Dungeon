@@ -18,9 +18,18 @@ EditorBuildSettings:
     path: Assets/Scenes/MasterScene/KeyBoardMainGame.unity
     guid: 609c6502511c2fb47b6f4dba75f1d84a
   - enabled: 1
+    path: Assets/Scenes/MasterScene/Ranking.unity
+    guid: 4d2fae252a3454a4089a01b8ad07e5bf
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
     path: Assets/Scenes/MasterScene/MainGameNanoVer.unity
-    guid: 81433480caea6c943845d7168237626f
+    guid: c88b13898ed9da54b94a44005188f3b6
   - enabled: 1
     path: Assets/Scenes/MasterScene/MainGameESP32Ver.unity
-    guid: 2307f9e4e9c83f546abe70c241301246
+    guid: 45f71029f2ca6f0459bc9d283873b6fb
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
