@@ -16,9 +16,17 @@ public class SceneController : MonoBehaviour
     }
 
     // IntroductionScene�Ŏg�p
-    public void OnClickGameButton() // �Q�[���{�^��
+    public void OnClickGameKeyButton() // �Q�[���{�^��
     {
         SceneManager.LoadScene("KeyBoardMainGame");
+    }
+     public void OnClickGameNanoButton() // �Q�[���{�^��
+    {
+        SceneManager.LoadScene("MainGameNanoVer");
+    }
+     public void OnClickGameESPButton() // �Q�[���{�^��
+    {
+        SceneManager.LoadScene("MainGameESP32Ver");
     }
 
     // RankingScene�Ŏg�p
