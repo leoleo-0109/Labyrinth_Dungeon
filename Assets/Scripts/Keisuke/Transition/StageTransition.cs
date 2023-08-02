@@ -9,26 +9,30 @@ namespace BananaClient
     {
         [SerializeField]
         ClearManager clearManager;
-        private int warpCounte;
         [SerializeField] private EventObserver eventObserver;
         private Subject<Unit> onWarpEventTrigger = new Subject<Unit>();
         public IObservable<Unit> OnWarpEventTrigger => onWarpEventTrigger;
         [SerializeField] private GameObject player;
         [SerializeField] private GameObject stage;
         private bool eventTriggered = false;
+        private static int stageNumber = 0; // stageNumberは全てのStageTransitionインスタンス間で共有される
         private void OnTriggerStay(Collider other)
         {
             if(other.gameObject.CompareTag(TagName.Player))
             {
+                // ステージ3のワープポイントに接触しているときにリザルトのキャンバスを表示する
+                if (stageNumber == 2)
+                {
+                    clearManager.ShowResult();
+                    return; // ワープ処理をスキップするためにここでメソッドを終了
+                }
                 // ワープ処理
                 if (EventFlagHolder.eventFlag && !eventTriggered)
                 {
-                    Debug.Log("発火");
                     onWarpEventTrigger.OnNext(Unit.Default);
-                    eventObserver.OnTimeItemCountResetTrigger();
-                    eventObserver.OnScoreItemCountResetTrigger();
+                    eventObserver.OnTimeItemCountResetTrigger(); // ワープ発生時にタイムアイテムのカウントをリセットするイベントを発行
+                    eventObserver.OnScoreItemCountResetTrigger(); // ワープ発生時にタイムアイテムのカウントをリセットするイベントを発行
                     Warp();
-                    clearManager.Clear();
                     eventTriggered = true;
                     EventFlagHolder.eventFlag = false;
                 }
@@ -40,6 +44,7 @@ namespace BananaClient
             Vector3 stagePortalPosition = stage.transform.position;
             stagePortalPosition.y += pos.y;
             player.transform.position = stagePortalPosition;
+            stageNumber++;
         }
     }
 }
