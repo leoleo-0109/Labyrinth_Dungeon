@@ -6,20 +6,15 @@ namespace Save
 {
     public class ClearManager : MonoBehaviour
     {
-        public int clearCounts = 0;
         [SerializeField]
         Canvas canvas;
         private void Awake()
         {
-            canvas.gameObject.SetActive(false);
+            canvas.enabled = false;
         }
-        public void Clear()
+        public void ShowResult()
         {
-            clearCounts++;
-            if (clearCounts == 3)
-            {
-                canvas.gameObject.SetActive(true);
-            }
+            canvas.enabled = true;
         }
     }
 }

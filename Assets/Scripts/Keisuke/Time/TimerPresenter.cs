@@ -142,5 +142,14 @@ namespace BananaClient
             }
             Debug.Log("カウントダウン終了");
         }
+        public void OnKeepTime()
+        {
+            int remainingTimeInSeconds = Mathf.RoundToInt((float)timer.RemainingTime.Value.TotalSeconds);
+            keepNowTime = remainingTimeInSeconds;
+        }
+        public int GetCurrentTime()
+        {
+            return keepNowTime;
+        }
     }
 }
