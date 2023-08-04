@@ -163,5 +163,9 @@ namespace BananaClient
         {
             scoreItemView.DisplayScoreItemCount(scoreItemRemoveCount,itemCurrentMaxCount);
         }
+        public float GetCurrentScore()
+        {
+            return score;
+        }
     }
 }

@@ -7,8 +7,8 @@ namespace BananaClient
 {
     public class StageTransition : MonoBehaviour
     {
-        [SerializeField]
-        ClearManager clearManager;
+        [SerializeField] private TimerPresenter timerPresenter;
+        [SerializeField] private ResultManager resultManager;
         [SerializeField] private EventObserver eventObserver;
         private Subject<Unit> onWarpEventTrigger = new Subject<Unit>();
         public IObservable<Unit> OnWarpEventTrigger => onWarpEventTrigger;
@@ -23,7 +23,8 @@ namespace BananaClient
                 // ステージ3のワープポイントに接触しているときにリザルトのキャンバスを表示する
                 if (stageNumber == 2)
                 {
-                    clearManager.ShowResult();
+                    timerPresenter.OnKeepTime();
+                    resultManager.ShowResult();
                     return; // ワープ処理をスキップするためにここでメソッドを終了
                 }
                 // ワープ処理
