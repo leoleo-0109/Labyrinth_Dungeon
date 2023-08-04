@@ -134,7 +134,7 @@ namespace Button
                     Debug.Log("ボタン入力準備完了");
                     if((data[2]=="2F"||data[2]=="3F") && !buttonPressed)
                     {
-                        eventObserver.TriggerStageTransition();
+                        eventObserver.TriggerStageTransition(); // ステージが変更されたのでイベントを発行
                         Debug.Log("2F");
                         EventFlagHolder.eventFlag = true;
                         buttonPressed = true;
@@ -153,7 +153,7 @@ namespace Button
                     Debug.Log(holdButtonTime);
                     if (holdButtonTime > 3f && !isResetButtonPress)
                     {
-                        ResetPlayerPositionBasedOnCount(eventObserver.HierarchyCount.Value);
+                        ResetPlayerPositionBasedOnCount(eventObserver.HierarchyCount.Value); // 引数は現在の階層
                         isResetButtonPress = true;
                     }
                 }

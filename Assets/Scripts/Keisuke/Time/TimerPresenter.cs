@@ -25,6 +25,7 @@ namespace BananaClient
         [SerializeField,Header("初期時間")] private float initialTime = 60; // 初期時間
         [SerializeField,Header("アイテムを取った時に追加するタイム")] private float addTimeElement = 0;
         public int keepNowTime;
+        CompositeDisposable disposables = new CompositeDisposable();
         private void Start()
         {
             ChangeMaxCount(0); // Stage1は0
@@ -47,7 +48,7 @@ namespace BananaClient
                     timer.DecrementTime(TimeSpan.FromSeconds(Time.deltaTime));
                     // TimerViewにタイマーの残り時間を表示
                     timerView.DisplayTime(timer.RemainingTime.Value);
-                }).AddTo(this);
+                }).AddTo(disposables);
         }
         public void AddTime()
         {
@@ -62,7 +63,7 @@ namespace BananaClient
                     timeItemRemovedCount++; // 消えた回数をインクリメント
                     AddTimeItemCount(); // タイムアイテムが取られた回数を記録するためのメソッド
                     AppendTime(); // アイテムを取るたびに関数が呼ばれる
-                }).AddTo(this);
+                }).AddTo(disposables);
             }
         }
         // ランキング表示時の追加タイムスコアの処理
@@ -70,12 +71,10 @@ namespace BananaClient
         {
             // アイテムが消えた回数と最大アイテム数をif条件で監視して特定する
             if(timeItemRemovedCount == allTimeItemMaxCount){
-                Debug.Log("appendTime");
                 // remainingTimeinSecondsに整数型の現在のTimeが入ってる
                 int remainingTimeInSeconds = Mathf.RoundToInt((float)timer.RemainingTime.Value.TotalSeconds);
                 keepNowTime = remainingTimeInSeconds;
                 timer.IncrementTime(TimeSpan.FromSeconds(remainingTimeInSeconds * magnification));
-                Debug.Log(keepNowTime);
             }
         }
         private void WarpEventObserver()
@@ -92,7 +91,7 @@ namespace BananaClient
                         ChangeMaxCount(stageChangeCount); // stageChangeCountはステージが変化した回数の値を持っているので引数に返す
                         UpdateTimeItemCount();
                     })
-                    .AddTo(this);
+                    .AddTo(disposables);
             }
         }
         // アイテムを取得した回数を記録するメソッド
@@ -147,9 +146,9 @@ namespace BananaClient
             int remainingTimeInSeconds = Mathf.RoundToInt((float)timer.RemainingTime.Value.TotalSeconds);
             keepNowTime = remainingTimeInSeconds;
         }
-        public int GetCurrentTime()
+        void OnDisable()
         {
-            return keepNowTime;
+            disposables.Dispose();
         }
     }
 }

@@ -128,7 +128,7 @@ namespace Button
                     Debug.Log("ボタン入力準備完了");
                     if((data[2]=="2F"||data[2]=="3F") && !buttonPressed)
                     {
-                        eventObserver.TriggerStageTransition();
+                        eventObserver.TriggerStageTransition(); // ステージが変更されたのでイベントを発行
                         Debug.Log("2F");
                         EventFlagHolder.eventFlag = true;
                         buttonPressed = true;

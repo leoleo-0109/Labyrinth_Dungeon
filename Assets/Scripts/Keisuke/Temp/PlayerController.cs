@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("ボタン入力準備完了");
                 if(Input.GetKey(KeyCode.K) && !buttonPressed)
                 {
-                    eventObserver.TriggerStageTransition();
+                    eventObserver.TriggerStageTransition(); // ステージが変更されたのでイベントを発行
                     Debug.Log("2F");
                     EventFlagHolder.eventFlag = true;
                     buttonPressed = true;

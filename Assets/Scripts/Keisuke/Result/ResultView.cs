@@ -16,16 +16,15 @@ namespace BananaClient
         {
             scoreText.text = "Score: " + score.ToString("F0");
         }
-
         public void CurrentTimeView(int time)
         {
             timeText.text = "Time: " + time.ToString();
         }
         public void TotalScoreView(float score, int time)
         {
-            int currentTime = time * 100;
+            int currentTime = time * 100; // 整数のタイムに×100
             int currentScore = Mathf.RoundToInt(score);  // scoreを四捨五入してintに変換
-            int totalScore = currentScore + currentTime;
+            int totalScore = currentScore + currentTime; // スコアとタイムを合わせたトータルスコアの作成
             totalScoreText.text = "TotalScore: " + totalScore.ToString();
         }
     }

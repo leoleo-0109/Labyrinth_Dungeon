@@ -9,14 +9,12 @@ namespace BananaClient
     {
         [SerializeField]
         Canvas canvas;
-        private void Awake()
-        {
-            canvas.enabled = false;
-        }
+        [SerializeField]
+        ResultPresenter resultPresenter;
         public void ShowResult()
         {
+            resultPresenter.StartSubscription();
             canvas.gameObject.SetActive(true);
-            canvas.enabled = true;
         }
     }
 }
