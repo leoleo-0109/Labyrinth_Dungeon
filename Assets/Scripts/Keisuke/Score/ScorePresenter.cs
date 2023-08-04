@@ -29,6 +29,8 @@ namespace BananaClient
         [SerializeField] private ScoreView scoreView; // スコア
         [SerializeField] private ScoreView scoreItemView; // スコアアイテム
         public float score = 0; // スコアがこいつに保存されてる
+        public ReplaySubject<Unit> itemCompleted = new ReplaySubject<Unit>(1);
+        CompositeDisposable disposables = new CompositeDisposable();
         void Start()
         {
             ChangeMaxCount(0);
@@ -44,19 +46,19 @@ namespace BananaClient
             {
                 scoreModelType1.OnEventTrigger.Subscribe(_ => {
                     AddScore(1);
-                }).AddTo(this);
+                }).AddTo(disposables);
             }
             foreach (ScoreModel scoreModelType2 in scoreModelsType2)
             {
                 scoreModelType2.OnEventTrigger.Subscribe(_ => {
                     AddScore(2);
-                }).AddTo(this);
+                }).AddTo(disposables);
             }
             foreach (ScoreModel scoreModelType3 in scoreModelsType3)
             {
                 scoreModelType3.OnEventTrigger.Subscribe(_ => {
                     AddScore(3);
-                }).AddTo(this);
+                }).AddTo(disposables);
             }
         }
         private void AddScore(int scoreType)
@@ -123,7 +125,7 @@ namespace BananaClient
                         ChangeMaxCount(stageChangeCount); // stageChangeCountはステージが変化した回数の値を持っているので引数に返す
                         UpdateScoreItemCount();
                     })
-                    .AddTo(this);
+                    .AddTo(disposables);
             }
 
         }
@@ -151,8 +153,8 @@ namespace BananaClient
             // スコアアイテムの合計取得取得数とステージ1,2,3にある全てのスコアアイテムの数が等しかったら処理を行う
             if(currentItemGetCount==allScoreItemMaxCount)
             {
-                // TODO:追加スコアの値が決まったら書く
-                //score +=
+                itemCompleted.OnNext(Unit.Default);
+                Debug.Log("Comleted");
             }
         }
         private void UpdateScore()
@@ -163,9 +165,9 @@ namespace BananaClient
         {
             scoreItemView.DisplayScoreItemCount(scoreItemRemoveCount,itemCurrentMaxCount);
         }
-        public float GetCurrentScore()
+        void OnDisable()
         {
-            return score;
+            disposables.Dispose();
         }
     }
 }

@@ -1,3 +1,5 @@
+using System;
+using UniRx;
 using UnityEngine;
 using BananaClient;
 
@@ -10,12 +12,31 @@ namespace BananaClient
         [SerializeField] private ResultView totalScoreResultView;
         [SerializeField] private ScorePresenter scorePresenter;
         [SerializeField] private TimerPresenter timerPresenter;
+        private int extraScore = 0;
+        private IDisposable subscription;
+        private bool isSubscribed = false;
+
+        public void StartSubscription()
+        {
+            if (isSubscribed) return;
+            subscription = scorePresenter.itemCompleted
+                .Subscribe(_ =>
+                {
+                    Debug.Log("Subscribe");
+                    extraScore += 100;
+                    isSubscribed = true;
+                });
+        }
         private void OnEnable()
         {
-            Debug.Log("OnEnable");
             timeResultView.CurrentTimeView(timerPresenter.keepNowTime);
-            scoreResultView.CurrentScoreView(scorePresenter.score);
-            totalScoreResultView.TotalScoreView(scorePresenter.score,timerPresenter.keepNowTime);
+            scoreResultView.CurrentScoreView(scorePresenter.score + extraScore);
+            totalScoreResultView.TotalScoreView(scorePresenter.score, timerPresenter.keepNowTime);
+        }
+        private void OnDisable()
+        {
+            subscription?.Dispose();
+            isSubscribed = false;
         }
     }
 }
