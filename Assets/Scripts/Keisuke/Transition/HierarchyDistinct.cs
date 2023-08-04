@@ -3,6 +3,7 @@ using UniRx;
 using System;
 using BananaClient;
 
+// 現在の階層を記録するシステム
 public class HierarchyDistinct : MonoBehaviour
 {
     [SerializeField] private EventObserver eventObserver;
@@ -15,11 +16,11 @@ public class HierarchyDistinct : MonoBehaviour
 
     public void UpdateHierarchyCount()
     {
+        // ステージが変更されるたびに購読
         eventObserver.OnStageTransitionTriggered
         .Subscribe(_ =>
         {
             count++;
-            Debug.Log("UpdateHierarchyCount");
             eventObserver.hierarchyCount.Value = count;
         }).AddTo(this);
     }

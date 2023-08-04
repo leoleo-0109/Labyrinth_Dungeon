@@ -20,7 +20,7 @@ namespace BananaClient
         {
             if(other.gameObject.CompareTag(TagName.Player))
             {
-                // ステージ3のワープポイントに接触しているときにリザルトのキャンバスを表示する
+                // クリア処理
                 if (stageNumber == 2)
                 {
                     timerPresenter.OnKeepTime();
