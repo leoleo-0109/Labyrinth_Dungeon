@@ -3,40 +3,40 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    // TitleScene�Ŏg�p
-    public void OnClickStartButton() // �^�C�g��(�X�^�[�g)�{�^��
+    // TitleScene
+    public void OnClickStartButton()
     {
         SceneManager.LoadScene("IntroductionScene");
     }
 
-    // TitleScene�Ŏg�p
-    public void OnClickRankingButton() // �^�C�g��(�����L���O)�{�^��
+    // TitleScene
+    public void OnClickRankingButton()
     {
         SceneManager.LoadScene("RankingScene");
     }
 
-    // IntroductionScene�Ŏg�p
-    public void OnClickGameKeyButton() // �Q�[���{�^��
+    // IntroductionScene
+    public void OnClickGameKeyButton()
     {
         SceneManager.LoadScene("KeyBoardMainGame");
     }
-     public void OnClickGameNanoButton() // �Q�[���{�^��
+    public void OnClickGameNanoButton()
     {
         SceneManager.LoadScene("MainGameNanoVer");
     }
-     public void OnClickGameESPButton() // �Q�[���{�^��
+     public void OnClickGameESPButton()
     {
         SceneManager.LoadScene("MainGameESP32Ver");
     }
 
-    // RankingScene�Ŏg�p
-    public void OnClickTitleButton() // �^�C�g���{�^��
+    // RankingScene
+    public void OnClickTitleButton()
     {
         SceneManager.LoadScene("Title");
     }
 
-    // TitleScene�Ŏg�p
-    public void OnClickRetryButton() // ���g���C�{�^��
+    // TitleScene
+    public void OnClickRetryButton()
     {
         SceneManager.LoadScene("GameScene");
     }

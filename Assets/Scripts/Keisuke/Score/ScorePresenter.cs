@@ -63,7 +63,7 @@ namespace BananaClient
         }
         private void AddScore(int scoreType)
         {
-            float addedScore = 1f; // スコア加算量を固定
+            float addedScore = 1000f; // スコア加算量を固定
             switch(scoreType){
                 case 1:
                     scoreCountType1++;
@@ -71,8 +71,9 @@ namespace BananaClient
                         addedScore *= 1.2f;
                     }
                     else if(scoreCountType1==3){
-                        score *= 1.5f; // ここで総スコアに1.5倍を適用
-                        addedScore = 0; // このアイテムによる追加スコアは0にする
+                        //score *= 1.5f; // ここで総スコアに1.5倍を適用
+                        //addedScore = 0; // このアイテムによる追加スコアは0にする
+                        addedScore *= 1.5f;
                         scoreCountType1 = 0; //リセット
                     }
                     break;
@@ -82,8 +83,9 @@ namespace BananaClient
                         addedScore *= 1.2f;
                     }
                     else if(scoreCountType2==3){
-                        score *= 1.5f; // ここで総スコアに1.5倍を適用
-                        addedScore = 0; // このアイテムによる追加スコアは0にする
+                        //score *= 1.5f; // ここで総スコアに1.5倍を適用
+                        //addedScore = 0; // このアイテムによる追加スコアは0にする
+                        addedScore *= 1.5f;
                         scoreCountType2 = 0; //リセット
                     }
                     break;
@@ -93,8 +95,9 @@ namespace BananaClient
                         addedScore *= 1.2f;
                     }
                     else if(scoreCountType3==3){
-                        score *= 1.5f; // ここで総スコアに1.5倍を適用
-                        addedScore = 0; // このアイテムによる追加スコアは0にする
+                        //score *= 1.5f; // ここで総スコアに1.5倍を適用
+                        //addedScore = 0; // このアイテムによる追加スコアは0にする
+                        addedScore *= 1.5f;
                         scoreCountType3 = 0; //リセット
                     }
                     break;
