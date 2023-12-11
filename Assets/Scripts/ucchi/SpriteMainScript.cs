@@ -4,31 +4,36 @@ using UnityEngine;
 
 public class SpriteMainScript : MonoBehaviour
 {
-    [SerializeField] public float speed=0.01f;
-    [SerializeField] public Canvas title;
-    bool Moveswitch=true;
-    private void start(){
+    [SerializeField] private GameObject titleCharacter;
+    [Header("移動速度"), SerializeField] private float speed = default;
+    private bool isMoveflag = true;
 
+    private void start()
+    {
+        titleCharacter.SetActive(false);
     }
+
     private void Update()
     {
-        if(Moveswitch==true){
-        Transform move=this.transform;
-
-        Vector3 MoveSpeed = move.position;
-        MoveSpeed.x += speed;
-
-        move.position=MoveSpeed;
+        if (isMoveflag)
+        {
+            Transform move = this.transform;
+            Vector3 moveSpeed = move.position;
+            moveSpeed.x += speed;
+            move.position = moveSpeed;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "stop")
         {
-            Moveswitch=false;
+            isMoveflag = false;
+            Animator anim = this.GetComponent<Animator>();
+            // アニメーション停止
+            anim.enabled = false;
             this.gameObject.SetActive(false);
-            title.gameObject.SetActive(true);
+            // キャラクター差し替え
+            titleCharacter.gameObject.SetActive(true);
         }
     }
-
 }
