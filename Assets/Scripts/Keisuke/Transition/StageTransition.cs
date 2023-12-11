@@ -3,6 +3,7 @@ using UniRx;
 using System;
 using BananaClient;
 using Save;
+using UnityEngine.SceneManagement;
 namespace BananaClient
 {
     public class StageTransition : MonoBehaviour
@@ -23,8 +24,7 @@ namespace BananaClient
                 // クリア処理
                 if (stageNumber == 2)
                 {
-                    timerPresenter.OnKeepTime();
-                    resultManager.ShowResult();
+                    SceneManager.LoadScene("RankingScene");
                     return; // ワープ処理をスキップするためにここでメソッドを終了
                 }
                 // ワープ処理

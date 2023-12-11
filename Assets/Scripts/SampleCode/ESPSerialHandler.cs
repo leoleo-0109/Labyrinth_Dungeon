@@ -9,7 +9,7 @@ public class ESPSerialHandler : MonoBehaviour
     public delegate void SerialDataReceivedEventHandler(string message);
     public event SerialDataReceivedEventHandler OnDataReceived;
 
-    [SerializeField, Header("dsESP:COM9, leoESP:COM10, nano:COM6")] private string portName = "ESP32";
+    [SerializeField, Header("dsESP:COM4, leoESP:COM10, nano:COM6")] private string portName = "ESP32";
     //public string portName = "COM6";
     public int baudRate = 115200;
 
@@ -31,6 +31,7 @@ public class ESPSerialHandler : MonoBehaviour
         if (isNewMessageReceived_)
         {
             OnDataReceived(message_);
+            //Debug.Log(message_);
         }
     }
 

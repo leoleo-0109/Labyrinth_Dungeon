@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
 using BananaClient;
+using UnityEngine.UIElements;
+
 namespace Button
 {
     public class ESPObjectController : MonoBehaviour
@@ -73,13 +75,15 @@ namespace Button
         {
             var data = message.Split(
                 new string[] { "," }, System.StringSplitOptions.None); // カンマで分割する
-            // TODO:リセットボタンの文字列を取りたかったら長さを4に変更
-            if (data.Length == 4)
+
+            Debug.Log(data.Length);
+            if (data.Length == 3)
             {
                 float ax = float.Parse(data[0]);
                 float az = float.Parse(data[1]);
+
                 // 感度調整 ESP用
-                if(ax < 10.00f)
+                if (ax < 10.00f)
                 {
                     ax = ax * (-1) * minusSpeed; // left
                 }
@@ -141,7 +145,7 @@ namespace Button
                     }
                 }
                 // リセットボタン
-                if(data[3]=="Reset"&&!isResetButtonPress)
+                if (data[2] == "Reset" && !isResetButtonPress)
                 {
                     holdButtonTime += Time.deltaTime;
                     Debug.Log(holdButtonTime);
@@ -151,13 +155,13 @@ namespace Button
                         isResetButtonPress = true;
                     }
                 }
-                else if(data[3]!="Reset"&&isResetButtonPress)
+                else if (data[2] != "Reset" && isResetButtonPress)
                 {
                     holdButtonTime = 0f;
                     isResetButtonPress = false;
                 }
                 playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
-                Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", camera: " + data[2]);
+                Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", Camera or Reset: " + data[2]);
             }
         }
         void ResetPlayerPositionBasedOnCount(int count)
