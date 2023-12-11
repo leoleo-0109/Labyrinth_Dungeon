@@ -78,7 +78,7 @@ namespace Button
         {
             var data = message.Split(
                 new string[] { "," }, System.StringSplitOptions.None); // カンマで分割する
-            // TODO:リセットボタンの文字列を取りたかったら長さを4に変更
+
             if (data.Length == 3)
             {
                 float ax = float.Parse(data[0]);
@@ -147,7 +147,7 @@ namespace Button
                     }
                 }
                 // リセットボタン
-                if(data[3]=="Reset"&&!isResetButtonPress)
+                if(data[2]=="Reset"&&!isResetButtonPress)
                 {
                     holdButtonTime += Time.deltaTime;
                     Debug.Log(holdButtonTime);
@@ -157,13 +157,13 @@ namespace Button
                         isResetButtonPress = true;
                     }
                 }
-                else if(data[3]!="Reset"&&isResetButtonPress)
+                else if(data[2]!="Reset"&&isResetButtonPress)
                 {
                     holdButtonTime = 0f;
                     isResetButtonPress = false;
                 }
                 playerObject.transform.Translate(ax * delta, 0.00f, az * delta);
-                //Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", camera: " + data[2]);
+                Debug.Log("ax: " + ax + ", az: " + az + ", ay: " + 0.00f + ", Camera or Reset: " + data[2]);
             }
         }
         void ResetPlayerPositionBasedOnCount(int count)

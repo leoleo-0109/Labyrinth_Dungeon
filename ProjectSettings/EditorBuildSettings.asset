@@ -16,14 +16,17 @@ EditorBuildSettings:
     guid: 4d2fae252a3454a4089a01b8ad07e5bf
   - enabled: 1
     path: Assets/Scenes/MasterScene/MainGameESP32Ver.unity
-    guid: dac15c5ca73c6384495e123e2f548aee
+    guid: 24a88a6d36c0afc47bf257ee52e94ec4
   - enabled: 1
     path: Assets/Scenes/MasterScene/MainGameNanoVer.unity
-    guid: 4ced7014fee7ff14790c9b425549505c
+    guid: e88649e8572ccf840a653048f6ffe89a
   - enabled: 1
     path: Assets/Scenes/MasterScene/MainGameKeyBoardVer.unity
     guid: 609c6502511c2fb47b6f4dba75f1d84a
   - enabled: 1
-    path: Assets/Scenes/MasterScene/ResultScene.unity
+    path: Assets/Scenes/MasterScene/GameClearScene.unity
     guid: b884bf340f6f4794187e34d239f79313
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/GameOverScene.unity
+    guid: 984da12de265092489581b5227d324d0
   m_configObjects: {}
