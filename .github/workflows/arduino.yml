@@ -1,0 +1,28 @@
+name: Arduino Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Arduino CLI
+      uses: arduino/setup-arduino-cli@v1
+
+    - name: Install BluetoothSerial dependency
+      run: |
+        arduino-cli lib install "BluetoothSerial"
+
+    - name: Install ESP32 board
+      run: |
+        arduino-cli core update-index
+        arduino-cli core install esp32:esp32
+
+    - name: Compile Sketch
+      run: |
+        arduino-cli compile --fqbn esp32:esp32:esp32 Arduino/ESP32_MPU6050
+
+
