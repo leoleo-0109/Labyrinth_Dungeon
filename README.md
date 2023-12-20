@@ -26,7 +26,7 @@
 - 
 ## メンバー情報
 
-プロジェクトのメンバー情報については、[こちらのWebサイト](http://xd679873.html.xdomain.jp/STAR/index.html)をご覧ください。
+プロジェクトのメンバー情報については、[こちらのWebサイト]([http://xd679873.html.xdomain.jp/STAR/index.html](https://leoleo-0109.github.io/TeamHomepage/))をご覧ください。
 
 ## 貢献方法
 
