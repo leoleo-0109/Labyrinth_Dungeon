@@ -19,5 +19,6 @@ public static class TagName
 	public const string Portal2 = "Portal2";
 	public const string Portal3 = "Portal3";
 	public const string Temp = "Temp";
+	public const string Fire = "Fire";
 
 }
