@@ -12,6 +12,7 @@ TagManager:
   - Portal2
   - Portal3
   - stop
+  - Fire
   layers:
   - Default
   - TransparentFX
