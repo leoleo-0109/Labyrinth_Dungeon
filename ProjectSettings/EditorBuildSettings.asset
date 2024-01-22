@@ -29,4 +29,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MasterScene/GameOverScene.unity
     guid: 984da12de265092489581b5227d324d0
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 33bd511714723004b971fbeac6a2678d, type: 2}

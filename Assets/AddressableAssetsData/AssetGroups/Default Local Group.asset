@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 4ba27b8416d10e9468872ce8b4a251d4
+  m_SerializeEntries:
+  - m_GUID: d37c7c3c43d591949b3754ffb7a74358
+    m_Address: stg1firetrap1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b75853ee19803444788b51019e6d7840
+    m_Address: Assets/Parameter/STAGE1_FIRE_TRAP_DATA2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f00578623c38f3544b1d1daba30346b7
+    m_Address: Assets/Parameter/STAGE1_FIRE_TRAP_DATA3.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3370cc43c50ad7b4981d482235f42101
+    m_Address: Assets/Parameter/STAGE1_FIRE_TRAP_DATA4.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 796bbcd8b82539d4c9bd01805a8b328c
+    m_Address: Assets/Parameter/STAGE1_FIRE_TRAP_DATA5.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 51e79a9b4430303428279842e10a8bbd
+    m_Address: Assets/Parameter/STAGE2_FIRE_TRAP_DATA1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8c3dae99dcdc40f48a16b5b0ae79b1f4
+    m_Address: Assets/Parameter/STAGE2_FIRE_TRAP_DATA2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9e327ce780d53dc46ac94816f0e26a67
+    m_Address: Assets/Parameter/STAGE2_FIRE_TRAP_DATA3.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cc232ce503685fc409cbe9910f673147
+    m_Address: Assets/Parameter/STAGE2_FIRE_TRAP_DATA4.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c4367d71d581cb447bae40a7464c340e
+    m_Address: Assets/Parameter/STAGE2_FIRE_TRAP_DATA5.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5aa3811f2d9edc7469c9ac3975c254e9
+    m_Address: Assets/Parameter/STAGE3_FIRE_TRAP_DATA1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b714b2504d82872428ad198790b6ea25
+    m_Address: Assets/Parameter/STAGE3_FIRE_TRAP_DATA2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e0705592e9c7aa7429eed43d06882fc4
+    m_Address: Assets/Parameter/STAGE3_FIRE_TRAP_DATA3.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9f867debb8375bb41ae46e1316f56c9d
+    m_Address: Assets/Parameter/STAGE3_FIRE_TRAP_DATA4.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4f8fbb6ae9e4fd741aa4c75f7b9a6728
+    m_Address: Assets/Parameter/STAGE3_FIRE_TRAP_DATA5.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 7ed620f0f90e3ec489248baaaa384704, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 51573867b48226647ba53deeb0b0cded, type: 2}
+    - {fileID: 11400000, guid: 6a23ffb6b19a1d043bdba3e48fa25f2a, type: 2}

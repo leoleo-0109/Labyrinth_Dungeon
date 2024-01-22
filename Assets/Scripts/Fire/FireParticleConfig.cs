@@ -1,19 +1,44 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UniRx;
+using UniRx.Triggers;
+using System;
+using System.Collections;
 
 public class FireParticleConfig : MonoBehaviour
 {
     public ParticleSystem particleSystem;
     private bool isParticleVisible = true;
-    [SerializeField] private float particleDisplayTime = 3f;
-    [SerializeField] private float particleHideTime = 3f;
-    private float particleToggleTime = 1f;
-    private float timer = 0f;
+    private float particleDisplayTime;
+    private float particleHideTime;
+    private float particleToggleTime;
+    private float rotationSpeed;
+    private float stopAngle;
+    private float timer = 0f; // 時間保持用使い捨て変数
 
-    private void Start()
+    [SerializeField] private string fireTrapDataAddress; // データアドレス
+
+    private async void Start()
     {
-        // パーティクルの表示をオンにする
+        // 指定されたアドレスのFireTrapDataを非同期でロード
+        FireTrapData data = await AddressLoader.AddressLoad<FireTrapData>(fireTrapDataAddress);
+
+        // ロードしたデータからパラメータを設定
+        particleDisplayTime = data.particleDisplayTime;
+        particleHideTime = data.particleHideTime;
+        particleToggleTime = data.particleToggleTime;
+        rotationSpeed = data.rotationSpeed;
+        stopAngle = data.stopAngle;
+
         ShowParticle();
+
+        // 定期的に回転させる
+        Observable.Interval(TimeSpan.FromSeconds(particleToggleTime))
+            .Subscribe(_ => RotateObject())
+            .AddTo(this);
     }
+
+
 
     private void Update()
     {
@@ -59,5 +84,16 @@ public class FireParticleConfig : MonoBehaviour
         // ゲームオーバー処理を行う
         Debug.Log("Game Over");
         Application.Quit();
+    }
+
+    private void RotateObject()
+    {
+        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+
+        if (Mathf.Abs(transform.rotation.eulerAngles.y - stopAngle) < 0.1f)
+        {
+            // 角度に応じて回転速度の方向を変更
+            rotationSpeed *= -1;
+        }
     }
 }
