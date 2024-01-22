@@ -29,15 +29,15 @@ public class FireParticleConfig : MonoBehaviour
     private async void Start()
     {
         // ディクショナリにメソッドを登録する
-        fireTrapDataMethods["stg1firetrap1"] = RotateObject;
+        fireTrapDataMethods["stg1firetrap1"] = RotateObjectContinuous;
         fireTrapDataMethods["stg1firetrap2"] = RotateObject;
-        fireTrapDataMethods["stg1firetrap3"] = SpinAround;
+        fireTrapDataMethods["stg1firetrap3"] = RotateObjectContinuous;
         fireTrapDataMethods["stg2firetrap1"] = RotateObject;
         fireTrapDataMethods["stg2firetrap2"] = RotateObject;
-        fireTrapDataMethods["stg2firetrap3"] = SpinAround;
+        fireTrapDataMethods["stg2firetrap3"] = RotateObjectContinuous;
         fireTrapDataMethods["stg3firetrap1"] = RotateObject;
         fireTrapDataMethods["stg3firetrap2"] = RotateObject;
-        fireTrapDataMethods["stg3firetrap3"] = SpinAround;
+        fireTrapDataMethods["stg3firetrap3"] = RotateObjectContinuous;
 
         // 指定されたアドレスのFireTrapDataを非同期でロード
         FireTrapData data = await AddressLoader.AddressLoad<FireTrapData>(fireTrapDataAddress);
@@ -156,32 +156,60 @@ public class FireParticleConfig : MonoBehaviour
             rotationPauseTimer += Time.deltaTime;
         }
     }
-
-
-
-    private void SpinAround()
+    // RotateObjectの逆回転版
+    private void RotateObjectInverse()
     {
-        // オブジェクトを回転させる
-        if (continuousRotation)
+        Transform parentTransform = transform.parent;
+        if (parentTransform == null) return;
+
+        // 初期のY軸回転角度を記録
+        if (!initialRotationRecorded)
         {
-            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+            initialYRotation = parentTransform.eulerAngles.y;
+            initialRotationRecorded = true;
+        }
+
+        // 現在のY軸の角度を取得し、初期角度からの差分を計算
+        float currentAngle = Mathf.DeltaAngle(initialYRotation, parentTransform.eulerAngles.y);
+
+        // 角度を正規化
+        if (rotateRight && currentAngle >= 90f)
+        {
+            rotateRight = false;
+            isRotating = false;
+            rotationPauseTimer = 0f;
+        }
+        else if (!rotateRight && currentAngle <= 0f)
+        {
+            rotateRight = true;
+            isRotating = false;
+            rotationPauseTimer = 0f;
+        }
+
+        // 回転停止時間が経過したら再度回転を開始
+        if (!isRotating && rotationPauseTimer >= rotationPauseTime)
+        {
+            isRotating = true;
+        }
+
+        // 回転方向に基づいて親オブジェクトを回転させる
+        if (isRotating)
+        {
+            float rotationDirection = rotateRight ? 1f : -1f;
+            parentTransform.Rotate(Vector3.up, rotationSpeed * rotationDirection * Time.deltaTime);
         }
         else
         {
-            if (rotateRight)
-            {
-                transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-            }
-            else
-            {
-                transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
-            }
-
-            // 90度回転したら回転方向を切り替える
-            if (Mathf.Abs(transform.rotation.eulerAngles.y) >= 90f)
-            {
-                rotateRight = !rotateRight;
-            }
+            rotationPauseTimer += Time.deltaTime;
         }
+    }
+
+    private void RotateObjectContinuous()
+    {
+        Transform parentTransform = transform.parent;
+        if (parentTransform == null) return;
+
+        // 親オブジェクトを一定の速度で永遠に回転させる
+        parentTransform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
     }
 }
