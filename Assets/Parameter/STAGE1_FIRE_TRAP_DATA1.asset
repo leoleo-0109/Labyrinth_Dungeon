@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a22bb4f1ebbf94ba9a74f574766d0e, type: 3}
   m_Name: STAGE1_FIRE_TRAP_DATA1
   m_EditorClassIdentifier: 
-  <rotationSpeed>k__BackingField: 41.71
-  <rotationDirection>k__BackingField: 1.9
-  <stopAngle>k__BackingField: 11
+  <rotationSpeed>k__BackingField: 10
   <particleDisplayTime>k__BackingField: 3
   <particleHideTime>k__BackingField: 3
   <particleToggleTime>k__BackingField: 1
+  <rotationPauseTime>k__BackingField: 4
