@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Datas/FireTrapData")]
 public class FireTrapData : ScriptableObject
 {
-    [field: SerializeField,Header("")] public float rotationSpeed { get; private set; }
+    [field: SerializeField,Header("")] public float rotationSpeed { get; private set; } // 90f
     [field: SerializeField,Header("")] public float rotationDirection { get; private set; }
     [field: SerializeField,Header("")] public float stopAngle { get; private set; }
     [field: SerializeField,Header("パーティクルの表示時間")] public float particleDisplayTime { get; private set;} // パーティクルの表示時間
