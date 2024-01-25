@@ -71,8 +71,8 @@ namespace BananaClient
                         addedScore *= 1.2f;
                     }
                     else if(scoreCountType1==3){
-                        //score *= 1.5f; // ここで総スコアに1.5倍を適用
-                        //addedScore = 0; // このアイテムによる追加スコアは0にする
+                        score *= 1.5f; // ここで総スコアに1.5倍を適用
+                        addedScore = 0; // このアイテムによる追加スコアは0にする
                         addedScore *= 1.5f;
                         scoreCountType1 = 0; //リセット
                     }
@@ -83,8 +83,8 @@ namespace BananaClient
                         addedScore *= 1.2f;
                     }
                     else if(scoreCountType2==3){
-                        //score *= 1.5f; // ここで総スコアに1.5倍を適用
-                        //addedScore = 0; // このアイテムによる追加スコアは0にする
+                        score *= 1.5f; // ここで総スコアに1.5倍を適用
+                        addedScore = 0; // このアイテムによる追加スコアは0にする
                         addedScore *= 1.5f;
                         scoreCountType2 = 0; //リセット
                     }
@@ -95,8 +95,8 @@ namespace BananaClient
                         addedScore *= 1.2f;
                     }
                     else if(scoreCountType3==3){
-                        //score *= 1.5f; // ここで総スコアに1.5倍を適用
-                        //addedScore = 0; // このアイテムによる追加スコアは0にする
+                        score *= 1.5f; // ここで総スコアに1.5倍を適用
+                        addedScore = 0; // このアイテムによる追加スコアは0にする
                         addedScore *= 1.5f;
                         scoreCountType3 = 0; //リセット
                     }
