@@ -15,6 +15,9 @@ public class ScoreView : MonoBehaviour
     // スコアアイテムカウント表示用テキスト
     [SerializeField] private TextMeshProUGUI scoreItemCountText;
 
+    // コンボ表示用テキスト
+    [SerializeField] private TextMeshProUGUI comboText;
+
     /// <summary>
     /// スコア表示メソッド
     /// </summary>
@@ -32,5 +35,14 @@ public class ScoreView : MonoBehaviour
     public void DisplayScoreItemCount(int count, int maxCount)
     {
         scoreItemCountText.text = count.ToString() + "/" + maxCount; // 現在のカウントと最大カウントをテキストに設定
+    }
+
+    /// <summary>
+    /// コンボ表示メソッド
+    /// </summary>
+    /// <param name="comboCount">表示するコンボ数</param>
+    public void DisplayCombo(int comboCount)
+    {
+        comboText.text = comboCount.ToString(); // コンボ数をテキストに設定
     }
 }

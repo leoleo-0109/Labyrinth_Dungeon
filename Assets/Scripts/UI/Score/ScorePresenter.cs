@@ -25,16 +25,47 @@ public class ScorePresenter : MonoBehaviour
     private int scoreCountType3 = 0;
     [SerializeField] private ScoreView scoreView; // スコア
     [SerializeField] private ScoreView scoreItemView; // スコアアイテム
+    [SerializeField] private ScoreView comboView; // コンボ表示用のScoreView
     public float score = 0; // スコアがこいつに保存されてる
     public ReplaySubject<Unit> itemCompleted = new ReplaySubject<Unit>(1);
     CompositeDisposable disposables = new CompositeDisposable();
     void Start()
     {
+        // TimerModelのインスタンスをすべて取得し、それぞれのイベントを購読
+        foreach (var timerModel in FindObjectsOfType<TimerModel>())
+        {
+            timerModel.TimerItemObserver.Subscribe(_ => {
+                ResetCombo();
+            }).AddTo(disposables);
+        }
+
+        // KeyModelのインスタンスをすべて取得し、それぞれのイベントを購読
+        foreach (var keyModel in FindObjectsOfType<KeyModel>())
+        {
+            keyModel.KeyCountAdd += () => {
+                ResetCombo();
+            };
+        }
         ChangeMaxCount(0);
         UpdateScoreItemCount();
         StageChangeObserver();
         AddScoreEventTrigger();
         UpdateScore();
+    }
+
+    // コンボをリセットするメソッド
+    private void ResetCombo()
+    {
+        // コンボ関連のカウントをリセット
+        scoreCountType1 = 0;
+        scoreCountType2 = 0;
+        scoreCountType3 = 0;
+        UpdateComboUI();
+    }
+    private void UpdateComboUI()
+    {
+        int totalCombo = scoreCountType1 + scoreCountType2 + scoreCountType3; // 総コンボ数を計算
+        comboView.DisplayCombo(totalCombo); // コンボ数を表示
     }
 
     /// <summary>
@@ -121,6 +152,7 @@ public class ScorePresenter : MonoBehaviour
         ExtraScore(); // TODO:クリア時に呼び出すほうがいいかも
         UpdateScoreItemCount();
         UpdateScore();
+        UpdateComboUI();
     }
     private void StageChangeObserver()
     {
