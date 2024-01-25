@@ -1,29 +1,44 @@
 using UnityEngine;
 using TMPro;
 
-
+/// <summary>
+/// ResultViewクラス
+/// </summary>
 public class ResultView : MonoBehaviour
 {
-    // スコアを表示するためのText
+    // スコア表示用テキスト
     [SerializeField] private TextMeshProUGUI scoreText;
 
-    // タイムを表示するためのText
+    // タイム表示用テキスト
     [SerializeField] private TextMeshProUGUI timeText;
-    // トータルスコアを表示するためのText
+
+    // トータルスコア表示用テキスト
     [SerializeField] private TextMeshProUGUI totalScoreText;
+
+    /// <summary>
+    /// スコア表示メソッド
+    /// </summary>
     public void CurrentScoreView(float score)
     {
-        scoreText.text = "Score: " + score.ToString("F0");
+        scoreText.text = "Score: " + score.ToString("F0"); // スコアをテキストに設定
     }
+
+    /// <summary>
+    /// タイム表示メソッド
+    /// </summary>
     public void CurrentTimeView(int time)
     {
-        timeText.text = "Time: " + time.ToString();
+        timeText.text = "Time: " + time.ToString(); // タイムをテキストに設定
     }
+
+    /// <summary>
+    /// トータルスコア表示メソッド
+    /// </summary>
     public void TotalScoreView(float score, int time)
     {
-        int currentTime = time * 100; // 整数のタイムに×100
-        int currentScore = Mathf.RoundToInt(score);  // scoreを四捨五入してintに変換
-        int totalScore = currentScore + currentTime; // スコアとタイムを合わせたトータルスコアの作成
-        totalScoreText.text = "TotalScore: " + totalScore.ToString();
+        int currentTime = time * 100; // タイムを100倍にする
+        int currentScore = Mathf.RoundToInt(score);  // スコアを四捨五入して整数に変換
+        int totalScore = currentScore + currentTime; // スコアとタイムを合計してトータルスコアを作成
+        totalScoreText.text = "TotalScore: " + totalScore.ToString(); // トータルスコアをテキストに設定
     }
 }

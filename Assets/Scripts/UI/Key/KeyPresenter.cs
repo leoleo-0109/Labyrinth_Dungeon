@@ -4,13 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-
+/// <summary>
+/// KeyPresenterクラスは、キーの表示を制御する
+/// </summary>
 public class KeyPresenter : MonoBehaviour
 {
     [SerializeField] private StageTransition[] warpEvent;
     [SerializeField] private KeyModel[] keyModels;
     [SerializeField] private KeyView keyView;
     private int keyCount = 0;
+
+    /// <summary>
+    /// オブジェクトが有効になったときに呼び出される
+    /// </summary>
     void Start()
     {
         RemovedKeyCountEvent();
@@ -20,9 +26,12 @@ public class KeyPresenter : MonoBehaviour
         }
         UpdateKeyCount();
     }
+
+    /// <summary>
+    /// ワープイベントが発生したらkeyCountを0にするメソッド
+    /// </summary>
     private void RemovedKeyCountEvent()
     {
-        // ワープイベントが発生したらkeyCountを0にする
         // ワープポイントの数だけ処理する
         foreach (StageTransition eventInstance in warpEvent)
         {
@@ -35,12 +44,20 @@ public class KeyPresenter : MonoBehaviour
                 .AddTo(this);
         }
     }
+
+    /// <summary>
+    /// キーカウントを増やすメソッド
+    /// </summary>
     private void AddKeyCount()
     {
         keyCount++;
         Debug.Log(keyCount);
         UpdateKeyCount();
     }
+
+    /// <summary>
+    /// キーカウントを更新するメソッド
+    /// </summary>
     private void UpdateKeyCount()
     {
         keyView.KeyCountDisplay(keyCount);

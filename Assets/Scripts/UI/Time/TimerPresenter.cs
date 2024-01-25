@@ -3,7 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UniRx;
 
-
+/// <summary>
+/// TimerPresenterクラス
+/// </summary>
 public class TimerPresenter : MonoBehaviour
 {
     [SerializeField,Header("ワープする回数分長さを変えて")] private EventObserver[] eventObserver; // テレポートイベントを呼びたい回数だけインスペクターで配列の長さを変えて
@@ -24,6 +26,10 @@ public class TimerPresenter : MonoBehaviour
     [SerializeField,Header("アイテムを取った時に追加するタイム")] private float addTimeElement = 0;
     public int keepNowTime;
     CompositeDisposable disposables = new CompositeDisposable();
+
+    /// <summary>
+    /// 初期化処理
+    /// </summary>
     private void Start()
     {
         ChangeMaxCount(0); // Stage1は0
@@ -35,6 +41,10 @@ public class TimerPresenter : MonoBehaviour
         TimeLimit();
         AddTime();
     }
+
+    /// <summary>
+    /// 時間制限処理
+    /// </summary>
     private void TimeLimit()
     {
         Observable.EveryUpdate()
@@ -48,6 +58,10 @@ public class TimerPresenter : MonoBehaviour
                 timerView.DisplayTime(timer.RemainingTime.Value);
             }).AddTo(disposables);
     }
+
+    /// <summary>
+    /// 時間追加処理
+    /// </summary>
     public void AddTime()
     {
         // モデル回数分だけ処理:Model1
@@ -64,7 +78,10 @@ public class TimerPresenter : MonoBehaviour
             }).AddTo(disposables);
         }
     }
-    // ランキング表示時の追加タイムスコアの処理
+
+    /// <summary>
+    /// ランキング表示時の追加タイムスコアの処理
+    /// </summary>
     public void AppendTime()
     {
         // アイテムが消えた回数と最大アイテム数をif条件で監視して特定する
@@ -75,6 +92,10 @@ public class TimerPresenter : MonoBehaviour
             timer.IncrementTime(TimeSpan.FromSeconds(remainingTimeInSeconds * magnification));
         }
     }
+
+    /// <summary>
+    /// ワープイベント監視処理
+    /// </summary>
     private void WarpEventObserver()
     {
         // ワープイベントが発生したらtimeItemCountを0にする
@@ -92,13 +113,19 @@ public class TimerPresenter : MonoBehaviour
                 .AddTo(disposables);
         }
     }
-    // アイテムを取得した回数を記録するメソッド
+
+    /// <summary>
+    /// アイテム取得回数記録処理
+    /// </summary>
     private void AddTimeItemCount()
     {
         timeItemCount++;
         UpdateTimeItemCount();
     }
-    // stageChangeCountの値を受け取るメソッド
+
+    /// <summary>
+    /// stageChangeCountの値を受け取る処理
+    /// </summary>
     private void ChangeMaxCount(int stageNum)
     {
         switch(stageNum)
@@ -116,18 +143,26 @@ public class TimerPresenter : MonoBehaviour
                 break;
         }
     }
-    // テキストにアイテムを取得した回数を反映
+
+    /// <summary>
+    /// テキストにアイテム取得回数を反映する処理
+    /// </summary>
     private void UpdateTimeItemCount()
     {
         itemView.DisplayTimeItemCount(timeItemCount,itemCurrentMaxCount);// 引数1:アイテムの取得数,引数2:現在のステージのアイテム取得上限
     }
 
-    // 必要な場所で呼び出す
+    /// <summary>
+    /// カウントダウン開始処理
+    /// </summary>
     public void StartCountdown()
     {
         StartCoroutine(CountdownCoroutine());
     }
 
+    /// <summary>
+    /// カウントダウンコルーチン
+    /// </summary>
     private IEnumerator CountdownCoroutine()
     {
         // 3,2,1のカウントダウン処理
@@ -139,11 +174,19 @@ public class TimerPresenter : MonoBehaviour
         }
         Debug.Log("カウントダウン終了");
     }
+
+    /// <summary>
+    /// 残り時間を保持する処理
+    /// </summary>
     public void OnKeepTime()
     {
         int remainingTimeInSeconds = Mathf.RoundToInt((float)timer.RemainingTime.Value.TotalSeconds);
         keepNowTime = remainingTimeInSeconds;
     }
+
+    /// <summary>
+    /// オブジェクトが非アクティブになったときの処理
+    /// </summary>
     void OnDisable()
     {
         disposables.Dispose();

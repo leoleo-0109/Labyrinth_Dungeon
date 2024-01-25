@@ -2,7 +2,9 @@ using System;
 using UniRx;
 using UnityEngine;
 
-
+/// <summary>
+/// ResultPresenterクラス
+/// </summary>
 public class ResultPresenter : MonoBehaviour
 {
     [SerializeField] private ResultView timeResultView;
@@ -14,6 +16,9 @@ public class ResultPresenter : MonoBehaviour
     private IDisposable subscription;
     private bool isSubscribed = false;
 
+    /// <summary>
+    /// 購読を開始するメソッド
+    /// </summary>
     public void StartSubscription()
     {
         if (isSubscribed) return;
@@ -21,20 +26,27 @@ public class ResultPresenter : MonoBehaviour
             .Subscribe(_ =>
             {
                 Debug.Log("Subscribe");
-                extraScore += 100;
-                isSubscribed = true;
+                extraScore += 100; // extraScoreに100を加算
+                isSubscribed = true; // 購読状態をtrueに設定
             });
     }
+
+    /// <summary>
+    /// オブジェクトが有効になったときに呼び出されるメソッド
+    /// </summary>
     private void OnEnable()
     {
-        timeResultView.CurrentTimeView(timerPresenter.keepNowTime);
-        scoreResultView.CurrentScoreView(scorePresenter.score + extraScore);
-        totalScoreResultView.TotalScoreView(scorePresenter.score, timerPresenter.keepNowTime);
+        timeResultView.CurrentTimeView(timerPresenter.keepNowTime); // 現在の時間を表示
+        scoreResultView.CurrentScoreView(scorePresenter.score + extraScore); // 現在のスコアを表示
+        totalScoreResultView.TotalScoreView(scorePresenter.score, timerPresenter.keepNowTime); // 合計スコアを表示
     }
+
+    /// <summary>
+    /// オブジェクトが無効になったときに呼び出されるメソッド
+    /// </summary>
     private void OnDisable()
     {
-        subscription?.Dispose();
-        isSubscribed = false;
+        subscription?.Dispose(); // 購読を解除
+        isSubscribed = false; // 購読状態をfalseに設定
     }
 }
-

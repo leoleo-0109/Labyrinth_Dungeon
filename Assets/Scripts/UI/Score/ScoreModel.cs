@@ -5,18 +5,27 @@ using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
 
-
+/// <summary>
+/// ScoreModelクラス
+/// </summary>
 public class ScoreModel : MonoBehaviour
 {
+    // イベントトリガーのSubject
     private Subject<Unit> onEventTrigger = new Subject<Unit>();
-    public IObservable<Unit> OnEventTrigger => onEventTrigger; // onEventTriggerで値を発行しOnEventTriggerでその値を受け取りSubscribeでOnEventTriggerの値を購読する、今回はUnitなので値なし
+
+    // イベントトリガーのObservable
+    public IObservable<Unit> OnEventTrigger => onEventTrigger;
+
+    /// <summary>
+    /// 衝突時に呼ばれるメソッド
+    /// </summary>
     void OnCollisionEnter(Collision other)
     {
+        // 衝突したオブジェクトがプレイヤーなら
         if (other.gameObject.CompareTag(TagName.Player))
         {
             onEventTrigger.OnNext(Unit.Default); // イベント発行
-            gameObject.SetActive(false);
+            gameObject.SetActive(false); // オブジェクトを非アクティブにする
         }
     }
 }
-

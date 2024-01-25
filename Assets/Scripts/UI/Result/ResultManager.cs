@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// ResultManagerクラス
+/// </summary>
 public class ResultManager : MonoBehaviour
 {
     [SerializeField]
-    Canvas canvas;
+    Canvas canvas; // 結果を表示するキャンバス
+
     [SerializeField]
-    ResultPresenter resultPresenter;
+    ResultPresenter resultPresenter; // 結果を表示するプレゼンター
+
+    /// <summary>
+    /// 結果を表示するメソッド
+    /// </summary>
     public void ShowResult()
     {
-        resultPresenter.StartSubscription();
-        canvas.gameObject.SetActive(true);
+        resultPresenter.StartSubscription(); // プレゼンターの購読を開始
+        canvas.gameObject.SetActive(true); // キャンバスをアクティブにする
     }
 }
-

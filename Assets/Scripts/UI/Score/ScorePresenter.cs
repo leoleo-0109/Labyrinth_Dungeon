@@ -37,20 +37,26 @@ public class ScorePresenter : MonoBehaviour
         UpdateScore();
     }
 
+    /// <summary>
+    /// スコアイベントトリガーを追加
+    /// </summary>
     private void AddScoreEventTrigger()
     {
+        // Type1のスコアモデルに対してイベントトリガーを追加
         foreach (ScoreModel scoreModelType1 in scoreModelsType1)
         {
             scoreModelType1.OnEventTrigger.Subscribe(_ => {
                 AddScore(1);
             }).AddTo(disposables);
         }
+        // Type2のスコアモデルに対してイベントトリガーを追加
         foreach (ScoreModel scoreModelType2 in scoreModelsType2)
         {
             scoreModelType2.OnEventTrigger.Subscribe(_ => {
                 AddScore(2);
             }).AddTo(disposables);
         }
+        // Type3のスコアモデルに対してイベントトリガーを追加
         foreach (ScoreModel scoreModelType3 in scoreModelsType3)
         {
             scoreModelType3.OnEventTrigger.Subscribe(_ => {
@@ -58,6 +64,11 @@ public class ScorePresenter : MonoBehaviour
             }).AddTo(disposables);
         }
     }
+
+    /// <summary>
+    /// スコアを追加
+    /// </summary>
+    /// <param name="scoreType">スコアのタイプ</param>
     private void AddScore(int scoreType)
     {
         float addedScore = 1000f; // スコア加算量を固定

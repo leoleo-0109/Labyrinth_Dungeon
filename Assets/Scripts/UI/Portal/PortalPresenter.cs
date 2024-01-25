@@ -4,11 +4,18 @@ using UnityEngine;
 using UniRx;
 using System;
 
+/// <summary>
+/// PortalPresenterクラス
+/// </summary>
 public class PortalPresenter : MonoBehaviour
 {
     private int RemoveCount{ get; set; }
     [SerializeField,Header("ポータルの表示に必要な鍵を設定")] private PortalModel[] portalModels;
     [SerializeField,Header("表示させたいポータルを設定")] private PortalView[] portalViews;
+
+    /// <summary>
+    /// Startメソッド
+    /// </summary>
     void Start()
     {
         foreach (PortalModel portalModel in portalModels)
@@ -17,9 +24,13 @@ public class PortalPresenter : MonoBehaviour
         }
         foreach (PortalView portalView in portalViews)
         {
-            portalView.gameObject.SetActive(false); // 初期状態ですべてのPortalViewを非アクティブにする
+            portalView.gameObject.SetActive(false); // 初期状態でPortalViewを非アクティブにする
         }
     }
+
+    /// <summary>
+    /// RemoveCountを増やすメソッド
+    /// </summary>
     public void IncrementRemoveCount()
     {
         RemoveCount++;
@@ -29,7 +40,7 @@ public class PortalPresenter : MonoBehaviour
         }
         if (RemoveCount == 6)
         {
-            portalViews[1].gameObject.SetActive(true); // ステージ3のPortalViewをアクティブにする
+            portalViews[1].gameObject.SetActive(true); // ステージ2のPortalViewをアクティブにする
         }
         if(RemoveCount == 9)
         {
@@ -37,4 +48,3 @@ public class PortalPresenter : MonoBehaviour
         }
     }
 }
-
