@@ -12,7 +12,6 @@ public class FireParticleConfig : MonoBehaviour
     private bool isParticleVisible = true;
     private float particleDisplayTime;
     private float particleHideTime;
-    private float particleToggleTime;
     private float rotationSpeed;
     private float rotationPauseTime; // 回転を停止する時間
     private float timer = 0f; // 時間保持用使い捨て変数
@@ -29,15 +28,23 @@ public class FireParticleConfig : MonoBehaviour
     private async void Start()
     {
         // ディクショナリにメソッドを登録する
-        fireTrapDataMethods["stg1firetrap1"] = RotateObjectContinuous;
-        fireTrapDataMethods["stg1firetrap2"] = RotateObject;
-        fireTrapDataMethods["stg1firetrap3"] = RotateObjectContinuous;
-        fireTrapDataMethods["stg2firetrap1"] = RotateObject;
-        fireTrapDataMethods["stg2firetrap2"] = RotateObject;
+        //fireTrapDataMethods["stg1firetrap1"] = RotateObjectContinuous;
+        //fireTrapDataMethods["stg1firetrap2"] = RotateObject;
+        //fireTrapDataMethods["stg1firetrap3"] = RotateObjectContinuous;
+        //fireTrapDataMethods["stg1firetrap4"] = RotateObject;
+        //fireTrapDataMethods["stg1firetrap5"] = RotateObjectContinuous;
+
+        //fireTrapDataMethods["stg2firetrap1"] = RotateObject;
+        //fireTrapDataMethods["stg2firetrap2"] = RotateObject;
         fireTrapDataMethods["stg2firetrap3"] = RotateObjectContinuous;
-        fireTrapDataMethods["stg3firetrap1"] = RotateObject;
-        fireTrapDataMethods["stg3firetrap2"] = RotateObject;
-        fireTrapDataMethods["stg3firetrap3"] = RotateObjectContinuous;
+        //fireTrapDataMethods["stg2firetrap4"] = RotateObject;
+        fireTrapDataMethods["stg2firetrap5"] = RotateObjectInverse;
+
+        //fireTrapDataMethods["stg3firetrap1"] = RotateObject;
+        //fireTrapDataMethods["stg3firetrap2"] = RotateObject;
+        fireTrapDataMethods["stg3firetrap3"] = RotateObjectInverse;
+        //fireTrapDataMethods["stg3firetrap4"] = RotateObject;
+        //fireTrapDataMethods["stg3firetrap5"] = RotateObjectContinuous;
 
         // 指定されたアドレスのFireTrapDataを非同期でロード
         FireTrapData data = await AddressLoader.AddressLoad<FireTrapData>(fireTrapDataAddress);
@@ -45,7 +52,6 @@ public class FireParticleConfig : MonoBehaviour
         // ロードしたデータからパラメータを設定
         particleDisplayTime = data.particleDisplayTime;
         particleHideTime = data.particleHideTime;
-        particleToggleTime = data.particleToggleTime;
         rotationSpeed = data.rotationSpeed;
         rotationPauseTime = data.rotationPauseTime;
 
