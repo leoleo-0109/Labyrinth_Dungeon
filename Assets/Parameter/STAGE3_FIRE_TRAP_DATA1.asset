@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: STAGE3_FIRE_TRAP_DATA1
   m_EditorClassIdentifier: 
   <rotationSpeed>k__BackingField: 0
-  <rotationDirection>k__BackingField: 0
-  <stopAngle>k__BackingField: 0
-  <particleDisplayTime>k__BackingField: 0
-  <particleHideTime>k__BackingField: 0
-  <particleToggleTime>k__BackingField: 0
+  <particleDisplayTime>k__BackingField: 2
+  <particleHideTime>k__BackingField: 2
+  <rotationPauseTime>k__BackingField: 0
