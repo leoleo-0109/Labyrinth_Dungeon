@@ -22,59 +22,59 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: b75853ee19803444788b51019e6d7840
-    m_Address: Assets/Parameter/STAGE1_FIRE_TRAP_DATA2.asset
+    m_Address: stg1firetrap2
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: f00578623c38f3544b1d1daba30346b7
-    m_Address: Assets/Parameter/STAGE1_FIRE_TRAP_DATA3.asset
+    m_Address: stg1firetrap3
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 3370cc43c50ad7b4981d482235f42101
-    m_Address: Assets/Parameter/STAGE1_FIRE_TRAP_DATA4.asset
+    m_Address: stg1firetrap4
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 796bbcd8b82539d4c9bd01805a8b328c
-    m_Address: Assets/Parameter/STAGE1_FIRE_TRAP_DATA5.asset
+    m_Address: stg1firetrap5
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 51e79a9b4430303428279842e10a8bbd
-    m_Address: Assets/Parameter/STAGE2_FIRE_TRAP_DATA1.asset
+    m_Address: stg2firetrap1
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 8c3dae99dcdc40f48a16b5b0ae79b1f4
-    m_Address: Assets/Parameter/STAGE2_FIRE_TRAP_DATA2.asset
+    m_Address: stg2firetrap2
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 9e327ce780d53dc46ac94816f0e26a67
-    m_Address: Assets/Parameter/STAGE2_FIRE_TRAP_DATA3.asset
+    m_Address: stg2firetrap3
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: cc232ce503685fc409cbe9910f673147
-    m_Address: Assets/Parameter/STAGE2_FIRE_TRAP_DATA4.asset
+    m_Address: stg2firetrap4
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: c4367d71d581cb447bae40a7464c340e
-    m_Address: Assets/Parameter/STAGE2_FIRE_TRAP_DATA5.asset
+    m_Address: stg2firetrap5
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 5aa3811f2d9edc7469c9ac3975c254e9
-    m_Address: Assets/Parameter/STAGE3_FIRE_TRAP_DATA1.asset
+    m_Address: stg3firetrap1
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: b714b2504d82872428ad198790b6ea25
-    m_Address: Assets/Parameter/STAGE3_FIRE_TRAP_DATA2.asset
+    m_Address: stg3firetrap2
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: e0705592e9c7aa7429eed43d06882fc4
-    m_Address: Assets/Parameter/STAGE3_FIRE_TRAP_DATA3.asset
+    m_Address: stg3firetrap3
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 9f867debb8375bb41ae46e1316f56c9d
-    m_Address: Assets/Parameter/STAGE3_FIRE_TRAP_DATA4.asset
+    m_Address: stg3firetrap4
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 4f8fbb6ae9e4fd741aa4c75f7b9a6728
-    m_Address: Assets/Parameter/STAGE3_FIRE_TRAP_DATA5.asset
+    m_Address: stg3firetrap5
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
