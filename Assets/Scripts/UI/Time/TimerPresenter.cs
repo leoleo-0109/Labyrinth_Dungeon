@@ -74,7 +74,7 @@ public class TimerPresenter : MonoBehaviour
                 timer.IncrementTime(TimeSpan.FromSeconds(addTimeElement));
                 timeItemRemovedCount++; // 消えた回数をインクリメント
                 AddTimeItemCount(); // タイムアイテムが取られた回数を記録するためのメソッド
-                AppendTime(); // アイテムを取るたびに関数が呼ばれる
+                //AppendTime(); // アイテムを取るたびに関数が呼ばれる
             }).AddTo(disposables);
         }
     }
