@@ -11,7 +11,7 @@ public class EventObserver : MonoBehaviour
     public IObservable<Unit> OnStageTransitionTriggered => onStageTransitionTriggered; // ステージが変更されたかどうかを監視するオブザーバー
 
     private Subject<Unit> onTimeItemCountResetEvent = new Subject<Unit>();
-    public IObservable<Unit> OnTimeItemCountResetEvent => onScoreItemCountResetEvent;
+    public IObservable<Unit> OnTimeItemCountResetEvent => onTimeItemCountResetEvent;
 
     private Subject<Unit> onScoreItemCountResetEvent = new Subject<Unit>();
     public IObservable<Unit> OnScoreItemCountResetEvent => onScoreItemCountResetEvent;
