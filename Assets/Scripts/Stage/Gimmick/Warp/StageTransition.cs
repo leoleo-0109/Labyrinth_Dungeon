@@ -39,6 +39,9 @@ public class StageTransition : MonoBehaviour
             }
             else
             {
+                onWarpEventTrigger.OnNext(Unit.Default);
+                eventObserver.OnTimeItemCountResetTrigger(); // ワープ発生時にタイムアイテムのカウントをリセットするイベントを発行
+                eventObserver.OnScoreItemCountResetTrigger(); // ワープ発生時にタイムアイテムのカウントをリセットするイベントを発行
                 // ストーリーモードの処理（次のステージへ遷移）
                 WarpToNextStage();
             }
