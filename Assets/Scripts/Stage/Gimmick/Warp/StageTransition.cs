@@ -6,44 +6,69 @@ using UnityEngine.SceneManagement;
 
 public class StageTransition : MonoBehaviour
 {
-    [SerializeField] private TimerPresenter timerPresenter;
-    [SerializeField] private ResultManager resultManager;
     [SerializeField] private EventObserver eventObserver;
     private Subject<Unit> onWarpEventTrigger = new Subject<Unit>();
     public IObservable<Unit> OnWarpEventTrigger => onWarpEventTrigger;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject stage;
     private bool eventTriggered = false;
-    private static int stageNumber = 0; // stageNumberは全てのStageTransitionインスタンス間で共有される
+    private static int stageNumber = 0;
+
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.CompareTag(TagName.Player))
+        if (other.gameObject.CompareTag(TagName.Player))
         {
-            // クリア処理
-            if (stageNumber == 2)
-            {
-                SceneManager.LoadScene("RankingScene");
-                return; // ワープ処理をスキップするためにここでメソッドを終了
-            }
-            // ワープ処理
             if (EventFlagHolder.eventFlag && !eventTriggered)
             {
-                onWarpEventTrigger.OnNext(Unit.Default);
-                eventObserver.OnTimeItemCountResetTrigger(); // ワープ発生時にタイムアイテムのカウントをリセットするイベントを発行
-                eventObserver.OnScoreItemCountResetTrigger(); // ワープ発生時にタイムアイテムのカウントをリセットするイベントを発行
-                Warp();
+                // ゲームモードに応じた処理
+                HandleGameMode();
+
                 eventTriggered = true;
                 EventFlagHolder.eventFlag = false;
             }
         }
     }
-    public void Warp()
+
+    private void HandleGameMode()
     {
-        Vector3 pos = new Vector3(0,1.6f,0);
+        if (GameModeManager.CurrentGameMode == GameMode.Story)
+        {
+            if (stageNumber == 2) // 最終ステージをクリアした場合
+            {
+                LoadRankingScene();
+            }
+            else
+            {
+                // ストーリーモードの処理（次のステージへ遷移）
+                WarpToNextStage();
+            }
+        }
+        else
+        {
+            // 個別ステージプレイの処理（ステージクリア）
+            CompleteSingleStage();
+        }
+    }
+
+    private void WarpToNextStage()
+    {
+        // 次のステージへのワープ処理
+        Vector3 pos = new Vector3(0, 1.6f, 0);
         Vector3 stagePortalPosition = stage.transform.position;
         stagePortalPosition.y += pos.y;
         player.transform.position = stagePortalPosition;
         stageNumber++;
     }
-}
 
+    private void CompleteSingleStage()
+    {
+        // 個別ステージのクリア処理
+        LoadRankingScene();
+    }
+
+    private void LoadRankingScene()
+    {
+        string rankingSceneName = "RankingScene_" + DeviceModeManager.CurrentDeviceMode.ToString();
+        SceneManager.LoadScene(rankingSceneName);
+    }
+}

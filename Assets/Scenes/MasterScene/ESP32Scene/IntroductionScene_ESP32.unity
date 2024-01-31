@@ -528,7 +528,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1725124883}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: OnClickReturnModeSelectButton_ESP32
+        m_MethodName: OnClickReturnModeSelectButton_KeyBoard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -661,7 +661,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1725124883}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: OnClickStoryModeGameButton_ESP32
+        m_MethodName: OnClickStoryModeGameButton_KeyBoard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
