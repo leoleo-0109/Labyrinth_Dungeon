@@ -24,6 +24,7 @@ public class FireParticleConfig : MonoBehaviour
     private bool continuousRotation = false; // 連続回転フラグ
     private Dictionary<string, Action> fireTrapDataMethods = new Dictionary<string, Action>();
     [SerializeField] private string fireTrapDataAddress; // データアドレス
+    [SerializeField] private GameObject gameOverCanvas;
 
     private async void Start()
     {
@@ -113,6 +114,7 @@ public class FireParticleConfig : MonoBehaviour
     {
         // ゲームオーバー処理を行う
         Debug.Log("Game Over");
+        gameOverCanvas.gameObject.SetActive(true);
         Application.Quit();
     }
 
