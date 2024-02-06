@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11744,6 +11744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 376187038}
   fireTrapDataAddress: stg3firetrap2
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &423651242
 GameObject:
   m_ObjectHideFlags: 0
@@ -11845,6 +11846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 451892178}
   fireTrapDataAddress: stg3firetrap4
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &495773118
 GameObject:
   m_ObjectHideFlags: 0
@@ -27598,6 +27600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 711621920}
   fireTrapDataAddress: stg3firetrap3
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &768210880
 GameObject:
   m_ObjectHideFlags: 0
@@ -28527,6 +28530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 965881870}
   fireTrapDataAddress: stg3firetrap1
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &978820338 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8439059248870106379, guid: 93c7e77ba4493bf4da18135867969173, type: 3}
@@ -34529,7 +34533,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-11624
+  m_Name: pb_Mesh-38902
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -46646,6 +46650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 1914752542}
   fireTrapDataAddress: stg3firetrap5
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &1947456318
 GameObject:
   m_ObjectHideFlags: 0

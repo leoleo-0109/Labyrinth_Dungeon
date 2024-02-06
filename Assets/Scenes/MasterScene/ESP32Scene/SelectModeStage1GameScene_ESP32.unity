@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -694,6 +694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 120252512}
   fireTrapDataAddress: stg1firetrap1
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &166388151 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1634767862067424, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
@@ -718,6 +719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 166388154}
   fireTrapDataAddress: stg1firetrap4
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &174484503
 GameObject:
   m_ObjectHideFlags: 0
@@ -23140,6 +23142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 934322739}
   fireTrapDataAddress: stg1firetrap2
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &935559089
 GameObject:
   m_ObjectHideFlags: 0
@@ -33566,6 +33569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 1171182087}
   fireTrapDataAddress: stg1firetrap5
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &1209095009
 GameObject:
   m_ObjectHideFlags: 0
@@ -44373,6 +44377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 1533268741}
   fireTrapDataAddress: stg1firetrap3
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &1600118864
 GameObject:
   m_ObjectHideFlags: 0

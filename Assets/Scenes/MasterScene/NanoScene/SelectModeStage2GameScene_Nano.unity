@@ -622,6 +622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 89335685}
   fireTrapDataAddress: stg2firetrap2
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1001 &102690082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6724,6 +6725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 336932464}
   fireTrapDataAddress: stg2firetrap3
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &353441098
 GameObject:
   m_ObjectHideFlags: 0
@@ -23534,6 +23536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 908578557}
   fireTrapDataAddress: stg2firetrap5
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &922668202
 GameObject:
   m_ObjectHideFlags: 0
@@ -28370,6 +28373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 933461178}
   fireTrapDataAddress: stg2firetrap1
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &935559089
 GameObject:
   m_ObjectHideFlags: 0
@@ -34079,6 +34083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 1118159547}
   fireTrapDataAddress: stg2firetrap4
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1001 &1154352785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39970,7 +39975,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-108024
+  m_Name: pb_Mesh-42790
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

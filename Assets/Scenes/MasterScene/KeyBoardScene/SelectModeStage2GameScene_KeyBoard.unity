@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -622,6 +622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 89335685}
   fireTrapDataAddress: stg2firetrap2
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1001 &102690082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6724,6 +6725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 336932464}
   fireTrapDataAddress: stg2firetrap3
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &353441098
 GameObject:
   m_ObjectHideFlags: 0
@@ -23534,6 +23536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 908578557}
   fireTrapDataAddress: stg2firetrap5
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &922668202
 GameObject:
   m_ObjectHideFlags: 0
@@ -28370,6 +28373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 933461178}
   fireTrapDataAddress: stg2firetrap1
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1 &935559089
 GameObject:
   m_ObjectHideFlags: 0
@@ -34079,6 +34083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 1118159547}
   fireTrapDataAddress: stg2firetrap4
+  gameOverCanvas: {fileID: 618177037}
 --- !u!1001 &1154352785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34202,8 +34207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2afb93d81fa679042a372bc94e718aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerPresenter: {fileID: 0}
-  resultManager: {fileID: 0}
   eventObserver: {fileID: 261875475}
   player: {fileID: 1619500275}
   stage: {fileID: 0}

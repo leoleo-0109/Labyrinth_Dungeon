@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: c7dabf75677d813429333c8e36e819d0
   - enabled: 1
     path: Assets/Scenes/MasterScene/KeyBoardScene/StoryModeGameScene_KeyBoard.unity
-    guid: a50bb89bbfd97cf45a9268ff399c3520
+    guid: 9ce2ab4ef3c897645beec0c78a65e706
   - enabled: 1
     path: Assets/Scenes/MasterScene/KeyBoardScene/StageSelectScene_KeyBoard.unity
     guid: 6941cc83a85435a468b56f274ef52dc4
@@ -35,5 +35,65 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MasterScene/KeyBoardScene/GameClearScene_KeyBoard.unity
     guid: b884bf340f6f4794187e34d239f79313
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/ESP32Scene/TitleScene_ESP32.unity
+    guid: 62482f1eaf9c7754d8724bfae469b803
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/ESP32Scene/IntroductionScene_ESP32.unity
+    guid: 2c82970425f492c4e9ad5c5beb3e45a7
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/ESP32Scene/ModeSelectScene_ESP32.unity
+    guid: f35e87cc15feaa14c8446891f28437b4
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/ESP32Scene/StoryModeGameScene_ESP32.unity
+    guid: c69e3a39705e5fe448dca808f2c74c1e
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/ESP32Scene/StageSelectScene_ESP32.unity
+    guid: 06787b36307f1a747b307af959ac0446
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/ESP32Scene/SelectModeStage1GameScene_ESP32.unity
+    guid: 2377a55bea858d7418bb3a9d36904d47
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/ESP32Scene/SelectModeStage2GameScene_ESP32.unity
+    guid: f2ff6a0706bb46c4590ac84fa26fbc29
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/ESP32Scene/SelectModeStage3GameScene_ESP32.unity
+    guid: d723b0629145bd24189ad55ba5eb031e
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/ESP32Scene/RankingScene_ESP32.unity
+    guid: 65b389062ec4a09499c864247b58b9ba
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/ESP32Scene/GameClearScene_ESP32.unity
+    guid: c5aa834a334e3ac45975455300a7616a
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/NanoScene/TitleScene_Nano.unity
+    guid: 5383a0fade16d544481e76870af0eef4
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/NanoScene/IntroductionScene_Nano.unity
+    guid: cde77437f20bef04aa04119e6920d196
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/NanoScene/ModeSelectScene_Nano.unity
+    guid: ff11a62c85eda934d9be37bca1e1c1b6
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/NanoScene/StoryModeGameScene_Nano.unity
+    guid: c394dd681cc0fcd4daba137823c05b00
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/NanoScene/StageSelectScene_Nano.unity
+    guid: 867cbba97b85c304296c4f997c882cbb
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/NanoScene/SelectModeStage1GameScene_Nano.unity
+    guid: a8b21ed097cbce84485029b563f1f363
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/NanoScene/SelectModeStage2GameScene_Nano.unity
+    guid: 77d94cb3098cf3140831deae8b3dc78f
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/NanoScene/SelectModeStage3GameScene_Nano.unity
+    guid: 5b45de8f5d2bd814d82bcaa975fee43b
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/NanoScene/RankingScene_Nano.unity
+    guid: 82dd7a603dfbe414aa448e72bd5943a8
+  - enabled: 1
+    path: Assets/Scenes/MasterScene/NanoScene/GameClearScene_Nano.unity
+    guid: b4b4fa5aa444fda42ad69fbc33c87035
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 33bd511714723004b971fbeac6a2678d, type: 2}
