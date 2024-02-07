@@ -26,6 +26,8 @@ public class FireParticleConfig : MonoBehaviour
     private Dictionary<string, Action> fireTrapDataMethods = new Dictionary<string, Action>();
     [SerializeField] private string fireTrapDataAddress; // データアドレス
     [SerializeField] private GameObject gameOverCanvas;
+    private Subject<Unit> isPlayerDead = new Subject<Unit>();
+    public IObservable<Unit> playerDeadObserver => isPlayerDead;
     private async void Start()
     {
         // ディクショナリにメソッドを登録する
@@ -94,7 +96,7 @@ public class FireParticleConfig : MonoBehaviour
         // プレイヤーに当たった場合はゲームオーバー処理を行う
         if (other.CompareTag(TagName.Player))
         {
-            GameOver();
+            isPlayerDead.OnNext(Unit.Default);
         }
     }
 
@@ -110,13 +112,7 @@ public class FireParticleConfig : MonoBehaviour
         isParticleVisible = false;
     }
 
-    private void GameOver()
-    {
-        // ゲームオーバー処理を行う
-        Debug.Log("Game Over");
-        gameOverCanvas.gameObject.SetActive(true);
-        Invoke("LoadTitle", 10f);
-    }
+    
     private void LoadTitle()
     {
         SceneManager.LoadScene("TitleScene_KeyBoard");
