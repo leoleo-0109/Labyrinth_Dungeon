@@ -27,7 +27,7 @@ public class FireParticleConfig : MonoBehaviour
     [SerializeField] private string fireTrapDataAddress; // データアドレス
     [SerializeField] private GameObject gameOverCanvas;
     private Subject<Unit> isPlayerDead = new Subject<Unit>();
-    public IObservable<Unit> playerDeadObserver => isPlayerDead;
+    public IObservable<Unit> PlayerDeadObserver => isPlayerDead;
     private async void Start()
     {
         // ディクショナリにメソッドを登録する
