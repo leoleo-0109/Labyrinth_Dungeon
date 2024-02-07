@@ -103,7 +103,17 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(holdButtonTime);
                 if (holdButtonTime > 3f && !isResetButtonPress)
                 {
-                    ResetPlayerPositionBasedOnCount(eventObserver.HierarchyCount.Value);
+                    // ゲームモードに応じたリセット処理を実行
+                    if (GameModeManager.CurrentGameMode == GameMode.Story)
+                    {
+                        // ストーリーモードの場合、eventObserverの階層数に基づくリセット
+                        ResetPlayerPositionBasedOnCount(eventObserver.HierarchyCount.Value);
+                    }
+                    else if (GameModeManager.CurrentGameMode == GameMode.Single)
+                    {
+                        // シングルモードの場合、選択されたステージに応じたリセット
+                        ResetPlayerPositionForSingleMode();
+                    }
                     isResetButtonPress = true;
                 }
             }
@@ -127,6 +137,18 @@ public class PlayerController : MonoBehaviour
             case 2:
                 ResetPlayerPosition(stageStartPosition[2]);
                 break;
+        }
+    }
+    void ResetPlayerPositionForSingleMode()
+    {
+        int stageIndex = StageManager.CurrentStage;
+        if (stageIndex >= 0 && stageIndex < stageStartPosition.Length)
+        {
+            ResetPlayerPosition(stageStartPosition[stageIndex]);
+        }
+        else
+        {
+            Debug.LogError("Invalid stage index for single mode reset: " + stageIndex);
         }
     }
     void ResetPlayerPosition(GameObject startPosition)
