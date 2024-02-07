@@ -38,7 +38,7 @@ public class StageTransition : MonoBehaviour
             if (stageNumber == 2) // 最終ステージをクリアした場合
             {
                 isPlayerClear.OnNext(Unit.Default);
-                LoadRankingScene();
+                LoadGameClearScene();
             }
             else
             {
@@ -71,12 +71,12 @@ public class StageTransition : MonoBehaviour
     {
         isPlayerClear.OnNext(Unit.Default);
         // 個別ステージのクリア処理
-        LoadRankingScene();
+        LoadGameClearScene();
     }
 
-    private void LoadRankingScene()
+    private void LoadGameClearScene()
     {
-        string rankingSceneName = "RankingScene_" + DeviceModeManager.CurrentDeviceMode.ToString();
-        SceneManager.LoadScene(rankingSceneName);
+        string clearSceneName = "GameClearScene_" + DeviceModeManager.CurrentDeviceMode.ToString();
+        SceneManager.LoadScene(clearSceneName);
     }
 }
