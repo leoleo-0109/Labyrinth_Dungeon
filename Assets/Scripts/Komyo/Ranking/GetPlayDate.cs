@@ -19,7 +19,7 @@ public class GetPlayDate : MonoBehaviour
     {
         string name = inputField.text;
         name = Regex.Replace(name, @"\d", "");
-        int score = hoge;//ScoreManager.Instance.Score;
+        int score = GameData.Score;
         string joinData = joinString.Join(name, score);
         playersDate.playersDate5 = joinData;
         sortDate.SortPlayersDate();

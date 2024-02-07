@@ -57409,6 +57409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6e6d3506eeaf9469df2ffabd962842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageTransitions:
+  - {fileID: 518559200}
   fireParticleConfig:
   - {fileID: 965881871}
   - {fileID: 376187039}
