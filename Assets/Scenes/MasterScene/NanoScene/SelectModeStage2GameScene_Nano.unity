@@ -12770,7 +12770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 627440443}
   scoreItemCountText: {fileID: 543872166}
-  comboText: {fileID: 0}
+  comboText: {fileID: 2087625110}
 --- !u!1001 &697244548
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12770,7 +12770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 627440443}
   scoreItemCountText: {fileID: 543872166}
-  comboText: {fileID: 0}
+  comboText: {fileID: 2087625110}
 --- !u!1001 &697244548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45551,9 +45551,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventObserver: {fileID: 261875475}
   stageStartPosition:
-  - {fileID: 0}
   - {fileID: 1946419313}
-  - {fileID: 0}
+  - {fileID: 1946419313}
+  - {fileID: 1946419313}
   _camera: {fileID: 978820338}
   nanoSerialHandler: {fileID: 1028882946}
   minusSpeed: 4
