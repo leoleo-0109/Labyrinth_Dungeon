@@ -45,6 +45,11 @@ public class GameState : MonoBehaviour
         Debug.Log("Game Over");
         gameOverCanvas.gameObject.SetActive(true);
         isGameOver.OnNext(Unit.Default);
-        Invoke("LoadTitle", 10f);
+        Invoke("LoadTitleScene", 10f);
+    }
+    private void LoadTitleScene()
+    {
+        string titleSceneName = "TitleScene_" + DeviceModeManager.CurrentDeviceMode.ToString();
+        SceneManager.LoadScene(titleSceneName);
     }
 }

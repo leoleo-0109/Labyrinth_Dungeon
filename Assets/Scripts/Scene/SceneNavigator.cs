@@ -37,6 +37,7 @@ public class SceneNavigator : MonoBehaviour
     public void OnClickStage1Button()
     {
         GameModeManager.CurrentGameMode = GameMode.Single;
+        StageManager.CurrentStage = 0; // ステージ1を設定
         LoadScene("SelectModeStage1GameScene");
     }
 
@@ -44,6 +45,7 @@ public class SceneNavigator : MonoBehaviour
     public void OnClickStage2Button()
     {
         GameModeManager.CurrentGameMode = GameMode.Single;
+        StageManager.CurrentStage = 1; // ステージ2を設定
         LoadScene("SelectModeStage2GameScene");
     }
 
@@ -51,6 +53,7 @@ public class SceneNavigator : MonoBehaviour
     public void OnClickStage3Button()
     {
         GameModeManager.CurrentGameMode = GameMode.Single;
+        StageManager.CurrentStage = 2; // ステージ3を設定
         LoadScene("SelectModeStage3GameScene");
     }
 
