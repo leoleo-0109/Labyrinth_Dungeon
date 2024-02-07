@@ -9,11 +9,16 @@ public class SortDate : MonoBehaviour
 {
     public struct Ranking
     {
-        public string fast;
-        public string second;
-        public string third;
-        public string fourth;
-        public string fifth;
+        public string fastText;
+        public string secondText;
+        public string thirdText;
+        public string fourthText;
+        public string fifthText;
+        public int fastScore;
+        public int secondScore;
+        public int thirdScore;
+        public int fourthScore;
+        public int fifthScore;
     }
     [SerializeField] private PlayersDate playersDate;
     private string joinData;
@@ -21,7 +26,6 @@ public class SortDate : MonoBehaviour
     public void SortPlayersDate(){
         joinData = playersDate.playersDate1 + "," + playersDate.playersDate2 + "," + playersDate.playersDate3 + "," + playersDate.playersDate4 + "," + playersDate.playersDate5;
         string[] parts = joinData.Split(',');
-
         Array.Sort(parts, (a, b) => 
         {
             int aValue = int.Parse(new string(a.Where(char.IsDigit).ToArray()));
@@ -29,28 +33,32 @@ public class SortDate : MonoBehaviour
 
             return aValue.CompareTo(bValue);
         });
-        ranking.fast = parts[4];
-        ranking.second = parts[3];
-        ranking.third = parts[2];
-        ranking.fourth = parts[1];
-        ranking.fifth = parts[0];
-        Debug.Log(ranking.fast + " " + ranking.second + " " + ranking.third + " " + ranking.fourth + " " + ranking.fifth);
+        ranking.fastScore = int.Parse(new string(parts[0].Where(char.IsDigit).ToArray()));
+        ranking.secondScore = int.Parse(new string(parts[1].Where(char.IsDigit).ToArray()));
+        ranking.thirdScore = int.Parse(new string(parts[2].Where(char.IsDigit).ToArray()));
+        ranking.fourthScore = int.Parse(new string(parts[3].Where(char.IsDigit).ToArray()));
+        ranking.fifthScore = int.Parse(new string(parts[4].Where(char.IsDigit).ToArray()));
+        ranking.fastText = (new string(parts[0].Where(char.IsLetter).ToArray()).ToString());
+        ranking.secondText = (new string(parts[1].Where(char.IsLetter).ToArray()).ToString());
+        ranking.thirdText = (new string(parts[2].Where(char.IsLetter).ToArray()).ToString());
+        ranking.fourthText = (new string(parts[3].Where(char.IsLetter).ToArray()).ToString());
+        ranking.fifthText =  (new string(parts[4].Where(char.IsLetter).ToArray()).ToString());
     }
-    public string ReturnRanking(int number){
+    public (string name, int score) ReturnRanking(int number){
         switch (number)
         {
             case 1:
-                return ranking.fast;
+                return (ranking.fastText, ranking.fastScore);
             case 2:
-                return ranking.second;
+                return (ranking.secondText, ranking.secondScore);
             case 3:
-                return ranking.third;
+                return (ranking.thirdText, ranking.thirdScore);
             case 4:
-                return ranking.fourth;
+                return (ranking.fourthText, ranking.fourthScore);
             case 5:
-                return ranking.fifth;
+                return (ranking.fifthText, ranking.fifthScore);
             default:
-                return "error";
+                return ("error",404);
         }
     }
 }
