@@ -33,16 +33,16 @@ public class SortDate : MonoBehaviour
 
             return aValue.CompareTo(bValue);
         });
-        ranking.fastScore = int.Parse(new string(parts[0].Where(char.IsDigit).ToArray()));
-        ranking.secondScore = int.Parse(new string(parts[1].Where(char.IsDigit).ToArray()));
+        ranking.fastScore = int.Parse(new string(parts[4].Where(char.IsDigit).ToArray()));
+        ranking.secondScore = int.Parse(new string(parts[3].Where(char.IsDigit).ToArray()));
         ranking.thirdScore = int.Parse(new string(parts[2].Where(char.IsDigit).ToArray()));
-        ranking.fourthScore = int.Parse(new string(parts[3].Where(char.IsDigit).ToArray()));
-        ranking.fifthScore = int.Parse(new string(parts[4].Where(char.IsDigit).ToArray()));
-        ranking.fastText = (new string(parts[0].Where(char.IsLetter).ToArray()).ToString());
-        ranking.secondText = (new string(parts[1].Where(char.IsLetter).ToArray()).ToString());
+        ranking.fourthScore = int.Parse(new string(parts[1].Where(char.IsDigit).ToArray()));
+        ranking.fifthScore = int.Parse(new string(parts[0].Where(char.IsDigit).ToArray()));
+        ranking.fastText = (new string(parts[4].Where(char.IsLetter).ToArray()).ToString());
+        ranking.secondText = (new string(parts[3].Where(char.IsLetter).ToArray()).ToString());
         ranking.thirdText = (new string(parts[2].Where(char.IsLetter).ToArray()).ToString());
-        ranking.fourthText = (new string(parts[3].Where(char.IsLetter).ToArray()).ToString());
-        ranking.fifthText =  (new string(parts[4].Where(char.IsLetter).ToArray()).ToString());
+        ranking.fourthText = (new string(parts[1].Where(char.IsLetter).ToArray()).ToString());
+        ranking.fifthText =  (new string(parts[0].Where(char.IsLetter).ToArray()).ToString());
     }
     public (string name, int score) ReturnRanking(int number){
         switch (number)
