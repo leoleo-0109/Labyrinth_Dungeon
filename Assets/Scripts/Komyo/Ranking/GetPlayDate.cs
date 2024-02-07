@@ -4,12 +4,12 @@ using UnityEngine;
 using RankingData;
 using UnityEngine.UI;
 using TMPro;
+using System.Text.RegularExpressions;
 
 public class GetPlayDate : MonoBehaviour
 {
     //プレイ時のスコアを取得する
-    [SerializeField] private TMP_InputField inputField;
-    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private InputField inputField;
     [SerializeField] private PlayersDate playersDate;
     [SerializeField] private JoinString joinString;
     [SerializeField] private SortDate sortDate;
@@ -18,7 +18,8 @@ public class GetPlayDate : MonoBehaviour
     public void InputText()
     {
         string name = inputField.text;
-        int score = ScoreManager.Instance.Score;
+        name = Regex.Replace(name, @"\d", "");
+        int score = hoge;//ScoreManager.Instance.Score;
         string joinData = joinString.Join(name, score);
         playersDate.playersDate5 = joinData;
         sortDate.SortPlayersDate();
