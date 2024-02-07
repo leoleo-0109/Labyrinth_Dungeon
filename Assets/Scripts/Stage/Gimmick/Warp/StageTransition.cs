@@ -13,6 +13,8 @@ public class StageTransition : MonoBehaviour
     [SerializeField] private GameObject stage;
     private bool eventTriggered = false;
     private static int stageNumber = 0;
+    private Subject<Unit> isPlayerClear = new Subject<Unit>();
+    public IObservable<Unit> PlayerClearObserver => isPlayerClear;
 
     private void OnTriggerStay(Collider other)
     {
@@ -35,6 +37,7 @@ public class StageTransition : MonoBehaviour
         {
             if (stageNumber == 2) // 最終ステージをクリアした場合
             {
+                isPlayerClear.OnNext(Unit.Default);
                 LoadRankingScene();
             }
             else
@@ -55,6 +58,7 @@ public class StageTransition : MonoBehaviour
 
     private void WarpToNextStage()
     {
+        Debug.Log("WarpToNextStage");
         // 次のステージへのワープ処理
         Vector3 pos = new Vector3(0, 1.6f, 0);
         Vector3 stagePortalPosition = stage.transform.position;
@@ -65,6 +69,7 @@ public class StageTransition : MonoBehaviour
 
     private void CompleteSingleStage()
     {
+        isPlayerClear.OnNext(Unit.Default);
         // 個別ステージのクリア処理
         LoadRankingScene();
     }
