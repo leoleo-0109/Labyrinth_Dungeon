@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -39060,7 +39060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f594221cec7e7b14ab14b65e8beff02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portName: ESP32
+  portName: COM5
   baudRate: 115200
 --- !u!4 &1330056367
 Transform:
@@ -55689,6 +55689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6e6d3506eeaf9469df2ffabd962842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageTransitions: []
   fireParticleConfig:
   - {fileID: 120252513}
   - {fileID: 934322740}
