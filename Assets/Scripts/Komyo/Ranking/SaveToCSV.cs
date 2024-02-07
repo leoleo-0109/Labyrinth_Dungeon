@@ -9,11 +9,11 @@ public class SaveToCSV : MonoBehaviour
 
     public void PunctuateDate(string fast, string second, string third, string fourth, string fifth)
     {
-        fast = ConvertString(fast);
+        /*fast = ConvertString(fast);
         second = ConvertString(second);
         third = ConvertString(third);
         fourth = ConvertString(fourth);
-        fifth = ConvertString(fifth);
+        fifth = ConvertString(fifth);*/
         Save(fast, second, third, fourth ,fifth);
     }
     string ConvertString(string input)
