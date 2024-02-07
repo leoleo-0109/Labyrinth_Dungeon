@@ -78,11 +78,6 @@ public class ScorePresenter : MonoBehaviour
         {
             ChangeMaxCount(0);
         }
-
-        UpdateScoreItemCount();
-        StageChangeObserver();
-        AddScoreEventTrigger();
-        UpdateScore();
     }
     // コンボをリセットするメソッド
     private void ResetCombo()
