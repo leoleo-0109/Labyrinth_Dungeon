@@ -46,13 +46,44 @@ public class ScorePresenter : MonoBehaviour
                 ResetCombo();
             };
         }
-        ChangeMaxCount(0);
+        InitializeItemCountBasedOnStage();
         UpdateScoreItemCount();
         StageChangeObserver();
         AddScoreEventTrigger();
         UpdateScore();
     }
+    private void InitializeItemCountBasedOnStage()
+    {
+        // ゲームモードがシングルステージプレイの場合、現在のステージに基づいてitemCurrentMaxCountを設定
+        if (GameModeManager.CurrentGameMode == GameMode.Single)
+        {
+            // StageManagerで設定された現在のステージ番号に基づき、itemCurrentMaxCountを初期化
+            switch (StageManager.CurrentStage)
+            {
+                case 0: // ステージ1
+                    itemCurrentMaxCount = itemCurrentMaxCountStage1;
+                    break;
+                case 1: // ステージ2
+                    itemCurrentMaxCount = itemCurrentMaxCountStage2;
+                    break;
+                case 2: // ステージ3
+                    itemCurrentMaxCount = itemCurrentMaxCountStage3;
+                    break;
+                default:
+                    Debug.LogError("Undefined stage number: " + StageManager.CurrentStage);
+                    break;
+            }
+        }
+        else
+        {
+            ChangeMaxCount(0);
+        }
 
+        UpdateScoreItemCount();
+        StageChangeObserver();
+        AddScoreEventTrigger();
+        UpdateScore();
+    }
     // コンボをリセットするメソッド
     private void ResetCombo()
     {

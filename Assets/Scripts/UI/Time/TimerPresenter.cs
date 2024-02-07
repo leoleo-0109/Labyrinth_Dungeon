@@ -32,7 +32,7 @@ public class TimerPresenter : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        ChangeMaxCount(0); // Stage1は0
+        InitializeItemCountBasedOnStage();
         UpdateTimeItemCount();// DisplayTimeItemCountの第二引数の更新
         // 初期時間を秒数からTimeSpan型に変換
         TimeSpan initialTimeSpan = TimeSpan.FromSeconds(initialTime);
@@ -41,7 +41,33 @@ public class TimerPresenter : MonoBehaviour
         TimeLimit();
         AddTime();
     }
-
+    private void InitializeItemCountBasedOnStage()
+    {
+        // ゲームモードがシングルステージプレイの場合、現在のステージに基づいてitemCurrentMaxCountを設定
+        if (GameModeManager.CurrentGameMode == GameMode.Single)
+        {
+            // StageManagerで設定された現在のステージ番号に基づき、itemCurrentMaxCountを初期化
+            switch (StageManager.CurrentStage)
+            {
+                case 0: // ステージ1
+                    itemCurrentMaxCount = itemCurrentMaxCountStage1;
+                    break;
+                case 1: // ステージ2
+                    itemCurrentMaxCount = itemCurrentMaxCountStage2;
+                    break;
+                case 2: // ステージ3
+                    itemCurrentMaxCount = itemCurrentMaxCountStage3;
+                    break;
+                default:
+                    Debug.LogError("Undefined stage number: " + StageManager.CurrentStage);
+                    break;
+            }
+        }
+        else
+        {
+            ChangeMaxCount(0);
+        }
+    }
     /// <summary>
     /// 時間制限処理
     /// </summary>
@@ -107,7 +133,10 @@ public class TimerPresenter : MonoBehaviour
                 {
                     stageChangeCount++; // ステージが変わるたびにインクリメント
                     timeItemCount = 0;
-                    ChangeMaxCount(stageChangeCount); // stageChangeCountはステージが変化した回数の値を持っているので引数に返す
+                    if(GameModeManager.CurrentGameMode == GameMode.Story)
+                    {
+                        ChangeMaxCount(stageChangeCount); // stageChangeCountはステージが変化した回数の値を持っているので引数に返す
+                    }
                     UpdateTimeItemCount();
                 })
                 .AddTo(disposables);
