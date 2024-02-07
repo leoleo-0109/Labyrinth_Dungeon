@@ -18,7 +18,7 @@ public class GetPlayDate : MonoBehaviour
     public void InputText()
     {
         string name = inputField.text;
-        int score = hoge;
+        int score = ScoreManager.Instance.Score;
         string joinData = joinString.Join(name, score);
         playersDate.playersDate5 = joinData;
         sortDate.SortPlayersDate();
