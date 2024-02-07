@@ -36,12 +36,6 @@ public class RankingTextManager : MonoBehaviour
         secondScore.text = sortDate.ReturnRanking(4).score.ToString();
         firstName.text = sortDate.ReturnRanking(5).name;
         firstScore.text = sortDate.ReturnRanking(5).score.ToString();
-        /*first.text = sortDate.ReturnRanking(1);
-        second.text = sortDate.ReturnRanking(2);
-        third.text = sortDate.ReturnRanking(3);
-        fourth.text = sortDate.ReturnRanking(4);
-        fifth.text = sortDate.ReturnRanking(5);
-        saveToCSV.PunctuateDate(first.text, second.text, third.text, fourth.text, fifth.text);*/
-        saveToCSV.PunctuateDate(fifthName.text + "," + fifthScore.text, fourthName.text + "," + fourthScore.text, thirdName.text + "," + thirdScore.text, secondName.text + "," + secondScore.text, firstName.text + "," + firstScore.text);
+        saveToCSV.Save(firstName.text + "," + firstScore.text, secondName.text + "," + secondScore.text, thirdName.text + "," + thirdScore.text, fourthName.text + "," + fourthScore.text, fifthName.text + "," + fifthScore.text);
     }
 }
