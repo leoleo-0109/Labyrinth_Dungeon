@@ -6309,6 +6309,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 221316418}
   timerItemCountText: {fileID: 313374782}
+--- !u!1001 &316541983
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5987344467101856844, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987344467101856844, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987344467101856844, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987344467101856844, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987344467101856844, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987344467101856844, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987344467101856844, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987344467101856844, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987344467101856844, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987344467101856844, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987344467101856844, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127218691627305155, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+      propertyPath: m_Name
+      value: BGMController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+--- !u!114 &316541984 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2914127682547741741, guid: bcc0413e1c54aec45890594b0fea9c5f, type: 3}
+  m_PrefabInstance: {fileID: 316541983}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a56bfd086f9dc49439fcec9870335e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &343027142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6564,7 +6632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &365047552
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6577,7 +6645,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cd0d71abb62cefc439b64ca6c8f16662, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -50527,6 +50595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c822e983eeda3b4392754f9b374fee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmController: {fileID: 316541984}
 --- !u!4 &1947456320
 Transform:
   m_ObjectHideFlags: 0

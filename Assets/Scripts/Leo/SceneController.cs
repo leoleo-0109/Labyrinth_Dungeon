@@ -3,11 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    [SerializeField] private BGMController bgmController;
     // KeyBoard—p
 
     // TitleScene
     public void OnClickReturnTitleButton_KeyBoard()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeTitleBGM();
         SceneManager.LoadScene("TitleScene_KeyBoard");
     }
 
@@ -20,6 +23,8 @@ public class SceneController : MonoBehaviour
     // StoryMode
     public void OnClickStoryModeGameButton_KeyBoard()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Story;
         SceneManager.LoadScene("StoryModeGameScene_KeyBoard");
     }
@@ -27,12 +32,16 @@ public class SceneController : MonoBehaviour
     // StageSelectScene
     public void OnClickStageSelectButton_KeyBoard()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         SceneManager.LoadScene("StageSelectScene_KeyBoard");
     }
 
     // Stage1 Single
     public void OnClickStage1Button_KeyBoard()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Single;
         SceneManager.LoadScene("SelectModeStage1GameScene_KeyBoard");
     }
@@ -40,6 +49,8 @@ public class SceneController : MonoBehaviour
     // Stage2 Single
     public void OnClickStage2Button_KeyBoard()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Single;
         SceneManager.LoadScene("SelectModeStage2GameScene_KeyBoard");
     }
@@ -47,6 +58,8 @@ public class SceneController : MonoBehaviour
     // Stage3 Single
     public void OnClickStage3Button_KeyBoard()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Single;
         SceneManager.LoadScene("SelectModeStage3GameScene_KeyBoard");
     }
@@ -63,6 +76,8 @@ public class SceneController : MonoBehaviour
     // TitleScene
     public void OnClickReturnTitleButton_Nano()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeTitleBGM();
         SceneManager.LoadScene("TitleScene_Nano");
     }
 
@@ -75,6 +90,8 @@ public class SceneController : MonoBehaviour
     // StoryMode
     public void OnClickStoryModeGameButton_Nano()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Story;
         SceneManager.LoadScene("StoryModeGameScene_Nano");
     }
@@ -88,6 +105,8 @@ public class SceneController : MonoBehaviour
     // Stage1 Single
     public void OnClickStage1Button_Nano()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Single;
         SceneManager.LoadScene("SelectModeStage1GameScene_Nano");
     }
@@ -95,6 +114,8 @@ public class SceneController : MonoBehaviour
     // Stage2 Single
     public void OnClickStage2Button_Nano()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Single;
         SceneManager.LoadScene("SelectModeStage2GameScene_Nano");
     }
@@ -102,6 +123,8 @@ public class SceneController : MonoBehaviour
     // Stage3 Single
     public void OnClickStage3Button_Nano()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Single;
         SceneManager.LoadScene("SelectModeStage3GameScene_Nano");
     }
@@ -118,6 +141,8 @@ public class SceneController : MonoBehaviour
     // TitleScene
     public void OnClickReturnTitleButton_ESP32()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeTitleBGM();
         SceneManager.LoadScene("TitleScene_ESP32");
     }
 
@@ -130,6 +155,8 @@ public class SceneController : MonoBehaviour
     // StoryMode
     public void OnClickStoryModeGameButton_ESP32()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Story;
         SceneManager.LoadScene("StoryModeGameScene_ESP32");
     }
@@ -143,6 +170,8 @@ public class SceneController : MonoBehaviour
     // Stage1 Single
     public void OnClickStage1Button_ESP32()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Single;
         SceneManager.LoadScene("SelectModeStage1GameScene_ESP32");
     }
@@ -150,6 +179,8 @@ public class SceneController : MonoBehaviour
     // Stage2 Single
     public void OnClickStage2Button_ESP32()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Single;
         SceneManager.LoadScene("SelectModeStage2GameScene_ESP32");
     }
@@ -157,6 +188,8 @@ public class SceneController : MonoBehaviour
     // Stage3 Single
     public void OnClickStage3Button_ESP32()
     {
+        bgmController.StopBGM();
+        bgmController.ChangeGameBGM();
         GameModeManager.CurrentGameMode = GameMode.Single;
         SceneManager.LoadScene("SelectModeStage3GameScene_ESP32");
     }
